@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7446765187976743121}
   - component: {fileID: 7446765187976743120}
   - component: {fileID: 1915008060}
-  - component: {fileID: 1915008064}
+  - component: {fileID: -1497331830455044406}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Occludable
@@ -152,7 +152,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -1629330200538877508, guid: d49495974fc2a594ca6d255bc6247d0d,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -181,7 +181,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 1.25}
   m_Size: {x: 1.32, y: 1}
   m_Direction: 0
---- !u!114 &1915008064
+--- !u!114 &-1497331830455044406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,6 +190,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7446765187976743123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dea2a8aef582729419fd97cefdb95dbc, type: 3}
+  m_Script: {fileID: 11500000, guid: d7ccc8c1b9630e0418f02535cbf42f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sprites:
+  - {fileID: 7446765187976743120}
+  playerColliders: []
+  colliders: []
