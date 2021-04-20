@@ -361,3 +361,28 @@ System memory in use after: 84.6 MB.
 Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2305.
 Total: 2.588700 ms (FindLiveObjects: 0.163400 ms CreateObjectMapping: 0.073700 ms MarkObjects: 2.329200 ms  DeleteObjects: 0.021000 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 705.082031 seconds.
+  path: Assets/Prefabs/Character.prefab
+  artifactKey: Guid(d052a8c2edd5c304e9bf168b11b6d2c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Character.prefab using Guid(d052a8c2edd5c304e9bf168b11b6d2c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fb0e96648c7a87dd3cf825145c27a5b') in 0.203336 seconds
+  Import took 0.208363 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.324060 seconds.
+  path: Assets/Prefabs/Enviroment_2_0.prefab
+  artifactKey: Guid(06dc6a92a2b6ef342ac58eb711a3a5f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enviroment_2_0.prefab using Guid(06dc6a92a2b6ef342ac58eb711a3a5f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '956c6e13e0fe52df5b93d9b9b71aa6bc') in 0.210995 seconds
+  Import took 0.215837 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.566760 seconds.
+  path: Assets/Prefabs/Tree.prefab
+  artifactKey: Guid(06dc6a92a2b6ef342ac58eb711a3a5f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Tree.prefab using Guid(06dc6a92a2b6ef342ac58eb711a3a5f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee13a6cebaaf18a7ce22f4ffade7eb1a') in 0.088035 seconds
+  Import took 0.093477 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
