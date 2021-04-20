@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Occludable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Person
   - Water
   - UI
   - 
@@ -40,7 +41,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Person
-    uniqueID: 2978853275
     locked: 0

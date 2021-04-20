@@ -2,73 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Person : MonoBehaviour
+public class Person : Util
 {
     private Vector3 _savedPosition;
+    [SerializeField]
+    private List<SpriteRenderer> _sprites;
 
+    private Util _util;
 
 
     [SerializeField]
     public List<Collider2D> colliders = new List<Collider2D>();
 
     public Vector3 SavedPosition { get => _savedPosition; set => _savedPosition = value; }
+    public Util Util { get => _util; set => _util = value; }
+    public List<SpriteRenderer> Sprites { get => _sprites; set => _sprites = value; }
 
     public List<Collider2D> GetColliders() { return colliders; }
 
+    private void Start()
+    {
+        Util = new Util();
+    }
     private void Update()
     {
-        
-        changePositionZ();
-   }
-
-    void changePositionZ()
-    {
-        if (colliders.Count == 0) { return; }
-
-        var me = this.transform.position;
-        if (me.x == SavedPosition.x && me.y == SavedPosition.y) { return; }
-
-        var entity = getClosestObject(colliders).position;
-        // if (me.z == entity.z) { return; }
-        if (me.z == entity.z && me.x == SavedPosition.x && me.y == SavedPosition.y) { return; }
-        if (entity.y> me.y )
-        {
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, (-colliders.Count * -this.transform.position.y));
-            this.SavedPosition = me;
-        }
-        else
-        {
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, (colliders.Count * this.transform.position.y));
-            this.SavedPosition = me;
-        }
+        SavedPosition = Util.isBehind(colliders,this.transform, SavedPosition, Sprites);
     }
-    Transform getClosestObject(List<Collider2D> list)
-    {
-        Transform closest = null;
-        float lastDistance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach (var entity in list)
-        {
-            var transform = entity.gameObject.transform;
-            float dist = Vector3.Distance(transform.position, position);
-            if (dist < lastDistance)
-            {
-                closest = transform;
-                lastDistance = dist;
-            }
-        }
-        return closest;
-    }
+   
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.name);
         colliders.Add(other);
+        if (other.gameObject.CompareTag("Occludable"))
+        {
+            SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
+            
+            if (spriteRenderer != null)
+            {
+                this.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         colliders.Remove(other);
+        if (other.gameObject.CompareTag("Occludable"))
+        {
+            SpriteRenderer spriteRenderer = other.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                this.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            }
+        }
     }
+
+
 
 }
