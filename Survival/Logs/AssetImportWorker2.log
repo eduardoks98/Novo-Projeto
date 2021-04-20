@@ -1762,3 +1762,73 @@ System memory in use after: 146.3 MB.
 Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 4267.
 Total: 5.115000 ms (FindLiveObjects: 0.497700 ms CreateObjectMapping: 0.199900 ms MarkObjects: 4.219800 ms  DeleteObjects: 0.195700 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 5928.082601 seconds.
+  path: Assets/UI-Bar.png
+  artifactKey: Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI-Bar.png using Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93e54de4c802d15d58b3a0d3447908dc') in 2.248986 seconds
+  Import took 3.575231 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 127.520199 seconds.
+  path: Assets/UI-Bar.png
+  artifactKey: Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI-Bar.png using Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c55f7a9b7fa1623be180c88cbeaefe11') in 0.127606 seconds
+  Import took 0.140878 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 717.383063 seconds.
+  path: Assets/UI-Bar.png
+  artifactKey: Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI-Bar.png using Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b720687f44498564c7a5e5a0ac7d093') in 0.072139 seconds
+  Import took 0.088122 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 19.907157 seconds.
+  path: Assets/UI-Bar.png
+  artifactKey: Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI-Bar.png using Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57af311f163dcbf5bc0823ef545da926') in 0.032125 seconds
+  Import took 0.044368 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.022371 seconds.
+  path: Assets/UI-Bar.png
+  artifactKey: Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI-Bar.png using Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57af311f163dcbf5bc0823ef545da926') in 0.025550 seconds
+  Import took 0.037667 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.686468 seconds.
+  path: Assets/UI-Bar.png
+  artifactKey: Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI-Bar.png using Guid(5bb7d285167ae8749bb3b88d32afbf92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca1f80c96cddad96be80c7a9fa8e08de') in 0.059459 seconds
+  Import took 0.069804 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.009811 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.95 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.792 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.88 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3102 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 146.1 MB.
+System memory in use after: 146.3 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 4279.
+Total: 11.668900 ms (FindLiveObjects: 2.070300 ms CreateObjectMapping: 0.516000 ms MarkObjects: 7.533000 ms  DeleteObjects: 1.546700 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
