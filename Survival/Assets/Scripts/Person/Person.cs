@@ -2,31 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Person : Util
+public class Person : MonoBehaviour
 {
-    private Vector3 _savedPosition;
-    [SerializeField]
-    private List<SpriteRenderer> _sprites;
 
-    private Util _util;
 
 
     [SerializeField]
     public List<Collider2D> colliders = new List<Collider2D>();
 
-    public Vector3 SavedPosition { get => _savedPosition; set => _savedPosition = value; }
-    public Util Util { get => _util; set => _util = value; }
-    public List<SpriteRenderer> Sprites { get => _sprites; set => _sprites = value; }
-
     public List<Collider2D> GetColliders() { return colliders; }
 
     private void Start()
     {
-        Util = new Util();
     }
     private void Update()
     {
-        SavedPosition = Util.isBehind(colliders,this.transform, SavedPosition, Sprites);
     }
    
 
