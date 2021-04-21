@@ -1141,6 +1141,7 @@ GameObject:
   - component: {fileID: 6126610370668161608}
   - component: {fileID: 6126610370668161623}
   - component: {fileID: 4361425117466674806}
+  - component: {fileID: 2363947644213835545}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -1307,6 +1308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 5
+  isRunning: 0
+  anim: {fileID: 2363947644213835545}
 --- !u!114 &4361425117466674806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,6 +1337,25 @@ MonoBehaviour:
     showGizmo: 1
   - color: {r: 0, g: 1, b: 0, a: 1}
     showGizmo: 1
+--- !u!95 &2363947644213835545
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126610370668161622}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 33296da924453174c8cc7c2b007b891d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7065630251448111722
 GameObject:
   m_ObjectHideFlags: 0

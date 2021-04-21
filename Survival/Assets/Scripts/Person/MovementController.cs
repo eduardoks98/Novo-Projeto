@@ -13,8 +13,11 @@ public class MovementController : MonoBehaviour
     public float runSpeed = 5.0f;
     public bool isRunning = false;
 
+    public Animator anim;
+
     void Start()
     {
+        anim = GetComponent<Animator>();
         body = GetComponent<Rigidbody2D>();
     }
 
@@ -23,6 +26,7 @@ public class MovementController : MonoBehaviour
         // Gives a value between -1 and 1
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+        anim.SetBool("isRunning", isRunning);
     }
 
     void FixedUpdate()
@@ -39,5 +43,7 @@ public class MovementController : MonoBehaviour
             isRunning = true;
         else
             isRunning = false;
+
+       
     }
 }
