@@ -11,6 +11,7 @@ public class MovementController : MonoBehaviour
     float moveLimiter = 0.7f;
 
     public float runSpeed = 5.0f;
+    public bool isRunning = false;
 
     void Start()
     {
@@ -34,5 +35,9 @@ public class MovementController : MonoBehaviour
         }
 
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        if (body.velocity.x != 0 || body.velocity.y != 0)
+            isRunning = true;
+        else
+            isRunning = false;
     }
 }
