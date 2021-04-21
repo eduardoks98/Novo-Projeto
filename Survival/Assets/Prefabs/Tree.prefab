@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 7446765187976743120}
   - component: {fileID: 1915008060}
   - component: {fileID: -4421078835962441094}
-  - component: {fileID: -1497331830455044406}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Occludable
@@ -196,21 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingBase: 500
   offset: 0
-  isPerson: 0
   runOnlyOnce: 1
---- !u!114 &-1497331830455044406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7446765187976743123}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ccc8c1b9630e0418f02535cbf42f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sprites:
-  - {fileID: 7446765187976743120}
-  playerPositionY: 0
-  colliders: []
+  objRenderer: {fileID: 0}
+  sortGroup: {fileID: 0}
