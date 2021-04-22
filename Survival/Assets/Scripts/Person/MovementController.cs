@@ -26,7 +26,7 @@ public class MovementController : MonoBehaviour
         // Gives a value between -1 and 1
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
-        anim.SetBool("isRunning", isRunning);
+       
     }
 
     void FixedUpdate()
@@ -43,7 +43,7 @@ public class MovementController : MonoBehaviour
             isRunning = true;
         else
             isRunning = false;
+        anim.SetBool("isRunning", isRunning);
 
-       
     }
 }
