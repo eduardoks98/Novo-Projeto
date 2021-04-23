@@ -9,8 +9,11 @@ public class Person : MonoBehaviour
     [SerializeField]
     private UIBars _healthBar;
 
+    private MovementController moveController;
+
     [SerializeField]
     public List<Collider2D> colliders = new List<Collider2D>();
+
 
     public UIBars HealthBar { get => _healthBar; set => _healthBar = value; }
 
@@ -18,27 +21,14 @@ public class Person : MonoBehaviour
 
     private void Start()
     {
+        moveController = gameObject.GetComponent<MovementController>();
         Job = new Survivalist();
         HealthBar.SetMaxValue(Job.MaxHealth);
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Job.TakeDamage(Job.Attack());
-            HealthBar.SetValue(Job.CurrentHealth);
-            Debug.Log("vida atual: " + Job.CurrentHealth);
-        }
+        moveController.Move(Job.CanMove);
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Job.MaxHealth += 200;
-            HealthBar.SetMaxValue(Job.MaxHealth);
-            HealthBar.SetValue(Job.CurrentHealth + 200f);
-            Job.CurrentHealth += 200f;
-            Debug.Log("vida maxima: " + Job.MaxHealth);
-            Debug.Log("vida atual: " + Job.CurrentHealth);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

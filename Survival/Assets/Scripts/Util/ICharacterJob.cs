@@ -5,11 +5,13 @@ using UnityEngine;
 public interface ICharacterJob
 {
     float AttackSpeed { get; set; }
+    float StopMoveWhenAttack { get; set; }
     float MaxHealth { get; set; }
     float CurrentHealth { get; set; }
     float TakeDamage(float damage);
 
     bool IsAlive();
+    bool CanMove { get; set; }
 
     float BaseDamage { get; }
     float ModifierDamage { get; }

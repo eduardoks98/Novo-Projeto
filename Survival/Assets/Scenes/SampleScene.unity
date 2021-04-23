@@ -2399,15 +2399,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524850768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.003316628, w: 0.9999946}
   m_LocalPosition: {x: -0.05, y: 0.98, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 703331361}
   - {fileID: 666492780}
   m_Father: {fileID: 2362576721163560390}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 719.62}
 --- !u!114 &1524850770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,9 +2422,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 4274209717758476225, guid: eb88a00671d247a498ce8429d6827375, type: 3}
   shotPoint: {fileID: 666492780}
-  lauchForce: 10
+  lauchForce: 15
   player: {fileID: 0}
   canAttack: 1
+  canMove: 1
 --- !u!1001 &1584288944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4225,7 +4226,7 @@ PrefabInstance:
     - target: {fileID: 6126610370668161623, guid: 0f294070e0238fb4f885b9bbbd6ecd26,
         type: 3}
       propertyPath: runSpeed
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7085523354967619924, guid: 0f294070e0238fb4f885b9bbbd6ecd26,
         type: 3}

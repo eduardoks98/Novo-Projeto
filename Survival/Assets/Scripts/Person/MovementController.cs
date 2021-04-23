@@ -21,29 +21,34 @@ public class MovementController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    public void Move(bool canMove)
     {
-        // Gives a value between -1 and 1
-        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
-        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
-       
-    }
-
-    void FixedUpdate()
-    {
-        if (horizontal != 0 && vertical != 0) // Check for diagonal movement
+        if (!canMove)
         {
-            // limit movement speed diagonally, so you move at 70% speed
-            horizontal *= moveLimiter;
-            vertical *= moveLimiter;
+            body.velocity = Vector2.zero;
+            isRunning = false;
+        }
+        else
+        {
+            // Gives a value between -1 and 1
+            horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
+            vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+
+            if (horizontal != 0 && vertical != 0) // Check for diagonal movement
+            {
+                // limit movement speed diagonally, so you move at 70% speed
+                horizontal *= moveLimiter;
+                vertical *= moveLimiter;
+            }
+
+            body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+            if (body.velocity.x != 0 || body.velocity.y != 0)
+                isRunning = true;
+            else
+                isRunning = false;
         }
 
-        body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
-        if (body.velocity.x != 0 || body.velocity.y != 0)
-            isRunning = true;
-        else
-            isRunning = false;
         anim.SetBool("isRunning", isRunning);
-
     }
+
 }

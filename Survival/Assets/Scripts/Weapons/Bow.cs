@@ -8,8 +8,10 @@ public class Bow : MonoBehaviour
     public Transform shotPoint;
     public float lauchForce;
     public Person player;
-    private float timer = 0f;
+    private float attackTimer = 0f;
+    private float moveTimer = 0f;
     public bool canAttack = true;
+    public bool canMove = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,25 +26,43 @@ public class Bow : MonoBehaviour
         Vector2 direction = mousePosition - bowPosition;
         transform.right = direction;
 
-        if (timer <= 0)
-        {
-            canAttack = true;
-        }
-        else if (!canAttack)
-        {
-            timer -= Time.deltaTime;
-        }
-        if (Input.GetMouseButtonDown(0)  && canAttack)
-        {
-            Shoot();
-        }
+        Shoot();
+        PlayerMove();
     }
 
     void Shoot()
     {
-        GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
-        newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * lauchForce;
-        canAttack = false;
-        timer = player.Job.AttackSpeed;
+        if (attackTimer <= 0)
+        {
+            canAttack = true;
+
+        }
+        else if (!canAttack)
+        {
+            attackTimer -= Time.deltaTime;
+        }
+        if (Input.GetMouseButtonDown(0) && canAttack)
+        {
+            GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
+            newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * lauchForce;
+            canAttack = false;
+            attackTimer = player.Job.AttackSpeed;
+            canMove = false;
+            moveTimer = player.Job.StopMoveWhenAttack;
+        }
+
+    }
+
+    void PlayerMove()
+    {
+        if (moveTimer <= 0)
+        {
+            canMove = true;
+        }
+        else
+        {
+            moveTimer -= Time.deltaTime;
+        }
+        player.Job.CanMove = canMove;
     }
 }

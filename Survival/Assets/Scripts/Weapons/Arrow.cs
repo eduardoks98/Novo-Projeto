@@ -11,22 +11,40 @@ public class Arrow : MonoBehaviour
 
     public Person player;
 
-
+    public float arrowRangeToFollow;
+    public CircleCollider2D circle;
+    public FollowTarget target;
+    public BoxCollider2D boxCollider;
+    public Bow bow;
     bool hasHit;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Person>();
+        bow = GameObject.FindObjectsOfType<Bow>()[0];
+        circle = gameObject.GetComponentInChildren<CircleCollider2D>();
+        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        target = gameObject.GetComponentInChildren<FollowTarget>();
+       
         rb = GetComponent<Rigidbody2D>();
         hasHit = false;
     }
     private void FixedUpdate()
     {
+        circle.radius = arrowRangeToFollow;
         if (_timer >= _expireTime)
         {
             _timer = 0f;
             Destroy(this.gameObject);
         }
         _timer += Time.deltaTime;
+        
+        if (target.target != null && rb!=null)
+        {
+            Debug.Log("TARGADO");
+            Vector2 direction = target.target.transform.position - this.transform.position;
+            transform.right = direction;
+            rb.velocity = transform.right * bow.lauchForce ;
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -37,7 +55,7 @@ public class Arrow : MonoBehaviour
             rb.isKinematic = true;
             hasHit = true;
         }
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.layer == 9 && boxCollider.IsTouching(other))
         {
             rb.velocity = Vector2.zero;
             if (other.gameObject.GetComponent<Rigidbody2D>() != null)
@@ -65,6 +83,7 @@ public class Arrow : MonoBehaviour
             this.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         }
     }
+
 
 
     

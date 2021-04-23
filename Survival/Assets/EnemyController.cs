@@ -29,4 +29,6 @@ public class EnemyController : MonoBehaviour
         if (Job.IsAlive())
             HealthBar.SetValue(Job.TakeDamage(value));
     }
+
+    
 }
