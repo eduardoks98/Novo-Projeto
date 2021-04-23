@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICharacterJob
+public interface IJobs
 {
     float AttackSpeed { get; set; }
     float StopMoveWhenAttack { get; set; }

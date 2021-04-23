@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Person : MonoBehaviour
 {
-    public ICharacterJob Job;
+    public IJobs Job;
     [SerializeField]
     private UIBars _healthBar;
 

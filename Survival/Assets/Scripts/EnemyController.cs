@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public ICharacterJob Job;
+    public IJobs Job;
     [SerializeField]
     private UIBars _healthBar;
 

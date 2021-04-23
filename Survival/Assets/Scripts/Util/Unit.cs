@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unit
 {
-    public ICharacterJob Job;
+    public IJobs Job;
 
 
 

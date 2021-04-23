@@ -1263,7 +1263,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 3461398771218890409}
-  colliders: []
 --- !u!1 &6186113817963853451
 GameObject:
   m_ObjectHideFlags: 0
