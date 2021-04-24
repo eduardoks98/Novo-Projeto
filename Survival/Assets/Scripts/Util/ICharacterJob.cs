@@ -4,10 +4,12 @@ using UnityEngine;
 
 public interface ICharacterJob
 {
+    float AttackSpeed { get; set; }
     float MaxHealth { get; set; }
-    float TakeDamage(float damage, float health);
+    float CurrentHealth { get; set; }
+    float TakeDamage(float damage);
 
-    bool IsAlive(float health);
+    bool IsAlive();
 
     float BaseDamage { get; }
     float ModifierDamage { get; }

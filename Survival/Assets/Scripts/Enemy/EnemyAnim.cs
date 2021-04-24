@@ -51,7 +51,7 @@ public class EnemyAnim : MonoBehaviour
 
     void animate()
     {
-        Debug.Log(this.gameObject.name + " Chegou no destino? " + path.reachedEndOfPath);
+        //Debug.Log(this.gameObject.name + " Chegou no destino? " + path.reachedEndOfPath);
         if (aiDestination.target == null)
         {
             isRunning = !path.reachedEndOfPath;

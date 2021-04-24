@@ -8,6 +8,8 @@ TagManager:
   - Health
   - Stamina
   - Exp
+  - Enemy
+  - AttachArrows
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - UI
   - Obstacle
   - Arrow
-  - 
-  - 
+  - ArrowsObstacle
+  - ArrowInEnemy
   - 
   - 
   - 

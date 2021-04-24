@@ -6,14 +6,12 @@ using UnityEngine.UI;
 public class Person : MonoBehaviour
 {
     public ICharacterJob Job;
-    private float _health;
     [SerializeField]
     private UIBars _healthBar;
 
     [SerializeField]
     public List<Collider2D> colliders = new List<Collider2D>();
 
-    public float Health { get => _health; set => _health = value; }
     public UIBars HealthBar { get => _healthBar; set => _healthBar = value; }
 
     public List<Collider2D> GetColliders() { return colliders; }
@@ -21,26 +19,25 @@ public class Person : MonoBehaviour
     private void Start()
     {
         Job = new Survivalist();
-        Health = Job.MaxHealth;
         HealthBar.SetMaxValue(Job.MaxHealth);
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Health = Job.TakeDamage(Job.Attack(), Health);
-            HealthBar.SetValue(Health);
-            Debug.Log("vida atual: " + Health);
+            Job.TakeDamage(Job.Attack());
+            HealthBar.SetValue(Job.CurrentHealth);
+            Debug.Log("vida atual: " + Job.CurrentHealth);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Job.MaxHealth += 200;
             HealthBar.SetMaxValue(Job.MaxHealth);
-            HealthBar.SetValue(Health + 200f);
-            Health = Health + 200f;
+            HealthBar.SetValue(Job.CurrentHealth + 200f);
+            Job.CurrentHealth += 200f;
             Debug.Log("vida maxima: " + Job.MaxHealth);
-            Debug.Log("vida atual: " + Health);
+            Debug.Log("vida atual: " + Job.CurrentHealth);
         }
     }
 
@@ -72,6 +69,7 @@ public class Person : MonoBehaviour
             }
         }
     }
+
 
 
 

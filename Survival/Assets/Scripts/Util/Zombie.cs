@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Survivalist : ICharacterJob
+public class Zombie : ICharacterJob
 {
     private float _maxHealth = 100f;
     private float _currentHealth = 100f;
-    private float _attackSpeed = 2f;
+    private float _attackSpeed = 1f;
     public float BaseDamage => 10f;
     public float ExpToLevelUp => 100f;
-    public float ModifierDamage => 1.5f;
+    public float ModifierDamage => 1f;
     public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
     public float CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
     public float AttackSpeed { get => _attackSpeed; set => _attackSpeed = value; }
@@ -33,6 +33,4 @@ public class Survivalist : ICharacterJob
         CurrentHealth -= damage;
         return CurrentHealth;
     }
-
 }
-
