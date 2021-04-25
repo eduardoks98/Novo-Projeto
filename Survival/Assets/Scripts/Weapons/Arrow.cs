@@ -43,7 +43,10 @@ public class Arrow : MonoBehaviour
             Debug.Log("TARGADO");
             Vector2 direction = target.target.transform.position - this.transform.position;
             transform.right = direction;
-            rb.velocity = transform.right * bow.lauchForce ;
+            rb.velocity = transform.right * bow.lauchForce;
+
+            float angle = Mathf.Atan2(rb.velocity.x, rb.velocity.y) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, -Vector3.forward);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
