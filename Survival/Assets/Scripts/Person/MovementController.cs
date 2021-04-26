@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class MovementController : MonoBehaviour
 {
     Rigidbody2D body;
@@ -48,7 +49,7 @@ public class MovementController : MonoBehaviour
                 isRunning = false;
         }
 
-        anim.SetBool("isRunning", isRunning);
+        //anim.SetBool("isRunning", isRunning);
     }
 
 }

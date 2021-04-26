@@ -8,7 +8,7 @@ public class EnemyAnim : MonoBehaviour
     public Seeker seeker;
     public AIDestinationSetter aiDestination;
     public AIPath path;
-    public Animator anim;
+    //public Animator anim;
     public bool isRunning;
     public float viewDistance;
     public GameObject player;
@@ -21,7 +21,7 @@ public class EnemyAnim : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         seeker = GetComponent<Seeker>();
         aiDestination = GetComponent<AIDestinationSetter>();
-        anim = GetComponentInChildren<Animator>();
+        //anim = GetComponentInChildren<Animator>();
         path = GetComponent<AIPath>();
         alreadySeePlayer = false;
     }
@@ -60,7 +60,7 @@ public class EnemyAnim : MonoBehaviour
         {            
             isRunning = !path.reachedEndOfPath;
         }
-        anim.SetBool("isRunning", !path.reachedEndOfPath);
+       // anim.SetBool("isRunning", !path.reachedEndOfPath);
     }
 
     bool seePlayer()
