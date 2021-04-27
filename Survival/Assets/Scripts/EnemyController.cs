@@ -1,10 +1,12 @@
+using Assets.Scripts.Interfaces.Entity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public IJobs Job;
+    public IEntity entity;
+    public IEntity stats;
     [SerializeField]
     private UIBars _healthBar;
 
@@ -12,8 +14,9 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        Job = new Zombie();
-        HealthBar.SetMaxValue(Job.MaxHealth);
+        entity = new Warrior();
+        stats = new StatsController(entity);
+        HealthBar.SetMaxValue(entity.Health);
     }
 
     private void Update()

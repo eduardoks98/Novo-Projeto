@@ -14,7 +14,7 @@ namespace Assets.Scripts.Interfaces.Entity
         public float PhysicPower { get => 10f;}
         public float MagicPower { get => 10f; }
         public float AttackRate { get => 1f;}
-        public float Speed { get => 1f;}
+        public float Speed { get =>2f;}
         public int Strength { get => 1;}
         public int Constitution { get => 1;}
         public int Dexterity { get => 1;}

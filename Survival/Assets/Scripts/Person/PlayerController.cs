@@ -11,11 +11,12 @@ namespace Assets.Scripts.Person
     {
         public IEntity entity;
         [SerializeField]
-        public IEntity stats;
+        public StatsController stats;
         public Animator anim;
         public bool runOnce;
         public bool faster;
         public MovementController moveController;
+        [SerializeField]
         private UIBars _healthBar;
         public List<Collider2D> colliders = new List<Collider2D>();
         public UIBars HealthBar { get => _healthBar; set => _healthBar = value; }

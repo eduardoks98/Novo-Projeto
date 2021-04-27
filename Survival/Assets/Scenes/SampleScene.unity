@@ -3842,6 +3842,11 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 8133282709225720257}
+    - target: {fileID: 8133282709225720257, guid: 4ec205320444517408b3367a34e9e34b,
+        type: 3}
+      propertyPath: _healthBar
+      value: 
+      objectReference: {fileID: 1752136249}
     - target: {fileID: 8133282709225720260, guid: 4ec205320444517408b3367a34e9e34b,
         type: 3}
       propertyPath: _healthBar
@@ -3852,7 +3857,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Steve
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8133282709225720260, guid: 4ec205320444517408b3367a34e9e34b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4ec205320444517408b3367a34e9e34b, type: 3}
 --- !u!4 &7446765186771711281 stripped
 Transform:
