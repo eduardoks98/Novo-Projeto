@@ -3,22 +3,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Interfaces.Entity
 {
-    public class StatsController : ScriptableObject
+    public class StatsController : IEntity
     {
-        public void setClass(IEntity entity)
-        {
-            this.job = entity;
-            CurrentHealth = Health;
-            Strength = job.Strength;
-            Constitution = job.Constitution;
-            Dexterity = job.Dexterity;
-            Intelligence = job.Intelligence;
-            Wisdom = job.Wisdom;
-            Charisma = job.Charisma;
-        }
+
         private IEntity job;
-
-
         [SerializeField] private float _currentHealth;
 
         [SerializeField] private int _strength;
@@ -27,7 +15,17 @@ namespace Assets.Scripts.Interfaces.Entity
         [SerializeField] private int _intelligence;
         [SerializeField] private int _wisdom;
         [SerializeField] private int _charisma;
-
+        public StatsController(IEntity entity)
+        {
+            job = entity;
+            CurrentHealth = Health;
+            Strength = job.Strength;
+            Constitution = job.Constitution;
+            Dexterity = job.Dexterity;
+            Intelligence = job.Intelligence;
+            Wisdom = job.Wisdom;
+            Charisma = job.Charisma;
+        }
         [SerializeField] public float Health { get { return job.Constitution * job.Health; } }
         [SerializeField] public float Defense { get { return job.Constitution * job.Defense; } }
         [SerializeField] public float PhysicPower { get { return job.Strength * job.PhysicPower; } }
