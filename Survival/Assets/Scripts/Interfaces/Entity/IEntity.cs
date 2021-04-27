@@ -19,5 +19,6 @@ namespace Assets.Scripts.Interfaces.Entity
         public int Wisdom { get; }
         public int Charisma { get; }
 
+        void AddDexterity(int value);
     }
 }

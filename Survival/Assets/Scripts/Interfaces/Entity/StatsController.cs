@@ -7,14 +7,14 @@ namespace Assets.Scripts.Interfaces.Entity
     {
 
         private IEntity job;
-        [SerializeField] private float _currentHealth;
+         private float _currentHealth;
 
-        [SerializeField] private int _strength;
-        [SerializeField] private int _constitution;
-        [SerializeField] private int _dexterity;
-        [SerializeField] private int _intelligence;
-        [SerializeField] private int _wisdom;
-        [SerializeField] private int _charisma;
+         private int _strength;
+         private int _constitution;
+         private int _dexterity;
+         private int _intelligence;
+         private int _wisdom;
+         private int _charisma;
         public StatsController(IEntity entity)
         {
             job = entity;
@@ -26,12 +26,12 @@ namespace Assets.Scripts.Interfaces.Entity
             Wisdom = job.Wisdom;
             Charisma = job.Charisma;
         }
-        [SerializeField] public float Health { get { return job.Constitution * job.Health; } }
-        [SerializeField] public float Defense { get { return job.Constitution * job.Defense; } }
-        [SerializeField] public float PhysicPower { get { return job.Strength * job.PhysicPower; } }
-        [SerializeField] public float MagicPower { get { return job.Intelligence * job.MagicPower; } }
-        [SerializeField] public float AttackRate { get { return job.Dexterity * job.AttackRate; } }
-        [SerializeField] public float Speed { get { return (job.Speed / job.Dexterity)+job.Speed; } }
+         public float Health { get { return Constitution * job.Health; } }
+         public float Defense { get { return Constitution * job.Defense; } }
+         public float PhysicPower { get { return Strength * job.PhysicPower; } }
+         public float MagicPower { get { return Intelligence * job.MagicPower; } }
+         public float AttackRate { get { return Dexterity * job.AttackRate; } }
+         public float Speed { get { return (job.Speed * Dexterity/100)+job.Speed; } }
         public int Strength { get => _strength; set => _strength = value; }
         public int Constitution { get => _constitution; set => _constitution = value; }
         public int Dexterity { get => _dexterity; set => _dexterity = value; }
@@ -40,6 +40,10 @@ namespace Assets.Scripts.Interfaces.Entity
         public int Charisma { get => _charisma; set => _charisma = value; }
 
 
+        public void AddDexterity(int value)
+        {
+            _dexterity += value;
+        }
         public float CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
         public bool IsAlive { get => !(CurrentHealth <= 0); }
 

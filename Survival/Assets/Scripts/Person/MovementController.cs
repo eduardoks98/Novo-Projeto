@@ -49,7 +49,7 @@ public class MovementController : MonoBehaviour
                 isRunning = false;
         }
 
-        //anim.SetBool("isRunning", isRunning);
+        anim.SetBool("isRunning", isRunning);
     }
 
 }

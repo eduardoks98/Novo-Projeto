@@ -3837,6 +3837,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8133282709225720257, guid: 4ec205320444517408b3367a34e9e34b,
+        type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 8133282709225720257}
     - target: {fileID: 8133282709225720260, guid: 4ec205320444517408b3367a34e9e34b,
         type: 3}
       propertyPath: _healthBar
@@ -3854,6 +3859,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7446765187976743121, guid: 06dc6a92a2b6ef342ac58eb711a3a5f2,
     type: 3}
   m_PrefabInstance: {fileID: 1764995225951632107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8133282709225720257 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3989329722921998192, guid: 4ec205320444517408b3367a34e9e34b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7011630021727857198}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8133282709225720258 stripped
 Transform:

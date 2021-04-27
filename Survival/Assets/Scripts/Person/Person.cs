@@ -25,7 +25,7 @@ public class Person : MonoBehaviour
         Job = new Survivalist();
         HealthBar.SetMaxValue(Job.MaxHealth);
     }
-    private void Update()
+    private void FixedUpdate()
     {
         moveController.Move(Job.CanMove);
 

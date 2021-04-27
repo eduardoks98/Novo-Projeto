@@ -21,5 +21,10 @@ namespace Assets.Scripts.Interfaces.Entity
         public int Intelligence { get => stat.Intelligence + 1; }
         public int Wisdom { get => stat.Wisdom + 1; }
         public int Charisma { get => stat.Charisma + 2; }
+
+        public void AddDexterity(int value)
+        {
+            return;
+        }
     }
 }
