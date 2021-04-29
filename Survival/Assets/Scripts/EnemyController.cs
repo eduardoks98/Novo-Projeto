@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public IEntity entity;
-    public IEntity stats;
+    public StatsController stats;
     [SerializeField]
     private UIBars _healthBar;
 
@@ -16,12 +16,12 @@ public class EnemyController : MonoBehaviour
     {
         entity = new Warrior();
         stats = new StatsController(entity);
-        HealthBar.SetMaxValue(entity.Health);
+        HealthBar.SetMaxValue(stats.Health);
     }
 
     private void Update()
     {
-        if (!Job.IsAlive())
+        if (!stats.IsAlive)
         {
             Destroy(this.gameObject);
         }
@@ -29,9 +29,10 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float value)
     {
-        if (Job.IsAlive())
-            HealthBar.SetValue(Job.TakeDamage(value));
+        if (!stats.IsAlive) { return; }
+        stats.TakeDamage(value);
+        HealthBar.SetValue(stats.Health);
     }
 
-    
+
 }
