@@ -18,13 +18,13 @@ namespace Assets.Scripts.Interfaces.Entity
         public StatsController(IEntity entity)
         {
             job = entity;
-            CurrentHealth = Health;
             Strength = job.Strength;
             Constitution = job.Constitution;
             Dexterity = job.Dexterity;
             Intelligence = job.Intelligence;
             Wisdom = job.Wisdom;
             Charisma = job.Charisma;
+            CurrentHealth = Health;
         }
          public float Health { get { return Constitution * job.Health; } }
          public float Defense { get { return Constitution * job.Defense; } }
@@ -57,7 +57,7 @@ namespace Assets.Scripts.Interfaces.Entity
         {
             if (!IsAlive) { return; }
 
-            float damage = amount - Defense;
+            float damage = amount;
 
             if (damage < 0) { return; }
 

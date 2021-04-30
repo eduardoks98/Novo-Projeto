@@ -33,6 +33,20 @@ namespace Assets.Scripts.Person
             HealthBar.SetMaxValue(stats.Health);
         }
 
+        public void TakeDamage(float value)
+        {
+            if (!stats.IsAlive) { return; }
+            stats.TakeDamage(value);
+            HealthBar.SetValue(stats.Health);
+        }
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                GetComponentInChildren<WeaponController>().animator.Play("WoodMaceAtttack");
+            }
+        }
+
         private void FixedUpdate()
         {
             if (faster && !runOnce)
@@ -46,6 +60,8 @@ namespace Assets.Scripts.Person
             float animSpeed = 1 + (stats.Dexterity / 100);
             anim.SetFloat("Speed", animSpeed);
             moveController.Move(true);
+
+           
 
         }
 

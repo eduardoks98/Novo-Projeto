@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Editors
 {
-    [CustomEditor(typeof(PlayerController))]
+    [CustomEditor(typeof(EnemyController))]
     [CanEditMultipleObjects]
     class StatsEditor : Editor
     {
@@ -16,7 +16,7 @@ namespace Assets.Scripts.Editors
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            PlayerController pc = (PlayerController)target;
+            EnemyController pc = (EnemyController)target;
             if(pc.stats == null) { return; }
 
             EditorGUILayout.LabelField("Stats");
