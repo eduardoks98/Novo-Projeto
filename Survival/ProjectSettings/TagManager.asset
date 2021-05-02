@@ -10,6 +10,7 @@ TagManager:
   - Exp
   - Enemy
   - AttachArrows
+  - Timer
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,9 @@ namespace Assets.teste
         private Faction _faction;
         private AvatarState _state;
 
+        public bool showTimer;
+        public GameObject Timer;
+
         private float _healthValue;
         [SerializeField]
         private float _timerValue;
@@ -53,6 +56,8 @@ namespace Assets.teste
         // Use this for initialization
         void Start()
         {
+            Timer = this.GetComponentInChildren<Canvas>().gameObject;
+
             Faction = Faction.Avatares;
             State = AvatarState.Idle;
             if (JobController == null)
@@ -74,6 +79,8 @@ namespace Assets.teste
         // Update is called once per frame
         void Update()
         {
+            Timer.SetActive(showTimer);
+
             if (JobController == null)
             {
                 Debug.Log("Character need a class!");
@@ -132,12 +139,14 @@ namespace Assets.teste
         }
 
 
-        void UpdateTimer(bool changeClass)
+        public void UpdateTimer(bool updateMaxValue)
         {
-            if (changeClass)
+            
+            if (updateMaxValue)
             {
                 UITimerSlider.maxValue = TimerMax;
                 TimerValue = TimerMax;
+                
             }
 
             UITimerText.text = ((int)TimerValue).ToString();
