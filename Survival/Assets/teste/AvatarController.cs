@@ -7,8 +7,9 @@ namespace Assets.teste
 {
     public class AvatarController : MonoBehaviour, IAvatarActions, ICastSkill
     {
-        private IAtributes _stats;
+        private JobChoose _jobController;
         private Faction _faction;
+        private AvatarState _state;
 
         private float _healthValue;
         [SerializeField]
@@ -25,17 +26,17 @@ namespace Assets.teste
         [SerializeField]
         private Color _UITimerCooldownColor;
 
-        private bool _isCasting;
-
-        public IAtributes Atributes { get => _stats; set => _stats = value; }
+        private bool _inCooldown;
+        public AvatarState State { get => _state; set => _state = value; }
+        public JobChoose JobController { get => _jobController; set => _jobController = value; }
         public Faction Faction { get => _faction; set => _faction = value; }
         public float HealthValue { get => _healthValue; set => _healthValue = value; }
         public bool IsAlive => HealthValue > 0;
 
 
-        public float TimerMax => 50;
+        public float TimerMax => JobController.AttackRate;
         public float TimerValue { get => _timerValue; set => _timerValue = value; }
-        public bool IsCasting { get => _isCasting; set => _isCasting = value; }
+        public bool InCooldown { get => _inCooldown; set => _inCooldown = value; }
         public Slider UITimerSlider => _UITimerSlider;
         public Text UITimerText => _UITimerText;
         public Image UITimerImage => _UITimerImage;
@@ -47,17 +48,20 @@ namespace Assets.teste
 
 
 
+
+
         // Use this for initialization
         void Start()
         {
-            _faction = Faction.Avatares;
-            if (Atributes == null)
+            Faction = Faction.Avatares;
+            State = AvatarState.Idle;
+            if (JobController == null)
             {
-                Atributes = new JobChoose();
-                Atributes.Job = Job.Mage;
-                
+                JobController = new JobChoose(Contract.Warrior);
+
                 Debug.Log("No class selected! Setup default class!");
             }
+            HealthValue = JobController.Health;
 
             TimerValue = TimerMax;
             UITimerSlider.maxValue = TimerMax;
@@ -70,42 +74,85 @@ namespace Assets.teste
         // Update is called once per frame
         void Update()
         {
-            if (Atributes == null)
+            if (JobController == null)
             {
                 Debug.Log("Character need a class!");
                 return;
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
-                IsCasting = true;
+                InCooldown = true;
+
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                changeClass();
             }
 
 
         }
         void FixedUpdate()
         {
-            IsCasting = TimerManager(IsCasting);
+            InCooldown = TimerManager(InCooldown);
         }
 
-        public bool TimerManager(bool isCasting)
+        public bool TimerManager(bool inCooldown)
         {
-            if (!isCasting) { return false; }
+
+            if (!inCooldown) { return false; }
 
             if (TimerValue <= 0)
             {
                 TimerValue = TimerMax;
-                UITimerText.text = ((int)TimerValue).ToString();
-                UITimerSlider.value = TimerValue;
-                UITimerImage.color = UITimerColor;
+                UpdateTimer(false);
+                State = AvatarState.Idle;
                 return false;
             }
-
+            State = AvatarState.Attack;
             TimerValue -= Time.fixedDeltaTime;
+            UpdateTimer(false);
+            return true;
+        }
+
+        void changeClass()
+        {
+
+            if (JobController.Contract == Contract.Mage)
+            {
+                Debug.Log("WARRIOR");
+                JobController.Job = JobController.SwitchJob(Contract.Warrior);
+            }
+            else if (JobController.Contract == Contract.Warrior)
+            {
+                Debug.Log("MAGE");
+                JobController.Job = JobController.SwitchJob(Contract.Mage);
+            }
+            UpdateTimer(true);
+        }
+
+
+        void UpdateTimer(bool changeClass)
+        {
+            if (changeClass)
+            {
+                UITimerSlider.maxValue = TimerMax;
+                TimerValue = TimerMax;
+            }
+
             UITimerText.text = ((int)TimerValue).ToString();
             UITimerSlider.value = TimerValue;
-            UITimerImage.color = UITimerCooldownColor;
-            return true;
+            if (!InCooldown) { return; }
+            if (TimerValue <= 0)
+            {
+                UITimerImage.color = UITimerColor;
+            }
+            else
+            {
+                UITimerImage.color = UITimerCooldownColor;
+
+            }
+
         }
     }
 }

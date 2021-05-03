@@ -4,15 +4,22 @@ using static Assets.teste.EnumScript;
 
 namespace Assets.teste
 {
-    public class JobChoose : IAtributes
+    public class JobChoose : IAtributes, IStat
     {
-        private Job _job;
-        private int _strenght;
-        private int _constitution;
-        private int _dexterity;
-        private int _intelligence;
-        private int _wisdom;
-        private int _charisma;
+        public JobChoose(Contract job)
+        {
+
+            Job = SwitchJob(job);
+            Contract = job;
+        }
+        private IStat _job;
+        private Contract _contract;
+        public int _strenght = 0;
+        public int _constitution = 0;
+        public int _dexterity = 0;
+        public int _intelligence = 0;
+        public int _wisdom = 0;
+        public int _charisma = 0;
 
         public float Health => BaseStats.Health * Constitution;
 
@@ -22,31 +29,34 @@ namespace Assets.teste
 
         public float MagicPower => BaseStats.MagicPower * Intelligence;
 
-        public float AttackRate => BaseStats.AttackRate * Dexterity;
+        public float AttackRate => BaseStats.AttackRate -(Dexterity / 100f) - (Strength / 100f) + (Constitution / 100f);
 
-        public float Speed => BaseStats.Speed * ((Dexterity / 100) + (Strength / 100) + (Constitution / 100));
+        public float Speed => (float)BaseStats.Speed + ((Dexterity / 100f) + (Strength / 100f) + (Constitution / 100f));
 
-        public Job Job { get => _job; set => _job = value; }
 
-        public int Strength { get => BaseStats.Strength + _strenght; set => _strenght = value; }
-        public int Constitution { get => BaseStats.Constitution + _constitution; set => _constitution = value; }
-        public int Dexterity { get => BaseStats.Dexterity + _dexterity; set => _dexterity = value; }
-        public int Intelligence { get => BaseStats.Intelligence + _intelligence; set => _intelligence = value; }
-        public int Wisdom { get => BaseStats.Wisdom + _wisdom; set => _wisdom = value; }
-        public int Charisma { get => BaseStats.Charisma + _charisma; set => _charisma = value; }
+        public int Strength { get => BaseStats.Strength + Job.Strength + _strenght; set => _strenght = value; }
+        public int Constitution { get => BaseStats.Constitution + Job.Constitution + _constitution; set => _constitution = value; }
+        public int Dexterity { get => BaseStats.Dexterity + Job.Dexterity + _dexterity; set => _dexterity = value; }
+        public int Intelligence { get => BaseStats.Intelligence + Job.Intelligence + _intelligence; set => _intelligence = value; }
+        public int Wisdom { get => BaseStats.Wisdom + Job.Wisdom + _wisdom; set => _wisdom = value; }
+        public int Charisma { get => BaseStats.Charisma + Job.Charisma + _charisma; set => _charisma = value; }
+        public IStat Job { get => _job; set => _job = value; }
+        public Contract Contract { get => _contract; set => _contract = value; }
 
-        void ChangeAtributes(int str, int cnt,int dex, int intl, int wis, int cha)
+        public IStat SwitchJob(Contract job)
         {
-            Strength = str;
-            Constitution = cnt;
-            Dexterity = dex;
-            Intelligence = intl;
-            Wisdom = wis;
-            Charisma = cha;
-        }
+            Contract = job;
+            switch (job)
+            {
+                case Contract.Mage:
+                    return new Mage();
+                case Contract.Warrior:
+                    return new Warrior();
+                default:
+                    return new Warrior();
+            }
 
-        public void SwitchJob()
-        {
+           
 
         }
 

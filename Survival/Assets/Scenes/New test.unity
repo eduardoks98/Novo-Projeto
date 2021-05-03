@@ -186,7 +186,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.957
+  m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -437,11 +437,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4329ebdfc35114abc8c47e0901ffb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timerValue: 0
   _UITimerSlider: {fileID: 718136531}
   _UITimerText: {fileID: 1131574011}
   _UITimerImage: {fileID: 4982793}
   _UITimerColor: {r: 1, g: 1, b: 1, a: 1}
-  _UITimerCooldownColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0}
+  _UITimerCooldownColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
 --- !u!1 &646056117
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +649,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.957
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

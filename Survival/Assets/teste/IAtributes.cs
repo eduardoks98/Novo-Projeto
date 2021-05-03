@@ -5,7 +5,6 @@ using static Assets.teste.EnumScript;
 
 public interface IAtributes
 {
-    public Job Job { get; set; }
     public float Health { get; }
     public float Defense { get; }
     public float PhysicPower { get; }

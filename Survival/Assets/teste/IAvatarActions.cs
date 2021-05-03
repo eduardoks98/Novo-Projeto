@@ -6,14 +6,15 @@ namespace Assets.teste
 {
     public interface IAvatarActions
     {
-        IAtributes Atributes { get; set; }
+        JobChoose JobController { get; set; }
         Faction Faction { get; set; }
+        AvatarState State { get; set; }
 
         float HealthValue { get; set; }
         bool IsAlive { get; }
 
 
-        
+
 
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.teste
 {
-    interface IStat
+    public interface IStat
     {
         public int Strength { get; set; }
         public int Constitution { get; set; }

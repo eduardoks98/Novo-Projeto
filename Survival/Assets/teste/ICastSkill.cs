@@ -11,7 +11,7 @@ namespace Assets.teste
     interface ICastSkill
     {
         string SkillName { get; set; }
-        bool IsCasting { get; set; }
+        bool InCooldown { get; set; }
         float TimerMax { get;}
         float TimerValue { get; set; }
         
