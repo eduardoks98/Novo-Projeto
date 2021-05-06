@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - AttachArrows
   - Timer
+  - Formation
+  - Vaga
   layers:
   - Default
   - TransparentFX

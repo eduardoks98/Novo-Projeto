@@ -1,14 +1,27 @@
-﻿using System.Collections;
+﻿using Pathfinding;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Assets.teste.EnumScript;
 
 namespace Assets.teste
 {
+
+    [RequireComponent(typeof(AvatarSettings))]
+    [RequireComponent(typeof(AIDestinationSetter))]
     public class AvatarController : MonoBehaviour, IAvatarActions, ICastSkill
     {
         private JobChoose _jobController;
+        private AIDestinationSetter _aIDestinationSetter;
+        [SerializeField]
+        private List<Transform> _formationPosition;
+        [SerializeField]
+        private Transform _target;
+        [SerializeField]
         private Faction _faction;
+        [SerializeField]
+        private Contract _contract;
         private AvatarState _state;
 
         public bool showTimer;
@@ -48,6 +61,7 @@ namespace Assets.teste
         public Color UITimerCooldownColor => _UITimerCooldownColor;
 
         public string SkillName { get => "TESTE"; set => SkillName = value; }
+        public Contract Contract { get => _contract; set => _contract = value; }
 
 
 
@@ -56,9 +70,15 @@ namespace Assets.teste
         // Use this for initialization
         void Start()
         {
+            if (!(Faction == Faction.Avatares)) {
+                _aIDestinationSetter.target = null;
+            }
+            else
+            {
+
+            }
             Timer = this.GetComponentInChildren<Canvas>().gameObject;
 
-            Faction = Faction.Avatares;
             State = AvatarState.Idle;
             if (JobController == null)
             {

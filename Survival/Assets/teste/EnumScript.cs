@@ -9,6 +9,6 @@ namespace Assets.teste
 
         public enum Contract { Mage, Warrior};
 
-        public enum AvatarState { Idle, Walk, Follow, Seek, Hide, Attack, Block, Die }
+        public enum AvatarState { Idle, Walk, Follow, Seek, Hide, Attack, Block, Die };
     }
 }
