@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using static Assets.teste.EnumScript;
 
 namespace Assets.teste
 {
@@ -15,6 +16,7 @@ namespace Assets.teste
             bool neepUpdate = false;
             base.OnInspectorGUI();
             AvatarController ac = (AvatarController)target;
+      
             if (ac.JobController == null) { return; }
 
             GUILayout.BeginVertical();
@@ -129,7 +131,7 @@ namespace Assets.teste
 
             GUILayout.EndVertical();
             if (neepUpdate)
-            { 
+            {
                 ac.UpdateTimer(true);
             }
         }

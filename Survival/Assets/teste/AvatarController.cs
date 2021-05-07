@@ -7,17 +7,18 @@ using static Assets.teste.EnumScript;
 
 namespace Assets.teste
 {
-
-    [RequireComponent(typeof(AvatarSettings))]
     [RequireComponent(typeof(AIDestinationSetter))]
     public class AvatarController : MonoBehaviour, IAvatarActions, ICastSkill
     {
         private JobChoose _jobController;
         private AIDestinationSetter _aIDestinationSetter;
+        public GameSettings gameSettings;
+        public FormationSettings formationSettings;
+        public bool setupPosition;
+        public bool isPlayer;
+
         [SerializeField]
-        private List<Transform> _formationPosition;
-        [SerializeField]
-        private Transform _target;
+        private GameObject _target;
         [SerializeField]
         private Faction _faction;
         [SerializeField]
@@ -66,17 +67,13 @@ namespace Assets.teste
 
 
 
-
         // Use this for initialization
         void Start()
         {
-            if (!(Faction == Faction.Avatares)) {
-                _aIDestinationSetter.target = null;
-            }
-            else
-            {
-
-            }
+            gameSettings = GameObject.FindObjectOfType<GameSettings>();
+            setupPosition = false;
+            _aIDestinationSetter = GetComponent<AIDestinationSetter>();
+            _aIDestinationSetter.target = null;
             Timer = this.GetComponentInChildren<Canvas>().gameObject;
 
             State = AvatarState.Idle;
@@ -116,6 +113,14 @@ namespace Assets.teste
             {
                 changeClass();
             }
+
+            if (!isPlayer) { return; }
+            if (gameSettings.loaded)
+            {
+                if (!setupPosition) getPosition();
+            }
+            if (setupPosition)
+                _aIDestinationSetter.target = _target.transform;
 
 
         }
@@ -158,15 +163,14 @@ namespace Assets.teste
             UpdateTimer(true);
         }
 
-
         public void UpdateTimer(bool updateMaxValue)
         {
-            
+
             if (updateMaxValue)
             {
                 UITimerSlider.maxValue = TimerMax;
                 TimerValue = TimerMax;
-                
+
             }
 
             UITimerText.text = ((int)TimerValue).ToString();
@@ -183,5 +187,14 @@ namespace Assets.teste
             }
 
         }
+
+        public void getPosition()
+        {
+            formationSettings = FormationSettings.nextPosition(true);
+            _target = formationSettings.TargetPosition;
+            setupPosition = true;
+        }
+
+
     }
 }
