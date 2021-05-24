@@ -14,13 +14,16 @@ public class Tentacle : MonoBehaviour
     public float targetDist;
     public float smoothSpeed;
 
-    public Transform[] bodyparts;
+    public GameObject[] bodyparts;
+
+    public TeamManager teamManager;
     private void Start()
     {
         lenght = bodyparts.Length+1;
         lineRenderer.positionCount = lenght;
         segmentPoses = new Vector3[lenght];
         segmentV = new Vector3[lenght];
+        teamManager = GameObject.FindGameObjectWithTag("Formation").GetComponent<TeamManager>();
     }
 
     private void Update()
@@ -31,9 +34,13 @@ public class Tentacle : MonoBehaviour
         {
             Vector3 targetPos = segmentPoses[i - 1] + (segmentPoses[i] - segmentPoses[i - 1]).normalized * targetDist;
             segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], targetPos, ref segmentV[i], smoothSpeed);
-            bodyparts[i -1].transform.position = segmentPoses[i];
+
+            int bodyPos = bodyparts[i - 1].GetComponent<BodyRotation>().position;
+            bodyparts[i - 1].transform.position = segmentPoses[teamManager.bodys[teamManager.getBodysIndex(bodyPos)].position];
+            //bodyPositions[i - 1].position = i;
             // segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i - 1] + targetDir.right * targetDist, ref segmentV[i], smoothSpeed);
         }
+     
         lineRenderer.SetPositions(segmentPoses);
     }
 }
