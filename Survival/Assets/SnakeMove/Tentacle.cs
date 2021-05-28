@@ -17,7 +17,7 @@ public class Tentacle : MonoBehaviour
     public Transform[] bodyparts;
     private void Start()
     {
-        lenght = bodyparts.Length;
+        lenght = bodyparts.Length+1;
         lineRenderer.positionCount = lenght;
         segmentPoses = new Vector3[lenght];
         segmentV = new Vector3[lenght];
