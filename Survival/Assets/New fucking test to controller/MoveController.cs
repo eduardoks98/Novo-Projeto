@@ -41,7 +41,7 @@ public class MoveController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         MoveInput();
 
@@ -59,7 +59,7 @@ public class MoveController : MonoBehaviour
             line.positionCount = points.Count;
             line.SetPositions(points.ToArray());
         }
-        if (DistanceToLastPoint(body.transform.position) > .1f)
+        if (DistanceToLastPoint(body.transform.position) > .6f)
         {
             points.Add(body.transform.position);
 
@@ -72,7 +72,13 @@ public class MoveController : MonoBehaviour
             if (line.positionCount - (i ) > 0)
             {
 
-                crew[i - 1].transform.position = Vector3.MoveTowards(crew[i - 1].transform.position, line.GetPosition(line.positionCount - (i)),1f) ;
+                crew[i - 1].transform.position =line.GetPosition(line.positionCount - (i));
+                CrewMember member = crew[i - 1].GetComponent<CrewMember>();
+                if (member)
+                {
+                    member.target = crew[i - 1].transform;
+
+                }
             }
 
         }
