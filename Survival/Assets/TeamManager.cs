@@ -117,14 +117,14 @@ public class TeamManager : MonoBehaviour
         {
             int BST = getBodysIndex(pos1);
             if (!bodys[BST].isFree && !bodys[BST].cannotRelease)
-                Destroy(bodys[BST]);
+                Destroy(bodys[BST].GetComponentInChildren<Char>().gameObject);
         }
 
         if (pos2 != 0)
         {
             int BSD = getBodysIndex(pos2);
             if (!bodys[BSD].isFree && !bodys[BSD].cannotRelease)
-                Destroy(bodys[BSD]);
+                Destroy(bodys[BSD].GetComponentInChildren<Char>().gameObject);
         }
     }
 

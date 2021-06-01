@@ -46,8 +46,16 @@ public class SlotManager : MonoBehaviour
 
             segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], targetPos, ref segmentV[i], smoothSpeed);
 
-            int bodyPos = bodyparts[i - 1].GetComponent<CharSlot>().position;
-            bodyparts[i - 1].transform.position = segmentPoses[teamManager.bodys[teamManager.getBodysIndex(bodyPos)].position];
+            int bodyPos = -1;
+            if (bodyparts[i - 1].GetComponent<CharSlot>() != null)
+            {
+                bodyPos = bodyparts[i - 1].GetComponent<CharSlot>().position;
+                if (bodyPos != -1)
+                {
+                    bodyparts[i - 1].transform.position = segmentPoses[teamManager.bodys[teamManager.getBodysIndex(bodyPos)].position];
+                }
+            }
+
             //bodyPositions[i - 1].position = i;
             // segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i - 1] + targetDir.right * targetDist, ref segmentV[i], smoothSpeed);
         }
