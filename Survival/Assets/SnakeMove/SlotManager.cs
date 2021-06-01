@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tentacle : MonoBehaviour
+public class SlotManager : MonoBehaviour
 {
 
     public int lenght;
@@ -19,11 +19,12 @@ public class Tentacle : MonoBehaviour
     public TeamManager teamManager;
     private void Start()
     {
-        lenght = bodyparts.Length+1;
+        lenght = bodyparts.Length + 1;
         lineRenderer.positionCount = lenght;
         segmentPoses = new Vector3[lenght];
         segmentV = new Vector3[lenght];
         teamManager = GameObject.FindGameObjectWithTag("Formation").GetComponent<TeamManager>();
+        InitLineRenderer();
     }
 
     private void Update()
@@ -32,15 +33,37 @@ public class Tentacle : MonoBehaviour
 
         for (int i = 1; i < segmentPoses.Length; i++)
         {
-            Vector3 targetPos = segmentPoses[i - 1] + (segmentPoses[i] - segmentPoses[i - 1]).normalized * targetDist;
+            Vector3 targetPos;
+            if (i == 1)
+            {
+                targetPos = segmentPoses[i - 1] + (segmentPoses[i] - segmentPoses[i - 1]).normalized * 0;
+            }
+            else
+            {
+                targetPos = segmentPoses[i - 1] + (segmentPoses[i] - segmentPoses[i - 1]).normalized * targetDist;
+            }
+
+
             segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], targetPos, ref segmentV[i], smoothSpeed);
 
-            int bodyPos = bodyparts[i - 1].GetComponent<BodyRotation>().position;
+            int bodyPos = bodyparts[i - 1].GetComponent<CharSlot>().position;
             bodyparts[i - 1].transform.position = segmentPoses[teamManager.bodys[teamManager.getBodysIndex(bodyPos)].position];
             //bodyPositions[i - 1].position = i;
             // segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i - 1] + targetDir.right * targetDist, ref segmentV[i], smoothSpeed);
         }
-     
+
+        lineRenderer.SetPositions(segmentPoses);
+    }
+
+    void InitLineRenderer()
+    {
+        segmentPoses[0] = targetDir.position;
+
+        for (int i = 1; i < segmentPoses.Length; i++)
+        {
+            segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i - 1] + targetDir.right * targetDist, ref segmentV[i], smoothSpeed);
+        }
+
         lineRenderer.SetPositions(segmentPoses);
     }
 }

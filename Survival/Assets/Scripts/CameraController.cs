@@ -20,11 +20,14 @@ public class CameraController : MonoBehaviour
             transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
             */
 
+            /* if want to use mouse to view over the board
             float maxScreenPoint = 0.2f;
             Vector3 mousePos = Input.mousePosition * maxScreenPoint + new Vector3(Screen.width, Screen.height, 0f) * ((1f - maxScreenPoint) * 0.5f);
 
             Vector3 position = (target.position + GetComponent<Camera>().ScreenToWorldPoint(mousePos)) / 2f;
             Vector3 destination = new Vector3(position.x, position.y, -10);
+            */
+            Vector3 destination = new Vector3(target.position.x, target.position.y, -10);
             transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
         }
 

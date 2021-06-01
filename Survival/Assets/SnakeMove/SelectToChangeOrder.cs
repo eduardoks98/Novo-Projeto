@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MouseInteraction : MonoBehaviour, IPointerClickHandler
+public class SelectToChangeOrder : MonoBehaviour, IPointerClickHandler
 {
     public int position;
     public TeamManager teamManager;
