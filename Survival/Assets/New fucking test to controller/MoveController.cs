@@ -11,7 +11,13 @@ public class MoveController : MonoBehaviour
     public LineRenderer line;
     private List<Vector3> points = new List<Vector3>();
     public Action<IEnumerable<Vector3>> newPath = delegate { };
+    public Rigidbody2D body;
+    float horizontal;
+    float vertical;
+    float moveLimiter = 0.7f;
+    public float runSpeed = 5.0f;
 
+    public CrewController crewController;
     public bool isRunning;
     private void Awake()
     {
@@ -27,20 +33,28 @@ public class MoveController : MonoBehaviour
         return Vector3.Distance(points.Last(), point);
     }
 
-    Rigidbody2D body;
-    float horizontal;
-    float vertical;
-    float moveLimiter = 0.7f;
-    public float runSpeed = 5.0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        crewController = FindObjectOfType<CrewController>();
         body = GetComponent<Rigidbody2D>();
         newPath(points);
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        body = crewController.GetPositionGameobject(1).Char.GetComponent<Rigidbody2D>();
+        var main = body.GetComponent<PathMover>();
+        if (main)
+        {
+            main.MainChar = true;
+        }
+
+
+    }
     void FixedUpdate()
     {
         MoveInput();
@@ -69,10 +83,10 @@ public class MoveController : MonoBehaviour
 
         for (int i = 1; i < crew.Count + 1; i++)
         {
-            if (line.positionCount - (i ) > 0)
+            if (line.positionCount -i> 0 )
             {
 
-                crew[i - 1].transform.position =line.GetPosition(line.positionCount - (i));
+                crew[i - 1].transform.position =line.GetPosition(line.positionCount-i);
                 CrewMember member = crew[i - 1].GetComponent<CrewMember>();
                 if (member)
                 {

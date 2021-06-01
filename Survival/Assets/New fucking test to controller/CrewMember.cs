@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CrewMember : MonoBehaviour
 {
+    public GameObject Char;
     public Transform target;
     public int position;
     public bool isFree;

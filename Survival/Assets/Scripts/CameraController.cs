@@ -7,10 +7,15 @@ public class CameraController : MonoBehaviour
     public float dampTime = 0.15f;
     private Vector3 velocity = Vector3.zero;
     public Transform target;
-
+    public MoveController move;
+    private void Start()
+    {
+        move = FindObjectOfType<MoveController>();
+    }
     // Update is called once per frame
     void Update()
     {
+        target = move.body.transform;
         if (target)
         {
             /*

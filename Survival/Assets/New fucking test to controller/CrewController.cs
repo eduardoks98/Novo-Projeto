@@ -22,14 +22,15 @@ public class CrewController : MonoBehaviour
         OrderByPosition();
     }
 
-    public int GetNextFreePosition()
+    public int GetNextFreePosition(GameObject obj)
     {
         foreach (CrewMember charr in characters)
         {
-            Debug.Log(charr.isFree);
+            //Debug.Log(charr.isFree);
             if (charr.isFree)
             {
                 charr.isFree = false;
+                charr.Char = obj;
                 return charr.position;
             }
 
@@ -40,10 +41,14 @@ public class CrewController : MonoBehaviour
 
     public Transform GetPositionTarget(int position)
     {
-        return characters.Find(x => x.position == position).target;
+        return characters.First(x => x.position == position).target;
     }
     public void OrderByPosition()
     {
         characters = characters.OrderBy(x => x.position).ToList();
+    }
+    public CrewMember GetPositionGameobject(int position)
+    {
+        return characters.Find(x => x.position == position).GetComponent<CrewMember>();
     }
 }
