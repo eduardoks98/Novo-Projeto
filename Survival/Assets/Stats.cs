@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
+    public int KillCount = 0;
     public string type;
     public float ataque = 10f;
     public float defesa = 2f;
@@ -13,6 +14,13 @@ public class Stats : MonoBehaviour
     public float vidaAtual;
     public bool canAttack;
     public float timer;
+    public bool isAlive;
+    public UIBars uiBars;
+    public void SetupUIBar()
+    {
+        uiBars = GetComponentInChildren<UIBars>();
+        uiBars.SetMaxValue(vidaMax);
+    }
     public void TimerTest()
     {
         if (timer <= 0)
@@ -26,26 +34,49 @@ public class Stats : MonoBehaviour
         }
     }
     public List<GameObject> inRange;
-    public virtual void Attack(float dano)
+    public void Attack(float dano)
     {
-        foreach (var item in inRange)
+        if (inRange.Count == 0) { return; }
+        foreach (var item in inRange.ToArray())
         {
-            if (gameObject.CompareTag("Enemy"))
+            if (!item.CompareTag("Enemy"))
             {
-
+                
                 Char charr = item.GetComponent<Char>();
-                charr.TakeDamage(dano);
+                if (charr == null) { return; }
+                if (charr.isAlive && type!=item.tag)
+                {
+                    charr.TakeDamage(dano);
+
+                    canAttack = false;
+                }
+                else if(!charr.isAlive)
+                {
+                    inRange.Remove(item);
+                }
             }
-            else if(!gameObject.CompareTag("Enemy"))
+            else if (item.CompareTag("Enemy"))
             {
                 Enemy enemy = item.GetComponent<Enemy>();
-                enemy.TakeDamage(dano);
+                if (enemy == null) { return; }
+                if (enemy.isAlive)
+                {
+
+                    enemy.TakeDamage(dano);
+
+                    canAttack = false;
+                }
+                else
+                {
+                    KillCount++;
+                    inRange.Remove(item);
+                    Destroy(item);
+                }
             }
         }
-        canAttack = false;
     }
 
-    public virtual void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         vidaAtual -= damage;
     }

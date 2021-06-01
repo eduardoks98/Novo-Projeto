@@ -15,6 +15,7 @@ public class TeamManager : MonoBehaviour
 
     public GameObject toInstantiate;
     public MoveByTouch moveController;
+    public SlotManager slotManager;
     void Start()
     {
         this.positionsToChange = new int[2];
@@ -141,5 +142,22 @@ public class TeamManager : MonoBehaviour
         }
         //Nenhuma posicao livre;
         return -1;
+    }
+
+    public GameObject getNextSpot()
+    {
+            GameObject tMin = null;
+            float minDist = Mathf.Infinity;
+            Vector3 currentPos = slotManager.segmentPoses[0];
+            foreach (GameObject t in slotManager.Spots)
+            {
+                float dist = Vector3.Distance(t.transform.position, currentPos);
+                if (dist < minDist)
+                {
+                    tMin = t;
+                    minDist = dist;
+                }
+            }
+            return tMin;
     }
 }

@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c2bc1588df18e478c2d565e3cf16c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sortingBase: 100
+  sortingBase: 1000
   offset: 0
   runOnlyOnce: 0
   objRenderer: {fileID: 0}
@@ -2059,9 +2059,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3250408127155644637}
+  - component: {fileID: 8988450200394374217}
+  - component: {fileID: 8988450200394374216}
+  - component: {fileID: 8988450200394374214}
+  - component: {fileID: 8988450200394374215}
   m_Layer: 0
   m_Name: Globin Enemy
-  m_TagString: FormAvatar
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2083,6 +2087,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &8988450200394374217
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9056521255436190186}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!58 &8988450200394374216
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9056521255436190186}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.8238486}
+  serializedVersion: 2
+  m_Radius: 0.9394578
+--- !u!95 &8988450200394374214
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9056521255436190186}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb3f09ee883d8b34e9a7abe593cbeaf3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8988450200394374215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9056521255436190186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d00a2a1438e7a94e9d1e9d4af0fe32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KillCount: 0
+  type: 
+  ataque: 10
+  defesa: 2
+  velAtaque: 5
+  velocidade: 2
+  vidaMax: 100
+  vidaAtual: 0
+  canAttack: 0
+  timer: 0
+  isAlive: 0
+  uiBars: {fileID: 0}
+  inRange: []
 --- !u!1 &9173441531200298674
 GameObject:
   m_ObjectHideFlags: 0

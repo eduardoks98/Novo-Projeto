@@ -11,7 +11,7 @@ public class Char : Stats
     private EntityColor entityColor;
     public Color color;
     public float TimeFlip;
-
+    public int LastKillCount;
 
     void Start()
     {
@@ -20,10 +20,17 @@ public class Char : Stats
         charAnimator = GetComponent<CharAnimator>();
         type = tag;
         vidaAtual = vidaMax;
+        SetupUIBar();
+        KillCount = 0;
+        LastKillCount = 0;
     }
 
     private void Update()
     {
+        isAlive = vidaAtual > 0 ? true : false;
+        TimerTest();
+        if (canAttack && inRange.Count > 0 && isAlive) { Attack(ataque - defesa); }
+        uiBars.SetValue(vidaAtual);
         if (charSlot != null)
         {
             parentTransform = charSlot.currentTransform;
@@ -38,8 +45,21 @@ public class Char : Stats
         entityColor.color = color;
         charAnimator.IsWalking = charSlot.teamManager.moveController.isRunning;
         charAnimator.TimeToWait = charSlot.position;
-        TimerTest();
-        if (canAttack && inRange.Count > 0) { Attack(ataque - defesa); }
+        Heal();
+        if (charSlot.MainDied && charSlot.cannotRelease)
+        {
+            charSlot.teamManager.moveController.transform.position = new Vector3(0, 0, 0);
+            GameObject nearstSpot = charSlot.teamManager.getNextSpot();
+            SpawnSlot[] positions = GetComponentsInChildren<SpawnSlot>();
+            List<Vector3> positionToSet = new List<Vector3>();
+            foreach (var item in positions)
+            {
+                positionToSet.Add(item.transform.position);
+            }
+            charSlot.teamManager.slotManager.lineRenderer.SetPositions(positionToSet.ToArray());
+            vidaAtual = vidaMax;
+            
+        }
     }
 
     IEnumerator FlipRight()
@@ -61,4 +81,26 @@ public class Char : Stats
 
     }
 
+    public void Heal()
+    {
+        if(LastKillCount < KillCount)
+        {
+            LastKillCount++;
+            float fulled = vidaAtual + 30;
+            if (fulled >= vidaMax)
+            {
+                vidaAtual = vidaMax;
+            }
+            else
+            {
+
+                vidaAtual += 30;
+                if (vidaAtual > vidaMax)
+                {
+                    vidaAtual = vidaMax;
+
+                }
+            }
+        }
+    }
 }

@@ -1485,6 +1485,8 @@ GameObject:
   - component: {fileID: 5143556452323524021}
   - component: {fileID: -5445869215900470772}
   - component: {fileID: 1941094263317189908}
+  - component: {fileID: 1229565937}
+  - component: {fileID: 1229565936}
   m_Layer: 0
   m_Name: Goblin 1
   m_TagString: FormAvatar
@@ -1521,10 +1523,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 617ecab17685bdf4a9c6413f8cf29b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KillCount: 0
+  type: 
+  ataque: 10
+  defesa: 2
+  velAtaque: 1
+  velocidade: 2
+  vidaMax: 100
+  vidaAtual: 0
+  canAttack: 0
+  timer: 0
+  isAlive: 0
+  uiBars: {fileID: 0}
+  inRange: []
   parentTransform: {x: 0, y: 0, z: 0}
   charSlot: {fileID: 0}
   charAnimator: {fileID: 0}
-  color: {r: 0.4714368, g: 0.65882355, b: 0.34117648, a: 1}
+  color: {r: 0.7921569, g: 0.607462, b: 0.3843137, a: 1}
+  TimeFlip: 0
+  LastKillCount: 0
 --- !u!95 &-5445869215900470772
 Animator:
   serializedVersion: 3
@@ -1556,8 +1573,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77a9a4127ffd75b4aa153ccf7cdfad40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: -5445869215900470772}
   _isWalking: 0
+  TimeToWait: 0
+--- !u!50 &1229565937
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762240795904789346}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!58 &1229565936
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762240795904789346}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.8423193}
+  serializedVersion: 2
+  m_Radius: 0.9444398
 --- !u!1 &6861770920885851194
 GameObject:
   m_ObjectHideFlags: 0

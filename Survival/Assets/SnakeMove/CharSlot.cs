@@ -11,6 +11,7 @@ public class CharSlot : MonoBehaviour
     public Vector3 currentTransform;
     public bool isFree;
     public bool cannotRelease;
+    public bool MainDied;
     public TeamManager teamManager;
     private void Start()
     {
@@ -21,6 +22,10 @@ public class CharSlot : MonoBehaviour
         currentTransform = gameObject.transform.position;
         TextMesh.text = position.ToString();
         isFree = GetComponentInChildren<Char>() == null ? true:false;
-        
+        if (cannotRelease)
+        {
+            MainDied = !(GetComponentInChildren<Char>().isAlive);
+           
+        }
     }
 }

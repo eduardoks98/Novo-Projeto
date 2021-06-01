@@ -17,8 +17,11 @@ public class SlotManager : MonoBehaviour
     public GameObject[] bodyparts;
 
     public TeamManager teamManager;
+
+    public GameObject[] Spots;
     private void Start()
     {
+
         lenght = bodyparts.Length + 1;
         lineRenderer.positionCount = lenght;
         segmentPoses = new Vector3[lenght];
@@ -65,13 +68,14 @@ public class SlotManager : MonoBehaviour
 
     void InitLineRenderer()
     {
+        lineRenderer.GetPositions(segmentPoses);
         segmentPoses[0] = targetDir.position;
 
         for (int i = 1; i < segmentPoses.Length; i++)
         {
             segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i - 1] + targetDir.right * targetDist, ref segmentV[i], smoothSpeed);
         }
-
+        
         lineRenderer.SetPositions(segmentPoses);
     }
 }
