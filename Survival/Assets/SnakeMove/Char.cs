@@ -50,12 +50,13 @@ public class Char : Stats
         {
             charSlot.teamManager.moveController.transform.position = new Vector3(0, 0, 0);
             GameObject nearstSpot = charSlot.teamManager.getNextSpot();
-            SpawnSlot[] positions = GetComponentsInChildren<SpawnSlot>();
+            SpawnSlot[] positions = nearstSpot.GetComponentsInChildren<SpawnSlot>();
             List<Vector3> positionToSet = new List<Vector3>();
             foreach (var item in positions)
             {
                 positionToSet.Add(item.transform.position);
             }
+            Debug.Log(positionToSet.Count);
             charSlot.teamManager.slotManager.lineRenderer.SetPositions(positionToSet.ToArray());
             vidaAtual = vidaMax;
             
