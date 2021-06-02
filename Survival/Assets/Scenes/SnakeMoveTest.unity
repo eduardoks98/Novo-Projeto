@@ -673,6 +673,7 @@ MonoBehaviour:
   TextMesh: {fileID: 2017141513}
   currentTransform: {x: 0, y: 0, z: 0}
   isFree: 0
+  cannotRelease: 0
 --- !u!1 &175243935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,6 +1193,7 @@ MonoBehaviour:
   TextMesh: {fileID: 97828879}
   currentTransform: {x: 0, y: 0, z: 0}
   isFree: 0
+  cannotRelease: 0
 --- !u!4 &310335104
 Transform:
   m_ObjectHideFlags: 0
@@ -1976,6 +1978,7 @@ MonoBehaviour:
   TextMesh: {fileID: 1388514316}
   currentTransform: {x: 0, y: 0, z: 0}
   isFree: 0
+  cannotRelease: 1
 --- !u!1 &896884064
 GameObject:
   m_ObjectHideFlags: 0
@@ -2874,6 +2877,7 @@ MonoBehaviour:
   TextMesh: {fileID: 896884066}
   currentTransform: {x: 0, y: 0, z: 0}
   isFree: 0
+  cannotRelease: 0
 --- !u!1 &1299720284
 GameObject:
   m_ObjectHideFlags: 0
@@ -3732,7 +3736,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1097476931}
         m_TargetAssemblyTypeName: TeamManager, Assembly-CSharp
-        m_MethodName: addMember
+        m_MethodName: removeMember
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4652,6 +4656,7 @@ MonoBehaviour:
   TextMesh: {fileID: 1561747304}
   currentTransform: {x: 0, y: 0, z: 0}
   isFree: 0
+  cannotRelease: 0
 --- !u!1 &2143679590
 GameObject:
   m_ObjectHideFlags: 0
