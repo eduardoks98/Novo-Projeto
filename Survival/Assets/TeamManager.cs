@@ -23,14 +23,9 @@ public class TeamManager : MonoBehaviour
     }
     private void Update()
     {
-        if ((hasEmpty()))
-        {
-            btnChangeOrder.enabled = false;
-        }
-        else
-        {
-            btnChangeOrder.enabled = true;
-        }
+
+        btnChangeOrder.enabled = !(hasEmpty());
+
 
     }
 
@@ -77,6 +72,7 @@ public class TeamManager : MonoBehaviour
 
     public void changeOrder()
     {
+        Debug.Log("change");
         int pos1 = positionsToChange[0];
         int pos2 = positionsToChange[1];
 
@@ -101,26 +97,46 @@ public class TeamManager : MonoBehaviour
     public void addMember()
     {
         int freeSlot = getNextFreeSlot();
-        Debug.Log("freeslot: "+freeSlot);
+        Debug.Log("freeslot: " + freeSlot);
         if (freeSlot != -1)
         {
             GameObject bodyFreeSlot = bodys[freeSlot].gameObject;
             Vector3 position = new Vector3(bodyFreeSlot.transform.position.x, bodyFreeSlot.transform.position.y, bodyFreeSlot.transform.position.z);
-            
-            GameObject obj =  Instantiate(toInstantiate, position, Quaternion.identity);
+
+            GameObject obj = Instantiate(toInstantiate, position, Quaternion.identity);
             obj.transform.SetParent(bodyFreeSlot.transform);
+        }
+    }
+
+    public void removeMember()
+    {
+
+        int pos1 = positionsToChange[0];
+        int pos2 = positionsToChange[1];
+        if (pos1 != 0)
+        {
+            int BST = getBodysIndex(pos1);
+            if (!bodys[BST].isFree && !bodys[BST].cannotRelease)
+                Destroy(bodys[BST]);
+        }
+
+        if (pos2 != 0)
+        {
+            int BSD = getBodysIndex(pos2);
+            if (!bodys[BSD].isFree && !bodys[BSD].cannotRelease)
+                Destroy(bodys[BSD]);
         }
     }
 
     int getNextFreeSlot()
     {
-        for (int i = 1; i < bodys.Count(); i++)
+        for (int i = 1; i < bodys.Length + 1; i++)
         {
             int index = getBodysIndex(i);
-            Debug.Log(index);
-            if (bodys[index].isFree)
+
+            if (bodys[index].isFree == true)
             {
-                return i;
+                return index;
             }
         }
         //Nenhuma posicao livre;

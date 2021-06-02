@@ -10,6 +10,7 @@ public class CharSlot : MonoBehaviour
     public TextMeshProUGUI TextMesh;
     public Vector3 currentTransform;
     public bool isFree;
+    public bool cannotRelease;
 
     private void Update()
     {
