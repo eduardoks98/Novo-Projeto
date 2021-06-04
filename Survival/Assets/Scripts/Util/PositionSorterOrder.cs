@@ -26,6 +26,7 @@ public class PositionSorterOrder : MonoBehaviour
 
     private void Update()
     {
+        if (parentScript == null) { return; }
         parentPosition = parentScript.parentTransform;
         if (sortGroup != null)
             sortGroup.sortingOrder = (int)(sortingBase - (parentPosition.y * 100) - offset);

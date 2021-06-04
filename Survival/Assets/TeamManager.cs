@@ -14,7 +14,7 @@ public class TeamManager : MonoBehaviour
     public Button btnChangeOrder;
 
     public GameObject toInstantiate;
-
+    public MoveByTouch moveController;
     void Start()
     {
         this.positionsToChange = new int[2];

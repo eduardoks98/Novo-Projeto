@@ -13,7 +13,7 @@ public class MoveByTouch : MonoBehaviour
 
     public float runSpeed = 5.0f;
     public bool isRunning = false;
-
+    public bool needFlip;
 
     void Start()
     {
@@ -34,10 +34,12 @@ public class MoveByTouch : MonoBehaviour
             vertical = joystick.Vertical; // -1 is down
             if (horizontal >= .2f)
             {
+                needFlip = true;
                 horizontal = runSpeed;
             }
             else if (horizontal <= -.2f)
             {
+                needFlip = false;
                 horizontal = -runSpeed;
             }
             else

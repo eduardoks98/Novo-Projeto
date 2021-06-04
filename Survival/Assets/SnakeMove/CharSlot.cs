@@ -11,11 +11,16 @@ public class CharSlot : MonoBehaviour
     public Vector3 currentTransform;
     public bool isFree;
     public bool cannotRelease;
-
+    public TeamManager teamManager;
+    private void Start()
+    {
+        teamManager = GameObject.FindObjectOfType<TeamManager>();
+    }
     private void Update()
     {
         currentTransform = gameObject.transform.position;
         TextMesh.text = position.ToString();
         isFree = GetComponentInChildren<Char>() == null ? true:false;
+        
     }
 }
