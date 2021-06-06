@@ -16,6 +16,17 @@ public class CrewManager : MonoBehaviour
     {
         segmentV = new Vector3[crewSlots.Count];
         segmentPoses = new Vector3[crewSlots.Count];
+        segmentPoses[0] = crewSlots[0].transform.position;
+        for (int i = 1; i < segmentPoses.Length; i++)
+        {
+            Vector3 targetPos = segmentPoses[i - 1] + (segmentPoses[i] - segmentPoses[i - 1]).normalized * targetDist;
+
+
+
+            segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], targetPos, ref segmentV[i], smoothSpeed);
+            //segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + (-targetDir.right) * targetDist, ref segmentV[i], smoothSpeed);
+        }
+        UpdatePositions(segmentPoses);
     }
 
 
@@ -40,10 +51,19 @@ public class CrewManager : MonoBehaviour
     {
         for (int i = 1; i < crewSlots.Count; i++)
         {
-            crewSlots[i].transform.position = newPositions[i];
+            CrewRB()[i].MovePosition(newPositions[i]);
         }
     }
 
+    public List<Rigidbody2D> CrewRB()
+    {
+        List<Rigidbody2D> list = new List<Rigidbody2D>();
+        foreach (GameObject slot in crewSlots)
+        {
+            list.Add(slot.GetComponent<Rigidbody2D>());
+        }
+        return list;
+    }
     public List<CrewSlot> CrewSlotList()
     {
         List<CrewSlot> list = new List<CrewSlot>();
