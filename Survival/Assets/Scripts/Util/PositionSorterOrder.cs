@@ -16,30 +16,15 @@ public class PositionSorterOrder : MonoBehaviour
     [SerializeField]
     private SortingGroup sortGroup;
 
-    public Char parentChar;
-    public Enemy parentEnemy;
     public Vector3 pTransform;
     private void Awake()
     {
         objRenderer = gameObject.GetComponent<Renderer>();
-        parentChar = GetComponentInParent<Char>();
-        parentEnemy = GetComponentInParent<Enemy>();
     }
 
     private void Update()
     {
-        if (parentChar != null) {
-
-            pTransform = parentChar.parentTransform;
-        }
-        else if(parentEnemy!=null)
-        {
-            pTransform = parentEnemy.transform.position;
-        }
-        else
-        {
-            return;
-        }
+        pTransform = GetComponentInParent<Transform>().position;
         if (sortGroup != null)
             sortGroup.sortingOrder = (int)(sortingBase - (pTransform.y * 100) - offset);
         objRenderer.sortingOrder = (int)(sortingBase - (pTransform.y * 100) - offset);
