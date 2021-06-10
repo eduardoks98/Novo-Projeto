@@ -4,10 +4,11 @@ using UnityEngine;
 using System.Linq;
 namespace Assets.New_fucking_test_to_controller
 {
-    public struct Util
+    public class Util
     {
 
-        public static bool Attack(float damage, AttackTypes type, List<Collider2D> enemies, Vector3 playerPosition)
+        public List<Collider2D> AttackedEnemies = new List<Collider2D>();
+        public bool Attack(float damage, AttackTypes type, List<Collider2D> enemies, Vector3 playerPosition)
         {
             switch (type)
             {
@@ -27,20 +28,24 @@ namespace Assets.New_fucking_test_to_controller
                     return SingleMeeleeAttack(damage, enemies, playerPosition);
             }
         }
-        public static bool SingleMeeleeAttack(float damage, List<Collider2D> enemies, Vector3 playerPosition)
+        public bool SingleMeeleeAttack(float damage, List<Collider2D> enemies, Vector3 playerPosition)
         {
+            AttackedEnemies.Clear();
             if (!HasEnemies(enemies)) { return false; }
-            Debug.Log(enemies.Count);
-            foreach (Collider2D enemy in enemies)
+            var closest = ClosestTarget(enemies, playerPosition);
+            if (closest != null)
             {
-                CharActions charActions = enemy.GetComponent<CharActions>();
+                AttackedEnemies.Add(closest);
+                CharActions charActions = closest.GetComponent<CharActions>();
                 charActions.TakeDamage(damage);
-
+                return true;
             }
-
-            return true;
+            else
+            {
+                return false;
+            }
         }
-        private static bool HasEnemies(List<Collider2D> enemies)
+        private bool HasEnemies(List<Collider2D> enemies)
         {
             if (enemies.Count > 0)
                 return true;
@@ -48,7 +53,7 @@ namespace Assets.New_fucking_test_to_controller
                 return false;
         }
 
-        public static Collider2D ClosestTarget(Collider2D[] colliders, Vector3 playerPosition)
+        public Collider2D ClosestTarget(List<Collider2D> colliders, Vector3 playerPosition)
         {
             Collider2D closest = null;
             float minDist = Mathf.Infinity;
@@ -71,5 +76,28 @@ namespace Assets.New_fucking_test_to_controller
         SingleRanged = 2,
         MultiMelee = 3,
         MultiRanged = 4
+    }
+
+    public enum CharTypes
+    {
+        Mage = 1,
+        Warrior = 2,
+        Healer = 3,
+        Necromancer = 4
+    }
+
+    public enum RaceTypes
+    {
+        Human = 1,
+        Orc = 2,
+        Elf = 3,
+        Undead = 4
+    }
+
+    public enum EntityTypes
+    {
+        Player = 1,
+        Enemies = 2
+
     }
 }

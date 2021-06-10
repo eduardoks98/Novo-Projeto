@@ -17,11 +17,10 @@ public class CharActions : MonoBehaviour
     public float attackRange;
     public Vector3 offsetRange;
 
-    public List<Collider2D> targets;
 
     CharInfo charInfo;
     CharUI charUI;
-
+    Util util = new Util();
     public bool isAlive;
     private void Start()
     {
@@ -33,14 +32,13 @@ public class CharActions : MonoBehaviour
 
     void Update()
     {
-        targets.Clear();
         Collider2D[] damage = Physics2D.OverlapCircleAll(transform.position + offsetRange, attackRange, enemies);
-        if (damage.Count() > 0)
-            targets.Add(Util.ClosestTarget(damage, transform.position + offsetRange));
-        ableToAttack = ableToAttack ? !Util.Attack(charInfo.ataque, attackType, targets.ToList(), transform.position + offsetRange) : TimerAttack();
+        ableToAttack = ableToAttack ? !util.Attack(charInfo.ataque, attackType, damage.ToList(), transform.position + offsetRange) : TimerAttack();
 
         isAlive = charInfo.vidaAtual > 0;
     }
+
+
     public bool TimerAttack()
     {
         if (cooldownTimer <= 0)
@@ -65,14 +63,15 @@ public class CharActions : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + offsetRange, attackRange);
-        foreach (Collider2D target in targets)
-        {
-            if (gameObject.layer == 11)
-                Gizmos.color = Color.white;
-            if (gameObject.layer == 12)
-                Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position + offsetRange, target.transform.position);
-        }
+        if (util.AttackedEnemies.Count > 0)
+            foreach (Collider2D target in util.AttackedEnemies)
+            {
+                if (gameObject.layer == 11)
+                    Gizmos.color = Color.white;
+                if (gameObject.layer == 12)
+                    Gizmos.color = Color.green;
+                Gizmos.DrawLine(transform.position + offsetRange, target.transform.position);
+            }
 
     }
 
