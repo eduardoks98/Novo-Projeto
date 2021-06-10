@@ -7,29 +7,36 @@ namespace Assets.New_fucking_test_to_controller
     public struct Util
     {
 
-        public static bool Attack(AttackTypes type, List<Collider2D> enemies, Vector3 playerPosition)
+        public static bool Attack(float damage, AttackTypes type, List<Collider2D> enemies, Vector3 playerPosition)
         {
             switch (type)
             {
                 case AttackTypes.SingleMelee:
-                    return SingleMeeleeAttack(enemies,playerPosition);
+                    return SingleMeeleeAttack(damage, enemies, playerPosition);
 
                 case AttackTypes.MultiMelee:
-                    return SingleMeeleeAttack(enemies, playerPosition);
+                    return SingleMeeleeAttack(damage, enemies, playerPosition);
 
                 case AttackTypes.SingleRanged:
-                    return SingleMeeleeAttack(enemies, playerPosition);
+                    return SingleMeeleeAttack(damage, enemies, playerPosition);
 
                 case AttackTypes.MultiRanged:
-                    return SingleMeeleeAttack(enemies, playerPosition);
+                    return SingleMeeleeAttack(damage, enemies, playerPosition);
 
                 default:
-                    return SingleMeeleeAttack(enemies, playerPosition);
+                    return SingleMeeleeAttack(damage, enemies, playerPosition);
             }
         }
-        public static bool SingleMeeleeAttack(List<Collider2D> enemies, Vector3 playerPosition)
+        public static bool SingleMeeleeAttack(float damage, List<Collider2D> enemies, Vector3 playerPosition)
         {
             if (!HasEnemies(enemies)) { return false; }
+            Debug.Log(enemies.Count);
+            foreach (Collider2D enemy in enemies)
+            {
+                CharActions charActions = enemy.GetComponent<CharActions>();
+                charActions.TakeDamage(damage);
+
+            }
 
             return true;
         }

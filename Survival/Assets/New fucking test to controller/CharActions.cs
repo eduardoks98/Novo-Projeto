@@ -17,21 +17,29 @@ public class CharActions : MonoBehaviour
     public float attackRange;
     public Vector3 offsetRange;
 
+    public List<Collider2D> targets;
+
+    CharInfo charInfo;
+    CharUI charUI;
+
+    public bool isAlive;
     private void Start()
     {
+        charInfo = GetComponent<CharInfo>();
+        charUI = GetComponent<CharUI>();
         cooldownTimer = attackSpeed;
         ableToAttack = true;
     }
 
     void Update()
     {
+        targets.Clear();
         Collider2D[] damage = Physics2D.OverlapCircleAll(transform.position + offsetRange, attackRange, enemies);
-        List<Collider2D> teste = new List<Collider2D>();
-        teste.Add(Util.ClosestTarget(damage, transform.position + offsetRange));
-        ableToAttack = ableToAttack ? !Util.Attack(attackType, teste.ToList(), transform.position + offsetRange) : TimerAttack();
-        
+        if (damage.Count() > 0)
+            targets.Add(Util.ClosestTarget(damage, transform.position + offsetRange));
+        ableToAttack = ableToAttack ? !Util.Attack(charInfo.ataque, attackType, targets.ToList(), transform.position + offsetRange) : TimerAttack();
 
-
+        isAlive = charInfo.vidaAtual > 0;
     }
     public bool TimerAttack()
     {
@@ -47,10 +55,25 @@ public class CharActions : MonoBehaviour
         }
         return false;
     }
+    public void TakeDamage(float damage)
+    {
+        if (!isAlive) { return; }
+        charInfo.vidaAtual -= damage;
+        charUI.healthBar.SetValue(charInfo.vidaAtual);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + offsetRange, attackRange);
+        foreach (Collider2D target in targets)
+        {
+            if (gameObject.layer == 11)
+                Gizmos.color = Color.white;
+            if (gameObject.layer == 12)
+                Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position + offsetRange, target.transform.position);
+        }
+
     }
 
 }

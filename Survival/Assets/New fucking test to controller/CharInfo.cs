@@ -25,21 +25,16 @@ namespace Assets.New_fucking_test_to_controller
         public string type;
 
         public List<Collider2D> targets;
+        public CharUI charUI;
 
-        public void TakeDamage(float damage)
+        private void Start()
         {
-            vidaAtual -= damage;
+            charUI = GetComponent<CharUI>();
+            charUI.healthBar.SetMaxValue(vidaMax);
+            vidaAtual = vidaMax;
+            
         }
-        
-      
 
-        private void OnDrawGizmos()
-        {
-            foreach (Collider2D target in targets)
-            {
-                Gizmos.DrawLine(transform.position, target.transform.position);
-            }
-        }
     }
    
 }

@@ -320,8 +320,12 @@ GameObject:
   - component: {fileID: 1652713999805566281}
   - component: {fileID: 7278985774057248431}
   - component: {fileID: 6167666054149436051}
+  - component: {fileID: 6372010215146979557}
+  - component: {fileID: 6372010215146979558}
   - component: {fileID: 4274149773386974495}
-  m_Layer: 0
+  - component: {fileID: 6372010215146979556}
+  - component: {fileID: 6372010215146979555}
+  m_Layer: 12
   m_Name: Player
   m_TagString: FormAvatar
   m_Icon: {fileID: 0}
@@ -381,6 +385,9 @@ MonoBehaviour:
   crewController: {fileID: 0}
   selectedChars: {fileID: 0}
   aIDestination: {fileID: 0}
+  aiPath: {fileID: 0}
+  MainChar: 0
+  anim: {fileID: 0}
 --- !u!114 &1652713999805566281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +466,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+--- !u!50 &6372010215146979557
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785814885746403353}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!58 &6372010215146979558
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785814885746403353}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!114 &4274149773386974495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +524,46 @@ MonoBehaviour:
     m_Bits: 2048
   attackRange: 1.5
   offsetRange: {x: -0.05, y: 0.74, z: 0}
+  targets: []
+--- !u!114 &6372010215146979556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785814885746403353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02a6aa989e346e43ac38d05327dab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ataque: 10
+  defesa: 2
+  velAtaque: 5
+  velocidade: 2
+  vidaMax: 100
+  ataqueAtual: 0
+  defesaAtual: 0
+  velAtaqueAtual: 0
+  velocidadeAtual: 0
+  vidaAtual: 0
+  KillCount: 0
+  type: 
+  targets: []
+  charUI: {fileID: 0}
+--- !u!114 &6372010215146979555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785814885746403353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96e0024a7fce694c8b91b75714da158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
 --- !u!1 &1885279040031045441
 GameObject:
   m_ObjectHideFlags: 0
