@@ -22,6 +22,8 @@ public class CharActions : MonoBehaviour
     CharUI charUI;
     Util util = new Util();
     public bool isAlive;
+
+    public Collider2D[] enemiesAround;
     private void Start()
     {
         charInfo = GetComponent<CharInfo>();
@@ -32,10 +34,10 @@ public class CharActions : MonoBehaviour
 
     void Update()
     {
-        Collider2D[] damage = Physics2D.OverlapCircleAll(transform.position + offsetRange, attackRange, enemies);
-        ableToAttack = ableToAttack ? !util.Attack(charInfo.ataque, attackType, damage.ToList(), transform.position + offsetRange) : TimerAttack();
+        enemiesAround = Physics2D.OverlapCircleAll(transform.position + offsetRange, attackRange, enemies);
+        ableToAttack = ableToAttack ? !util.Attack(charInfo.cAttackPower, attackType, enemiesAround.ToList(), transform.position + offsetRange) : TimerAttack();
 
-        isAlive = charInfo.vidaAtual > 0;
+        isAlive = charInfo.cHealth > 0;
     }
 
 
@@ -56,10 +58,10 @@ public class CharActions : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (!isAlive) { return; }
-        charInfo.vidaAtual -= damage;
-        charUI.healthBar.SetValue(charInfo.vidaAtual);
+        charInfo.cHealth -= damage;
+        charUI.healthBar.SetValue(charInfo.cHealth);
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + offsetRange, attackRange);

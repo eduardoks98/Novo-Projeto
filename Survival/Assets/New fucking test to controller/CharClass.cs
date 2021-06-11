@@ -8,7 +8,7 @@ namespace Assets.New_fucking_test_to_controller
     public class CharClass : IComparable<CharClass>
     {
         AttackTypes style;
-        CharTypes classe;
+        private CharTypes classe;
         RaceTypes race;
         EntityTypes type;
 
@@ -19,10 +19,15 @@ namespace Assets.New_fucking_test_to_controller
         float maxHealth;    
         float maxMana;
 
-        CharClass(AttackTypes style,
+        string name;
+        string description;
+
+        public CharClass(AttackTypes style,
                   CharTypes classe,
                   RaceTypes race,
                   EntityTypes type,
+                  string name, 
+                  string description,
                   float attackPower,
                   float defensePower,
                   float attackSpeed,
@@ -41,7 +46,22 @@ namespace Assets.New_fucking_test_to_controller
             this.moveSpeed = moveSpeed;
             this.maxHealth = maxHealth;
             this.maxMana = maxMana;
+            this.name = name;
+            this.description = description;
         }
+
+        public CharTypes Classe { get => classe; set => classe = value; }
+        public AttackTypes Style { get => style; set => style = value; }
+        public RaceTypes Race { get => race; set => race = value; }
+        public EntityTypes Type { get => type; set => type = value; }
+        public float AttackPower { get => attackPower; set => attackPower = value; }
+        public float DefensePower { get => defensePower; set => defensePower = value; }
+        public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
+        public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+        public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+        public float MaxMana { get => maxMana; set => maxMana = value; }
+        public string Name { get => name; set => name = value; }
+        public string Description { get => description; set => description = value; }
 
         public int CompareTo(CharClass other)
         {
@@ -49,5 +69,7 @@ namespace Assets.New_fucking_test_to_controller
 
             return (int)(attackPower - other.attackPower);
         }
+
+      
     }
 }

@@ -16,7 +16,7 @@ namespace Assets.New_fucking_test_to_controller
                     return SingleMeeleeAttack(damage, enemies, playerPosition);
 
                 case AttackTypes.MultiMelee:
-                    return SingleMeeleeAttack(damage, enemies, playerPosition);
+                    return MultiMeleeAttack(damage, 2, enemies, playerPosition);
 
                 case AttackTypes.SingleRanged:
                     return SingleMeeleeAttack(damage, enemies, playerPosition);
@@ -38,6 +38,29 @@ namespace Assets.New_fucking_test_to_controller
                 AttackedEnemies.Add(closest);
                 CharActions charActions = closest.GetComponent<CharActions>();
                 charActions.TakeDamage(damage);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool MultiMeleeAttack(float damage, int amountTargets, List<Collider2D> enemies, Vector3 playerPosition)
+        {
+            AttackedEnemies.Clear();
+            if (!HasEnemies(enemies)) { return false; }
+
+
+            var closest = MultiClosestTarget(amountTargets, enemies, playerPosition);
+            if (closest != null)
+            {
+                AttackedEnemies = closest;
+                foreach (Collider2D coll in AttackedEnemies)
+                {
+                    CharActions charActions = coll.GetComponent<CharActions>();
+                    charActions.TakeDamage(damage);
+                }
+
                 return true;
             }
             else
@@ -67,6 +90,26 @@ namespace Assets.New_fucking_test_to_controller
                 }
             }
             return closest;
+        }
+
+        public List<Collider2D> MultiClosestTarget(int amountTargets, List<Collider2D> colliders, Vector3 playerPosition)
+        {
+            if (colliders.Count <= amountTargets)
+            {
+                return colliders;
+            }
+
+            List<Collider2D> closestTargets = new List<Collider2D>();
+            List<Collider2D> temp = colliders;
+            for (int i = 0; i < amountTargets; i++)
+            {
+                Collider2D closest = ClosestTarget(temp, playerPosition);
+                closestTargets.Add(closest);
+                temp.Remove(closest);
+            }
+
+
+            return closestTargets;
         }
     }
 
