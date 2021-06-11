@@ -16,13 +16,15 @@ public class CharActions : MonoBehaviour
 
     CharInfo charInfo;
     CharUI charUI;
-    Util util = new Util();
+    Util util;
+
     public GameObject projectileAngle;
 
     public Collider2D[] enemiesAround;
     public GameObject projectile;
     private void Start()
     {
+        util = GetComponent<Util>();
         charInfo = GetComponent<CharInfo>();
         charUI = GetComponent<CharUI>();
         canAttack = false;

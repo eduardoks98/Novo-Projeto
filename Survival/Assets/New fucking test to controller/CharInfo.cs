@@ -30,19 +30,11 @@ namespace Assets.New_fucking_test_to_controller
         [Header("Info Stats")]
         public bool isAlive;
         public int KillCount = 0;
-        public string type;
         public LayerMask targetLayer;
 
         public CharUI charUI;
         public CharTypes classe;
         public CharClass charClasse;
-        private void Awake()
-        {
-           
-            
-
-
-        }
         private void Start()
         {
             

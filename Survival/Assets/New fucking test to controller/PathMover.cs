@@ -1,3 +1,4 @@
+using Assets.New_fucking_test_to_controller;
 using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,28 +6,21 @@ using UnityEngine;
 
 public class PathMover : MonoBehaviour
 {
+
+    public AIDestinationSetter aIDestination;
+    public AIPath aiPath;
+    public Animator anim;
+
+    [Header("Player")]
     public int position;
     public MoveController moveController;
     public CrewController crewController;
     public SelectedChars selectedChars;
-    public AIDestinationSetter aIDestination;
-    public AIPath aiPath;
     public bool MainChar;
-    public Animator anim;
-    private void Awake()
-    {
-        MainChar = false;
-        crewController = FindObjectOfType<CrewController>();
-        moveController = FindObjectOfType<MoveController>();
-
-    }
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
-        aIDestination = GetComponent<AIDestinationSetter>();
-        aiPath = GetComponent<AIPath>();
-        position = crewController.GetNextFreePosition(gameObject);
+        if (GetComponent<CharInfo>().charClasse.Type == EntityTypes.Enemies) { SetupEnemy(); } else { SetupPlayer(); }
     }
 
     // Update is called once per frame
@@ -66,6 +60,25 @@ public class PathMover : MonoBehaviour
             }
             anim.SetBool("isRunning", moveController.isRunning);
         }
-        
+
+    }
+
+    void SetupEnemy()
+    {
+        MainChar = false;
+
+        anim = GetComponent<Animator>();
+        aIDestination = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
+    }
+    void SetupPlayer()
+    {
+        MainChar = false;
+        crewController = FindObjectOfType<CrewController>();
+        moveController = FindObjectOfType<MoveController>();
+        anim = GetComponent<Animator>();
+        aIDestination = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
+        position = crewController.GetNextFreePosition(gameObject);
     }
 }

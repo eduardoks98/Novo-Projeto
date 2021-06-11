@@ -22,7 +22,7 @@ new CharClass(AttackTypes.SingleRanged, // Attack Type
                 "Cool", // cool descriction
                 20f, //attack power
                 5f, //defense power
-                1f, //attack speed
+                .5f, //attack speed
                 5f, //attack range
                 3f, //move speed
                 100f, // max health
@@ -37,7 +37,7 @@ new CharClass(AttackTypes.SingleRanged, // Attack Type
                "Cool", // cool descriction
                5f, //attack power
                20f, //defense power
-               1.5f, //attack speed
+               .2f, //attack speed
                1f, //attack range
                3.2f, //move speed
                200f, // max health

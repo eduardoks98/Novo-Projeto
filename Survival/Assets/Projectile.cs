@@ -1,3 +1,4 @@
+using Assets.New_fucking_test_to_controller;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,9 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     public Vector3 target;
     public Rigidbody2D rb;
-    public LayerMask enemies;
+    public GameObject fromChar;
+    public float damage;
+    public GameObject damageInfo;
     void Start()
     {
 
@@ -21,8 +24,13 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            Debug.Log(LayerMask.LayerToName(collision.gameObject.layer));
+        if (collision.gameObject.layer == fromChar.layer) { return; }
 
+        var damagee = fromChar.GetComponent<CharInfo>().cAttackPower + damage;
+        collision.GetComponent<CharActions>().TakeDamage(damagee); 
+        bool isCrit = Random.Range(0, 100) < 30;
+        DamagePopup.Create(damageInfo, collision.transform.position, damagee, isCrit);
+        Destroy(gameObject);
 
     }
 }

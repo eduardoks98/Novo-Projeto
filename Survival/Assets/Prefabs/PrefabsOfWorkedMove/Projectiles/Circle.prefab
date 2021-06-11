@@ -100,6 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   rb: {fileID: -5926244703746416406}
+  fromChar: {fileID: 0}
+  damage: 0
+  damageInfo: {fileID: 3458834964386159282, guid: 97120882d6efffa4cbce3b1217e8fed3,
+    type: 3}
 --- !u!50 &-5926244703746416406
 Rigidbody2D:
   serializedVersion: 4

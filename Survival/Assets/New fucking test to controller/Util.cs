@@ -8,6 +8,7 @@ namespace Assets.New_fucking_test_to_controller
     {
 
         public List<Collider2D> AttackedEnemies = new List<Collider2D>();
+        public GameObject damageInfo;
         public bool Attack(GameObject projectile,
             GameObject projectileAngle,
             LayerMask targetLayer,
@@ -44,6 +45,8 @@ namespace Assets.New_fucking_test_to_controller
                 AttackedEnemies.Add(closest);
                 CharActions charActions = closest.GetComponent<CharActions>();
                 charActions.TakeDamage(damage);
+                bool isCrit = Random.Range(0, 100) < 30;
+                DamagePopup.Create(damageInfo, closest.transform.position, damage, isCrit);
                 return true;
             }
             else
@@ -65,6 +68,8 @@ namespace Assets.New_fucking_test_to_controller
                 {
                     CharActions charActions = coll.GetComponent<CharActions>();
                     charActions.TakeDamage(damage);
+                    bool isCrit = Random.Range(0, 100) < 30;
+                    DamagePopup.Create(damageInfo, coll.transform.position, damage, isCrit);
                 }
 
                 return true;
@@ -91,7 +96,7 @@ namespace Assets.New_fucking_test_to_controller
                     //projectileAngle.GetComponent<Rigidbody2D>().rotation = angle;
                     projectileAngle.transform.rotation = Quaternion.Euler(0, 0, angle);
                     var shoot = Instantiate(projectile, playerPosition, projectileAngle.transform.rotation);
-                    shoot.GetComponent<Projectile>().enemies = targetLayer;
+                    shoot.GetComponent<Projectile>().fromChar = gameObject;
                 }
                 return true;
             }
