@@ -4,31 +4,37 @@ using UnityEngine;
 using System.Linq;
 namespace Assets.New_fucking_test_to_controller
 {
-    public class Util
+    public class Util : MonoBehaviour
     {
 
         public List<Collider2D> AttackedEnemies = new List<Collider2D>();
-        public bool Attack(float damage, AttackTypes type, List<Collider2D> enemies, Vector3 playerPosition)
+        public bool Attack(GameObject projectile,
+            GameObject projectileAngle,
+            LayerMask targetLayer,
+            float damage,
+            AttackTypes type,
+            List<Collider2D> targets,
+            Vector3 playerPosition)
         {
             switch (type)
             {
                 case AttackTypes.SingleMelee:
-                    return SingleMeeleeAttack(damage, enemies, playerPosition);
+                    return SingleMelee(damage, targets, playerPosition);
 
                 case AttackTypes.MultiMelee:
-                    return MultiMeleeAttack(damage, 2, enemies, playerPosition);
+                    return MultipleMelee(damage, 2, targets, playerPosition);
 
                 case AttackTypes.SingleRanged:
-                    return SingleMeeleeAttack(damage, enemies, playerPosition);
+                    return SingleRanged(targetLayer,projectile, projectileAngle, damage, targets, playerPosition);
 
                 case AttackTypes.MultiRanged:
-                    return SingleMeeleeAttack(damage, enemies, playerPosition);
+                    return SingleMelee(damage, targets, playerPosition);
 
                 default:
-                    return SingleMeeleeAttack(damage, enemies, playerPosition);
+                    return SingleMelee(damage, targets, playerPosition);
             }
         }
-        public bool SingleMeeleeAttack(float damage, List<Collider2D> enemies, Vector3 playerPosition)
+        public bool SingleMelee(float damage, List<Collider2D> enemies, Vector3 playerPosition)
         {
             AttackedEnemies.Clear();
             if (!HasEnemies(enemies)) { return false; }
@@ -45,7 +51,7 @@ namespace Assets.New_fucking_test_to_controller
                 return false;
             }
         }
-        public bool MultiMeleeAttack(float damage, int amountTargets, List<Collider2D> enemies, Vector3 playerPosition)
+        public bool MultipleMelee(float damage, int amountTargets, List<Collider2D> enemies, Vector3 playerPosition)
         {
             AttackedEnemies.Clear();
             if (!HasEnemies(enemies)) { return false; }
@@ -68,6 +74,33 @@ namespace Assets.New_fucking_test_to_controller
                 return false;
             }
         }
+
+        public bool SingleRanged(LayerMask targetLayer, GameObject projectile, GameObject projectileAngle, float damage, List<Collider2D> enemies, Vector3 playerPosition)
+        {
+            AttackedEnemies.Clear();
+            if (!HasEnemies(enemies)) { return false; }
+
+            var closest = ClosestTarget(enemies, playerPosition);
+            if (closest != null)
+            {
+                AttackedEnemies.Add(closest);
+                foreach (Collider2D coll in AttackedEnemies)
+                {
+                    Vector2 lookDir = playerPosition - (coll.transform.position + new Vector3(0, 1, 0));
+                    float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
+                    //projectileAngle.GetComponent<Rigidbody2D>().rotation = angle;
+                    projectileAngle.transform.rotation = Quaternion.Euler(0, 0, angle);
+                    var shoot = Instantiate(projectile, playerPosition, projectileAngle.transform.rotation);
+                    shoot.GetComponent<Projectile>().enemies = targetLayer;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private bool HasEnemies(List<Collider2D> enemies)
         {
             if (enemies.Count > 0)

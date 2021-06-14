@@ -14,7 +14,9 @@ namespace Assets.New_fucking_test_to_controller
 
         float attackPower;
         float defensePower;
+        float dodgeChance;
         float attackSpeed;
+        float attackRange;
         float moveSpeed;
         float maxHealth;    
         float maxMana;
@@ -31,6 +33,7 @@ namespace Assets.New_fucking_test_to_controller
                   float attackPower,
                   float defensePower,
                   float attackSpeed,
+                  float attackRange,
                   float moveSpeed,
                   float maxHealth,
                   float maxMana
@@ -43,6 +46,7 @@ namespace Assets.New_fucking_test_to_controller
             this.attackPower = attackPower;
             this.defensePower = defensePower;
             this.attackSpeed = attackSpeed;
+            this.attackRange = attackRange;
             this.moveSpeed = moveSpeed;
             this.maxHealth = maxHealth;
             this.maxMana = maxMana;
@@ -62,6 +66,7 @@ namespace Assets.New_fucking_test_to_controller
         public float MaxMana { get => maxMana; set => maxMana = value; }
         public string Name { get => name; set => name = value; }
         public string Description { get => description; set => description = value; }
+        public float AttackRange { get => attackRange; set => attackRange = value; }
 
         public int CompareTo(CharClass other)
         {

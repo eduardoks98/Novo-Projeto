@@ -7,7 +7,7 @@ namespace Assets.New_fucking_test_to_controller
     public class CharInfo : MonoBehaviour
     {
         [Header("Level Stats")]
-        public int level = 2;
+        public int level;
         public float cExp;
         public float ExpToNextLevel;
 
@@ -28,30 +28,38 @@ namespace Assets.New_fucking_test_to_controller
         public float cMana;
 
         [Header("Info Stats")]
+        public bool isAlive;
         public int KillCount = 0;
         public string type;
+        public LayerMask targetLayer;
 
-        public List<Collider2D> targets;
         public CharUI charUI;
-        private AllCharacters characters;
         public CharTypes classe;
+        public CharClass charClasse;
         private void Awake()
         {
-            level = 2;
-            characters = FindObjectOfType<AllCharacters>();
-            attackPower = characters.GetClass(classe).AttackPower;
-            defensePower = characters.GetClass(classe).DefensePower;
-            attackSpeed = characters.GetClass(classe).AttackSpeed;
-            moveSpeed = characters.GetClass(classe).MoveSpeed;
-            maxHealth = characters.GetClass(classe).MaxHealth;
-            maxMana = characters.GetClass(classe).MaxMana;
+           
+            
 
 
         }
         private void Start()
         {
-            charUI = GetComponent<CharUI>();
-            charUI.healthBar.SetMaxValue(maxHealth * level);
+            
+            InitializeStats();
+            LevelUp();
+            InitializeUI();
+        }
+
+        private void FixedUpdate()
+        {
+            isAlive = cHealth > 0;
+            WatchCHealth();
+        }
+
+        void LevelUp()
+        {
+            level++;
             cHealth = maxHealth * level;
             cAttackPower = attackPower * level;
             cDefensePower = defensePower * level;
@@ -61,6 +69,28 @@ namespace Assets.New_fucking_test_to_controller
             cMana = maxMana * level;
         }
 
+        void InitializeStats()
+        {
+            charClasse = FindObjectOfType<AllCharacters>().GetClass(classe);
+            attackPower = charClasse.AttackPower;
+            defensePower = charClasse.DefensePower;
+            attackSpeed = charClasse.AttackSpeed;
+            moveSpeed = charClasse.MoveSpeed;
+            maxHealth = charClasse.MaxHealth;
+            maxMana = charClasse.MaxMana;
+            level = 0;
+        }
+
+        void InitializeUI()
+        {
+
+            charUI = GetComponent<CharUI>();
+            charUI.healthBar.SetMaxValue(maxHealth * level);
+        }
+
+        public void DecreaseHealth(float amount) { cHealth -= amount; }
+        public void IncreaseHealth(float amount) { cHealth += amount; }
+        public void WatchCHealth() { if (cHealth > maxHealth) cHealth = maxHealth; }
     }
 
 }

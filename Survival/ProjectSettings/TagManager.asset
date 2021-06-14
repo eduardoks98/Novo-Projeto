@@ -14,6 +14,7 @@ TagManager:
   - Formation
   - Vaga
   - FormAvatar
+  - Projectiles
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - ArrowRange
   - Enemies
   - Player
-  - 
+  - Projectiles
   - 
   - 
   - 
