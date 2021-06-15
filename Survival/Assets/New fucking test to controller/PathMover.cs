@@ -17,15 +17,46 @@ public class PathMover : MonoBehaviour
     public CrewController crewController;
     public SelectedChars selectedChars;
     public bool MainChar;
+
+    public bool isPlayer;
     // Start is called before the first frame update
     void Start()
     {
-        if (GetComponent<CharInfo>().charClasse.Type == EntityTypes.Enemies) { SetupEnemy(); } else { SetupPlayer(); }
+        if (isPlayer) { SetupPlayer(); } else { SetupEnemy(); }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isPlayer) { MovePlayer(); } else { MoveEnemy(); }
+
+    }
+
+    void SetupEnemy()
+    {
+        MainChar = false;
+
+        anim = GetComponent<Animator>();
+        aIDestination = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
+
+        Debug.Log("ENEMY");
+    }
+    void SetupPlayer()
+    {
+        MainChar = false;
+        crewController = FindObjectOfType<CrewController>();
+        moveController = FindObjectOfType<MoveController>();
+        anim = GetComponent<Animator>();
+        aIDestination = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
+        position = crewController.GetNextFreePosition(gameObject);
+        Debug.Log("Player");
+    }
+
+    void MovePlayer()
+    {
+
         if (position == -1)
         {
             aIDestination.target = null;
@@ -60,25 +91,10 @@ public class PathMover : MonoBehaviour
             }
             anim.SetBool("isRunning", moveController.isRunning);
         }
-
     }
 
-    void SetupEnemy()
+    void MoveEnemy()
     {
-        MainChar = false;
 
-        anim = GetComponent<Animator>();
-        aIDestination = GetComponent<AIDestinationSetter>();
-        aiPath = GetComponent<AIPath>();
-    }
-    void SetupPlayer()
-    {
-        MainChar = false;
-        crewController = FindObjectOfType<CrewController>();
-        moveController = FindObjectOfType<MoveController>();
-        anim = GetComponent<Animator>();
-        aIDestination = GetComponent<AIDestinationSetter>();
-        aiPath = GetComponent<AIPath>();
-        position = crewController.GetNextFreePosition(gameObject);
     }
 }
