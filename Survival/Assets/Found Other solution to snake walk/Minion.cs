@@ -6,7 +6,7 @@ namespace Assets.Found_Other_solution_to_snake_walk
     public class Minion : MonoBehaviour
     {
         public int index;
-
+        public Transform posicao;
         public void Init(int index)
         {
             this.index = index;

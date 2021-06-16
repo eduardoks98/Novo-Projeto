@@ -67,7 +67,7 @@ namespace Assets.Found_Other_solution_to_snake_walk
             head %= Capacity;
         }
 
-        int Mod(int x, int m)
+        public int Mod(int x, int m)
         {
             return (x % m + m) % m;
         }

@@ -15,7 +15,6 @@ namespace Assets.Found_Other_solution_to_snake_walk
         public Path path = new Path(1); // path points
         public List<Minion> minions = new List<Minion>(); // all minions
 
-        public Minion teste;
         public GameObject prefab;
         float horizontal;
         float vertical;
@@ -77,7 +76,7 @@ namespace Assets.Found_Other_solution_to_snake_walk
             }
             dir = new Vector2(horizontal * MOVE_SPEED, vertical * MOVE_SPEED);
 
-            if(dir.x!=0 || dir.y!=0)
+            if (dir.x != 0 || dir.y != 0)
             {
                 moveMinions = true;
             }
@@ -126,10 +125,11 @@ namespace Assets.Found_Other_solution_to_snake_walk
                 if (distance < RADIUS)
                 {
                     float intersection = RADIUS - distance;
-                    //minion.Push(-prevToNext.normalized * RADIUS * intersection);
+                    minion.Push(-prevToNext.normalized * RADIUS * intersection);
                 }
             }
         }
+      
     }
 
 
