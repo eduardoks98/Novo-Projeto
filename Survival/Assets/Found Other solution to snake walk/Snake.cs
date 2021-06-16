@@ -23,6 +23,8 @@ namespace Assets.Found_Other_solution_to_snake_walk
 
         public Minion Leader => minions[0];
 
+        public bool moveMinions;
+
         void Awake()
         {
             path.Add(this.transform.position);
@@ -31,7 +33,9 @@ namespace Assets.Found_Other_solution_to_snake_walk
             {
                 AddMinion(item);
             }
-            
+
+            moveMinions = false;
+
         }
 
         public void Add()
@@ -47,7 +51,7 @@ namespace Assets.Found_Other_solution_to_snake_walk
             minion.Init(minions.Count);
 
             minions.Add(minion);
-            minion.MoveOnPath(path, 0f);
+            //minion.MoveOnPath(path, 10f);
 
             // Resize the capacity of the path if there are more minions in the snake than the path
             if (path.Capacity <= minions.Count) path.Resize();
@@ -56,7 +60,8 @@ namespace Assets.Found_Other_solution_to_snake_walk
         void FixedUpdate()
         {
             MoveLeader();
-            MoveMinions();
+            if (moveMinions)
+                MoveMinions();
         }
 
         void MoveLeader()
@@ -71,6 +76,15 @@ namespace Assets.Found_Other_solution_to_snake_walk
                 vertical *= moveLimiter;
             }
             dir = new Vector2(horizontal * MOVE_SPEED, vertical * MOVE_SPEED);
+
+            if(dir.x!=0 || dir.y!=0)
+            {
+                moveMinions = true;
+            }
+            else
+            {
+                moveMinions = false;
+            }
             // Move the first minion (leader) towards the 'dir'
             Leader.transform.position += ((Vector3)dir) * MOVE_SPEED * Time.deltaTime;
 
@@ -112,7 +126,7 @@ namespace Assets.Found_Other_solution_to_snake_walk
                 if (distance < RADIUS)
                 {
                     float intersection = RADIUS - distance;
-                    minion.Push(-prevToNext.normalized * RADIUS * intersection);
+                    //minion.Push(-prevToNext.normalized * RADIUS * intersection);
                 }
             }
         }
