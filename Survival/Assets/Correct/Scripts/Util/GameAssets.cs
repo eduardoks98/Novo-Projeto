@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Found_Other_solution_to_snake_walk
+namespace Assets.Correct.Util
 {
     public class GameAssets : MonoBehaviour
     {
+
+        public const int MAX_DODGE_CHANCE = 1000;
+        public const int MAX_HIT_CHANCE = 100;
+
 
         private static GameAssets _i;
 
@@ -16,9 +20,11 @@ namespace Assets.Found_Other_solution_to_snake_walk
                 return _i;
             }
         }
-
+        [Header("Popups")]
         public Transform pfDamagePopup;
 
+        [Header("Characters")]
         public GameObject Mage;
+        public GameObject Warrior;
     }
 }

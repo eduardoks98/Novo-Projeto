@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7280255757608165686}
   - component: {fileID: 3497319688921235603}
   - component: {fileID: 2078945484637557979}
-  - component: {fileID: 4074404917968165877}
   - component: {fileID: 972116706548549930}
   m_Layer: 5
   m_Name: DamagePopup
@@ -172,18 +171,6 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
---- !u!114 &4074404917968165877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3458834964386159282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d21dad4c40f46044aada9931024f339c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!210 &972116706548549930
 SortingGroup:
   m_ObjectHideFlags: 0

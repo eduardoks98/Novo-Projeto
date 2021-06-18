@@ -1,8 +1,9 @@
-using System.Collections;
+using Assets.Correct.Characters;
+using Assets.New_fucking_test_to_controller;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Found_Other_solution_to_snake_walk
+namespace Assets.Correct.Party
 {
 
     public class Snake : MonoBehaviour
@@ -15,32 +16,50 @@ namespace Assets.Found_Other_solution_to_snake_walk
         public Path path = new Path(1); // path points
         public List<Minion> minions = new List<Minion>(); // all minions
 
-        public GameObject prefab;
         float horizontal;
         float vertical;
         float moveLimiter = 0.7f;
 
         public Minion Leader => minions[0];
 
-        public bool moveMinions;
-
         void Awake()
         {
             path.Add(this.transform.position);
             var minions = FindObjectsOfType<Minion>();
-            foreach (var item in minions)
+            if (minions != null)
             {
-                AddMinion(item);
+                foreach (var item in minions)
+                {
+                    AddMinion(item);
+                }
+            }
+            else
+            {
+                AddMinion(Mage.Create());
             }
 
-            moveMinions = false;
 
         }
 
-        public void Add()
+        public void AddMinions(int n)
         {
+            switch ((CharTypes)n)
+            {
+                case CharTypes.Mage:
+                    AddMinion(Mage.Create());
+                    break;
+                case CharTypes.Warrior:
+                    AddMinion(Warrior.Create());
+                    break;
+                default:
+                    Debug.Log(n);
+                    break;
+            }
+        }
 
-            AddMinion(Mage.Create());
+        public void RemoveMinion(Minion minion)
+        {
+            minions.Remove(minion);
         }
 
         void AddMinion(Minion minion)
@@ -57,9 +76,12 @@ namespace Assets.Found_Other_solution_to_snake_walk
 
         void FixedUpdate()
         {
-            MoveLeader();
-            if (moveMinions)
+            if (minions.Count > 0)
+            {
+
+                MoveLeader();
                 MoveMinions();
+            }
         }
 
         void MoveLeader()
@@ -75,14 +97,6 @@ namespace Assets.Found_Other_solution_to_snake_walk
             }
             dir = new Vector2(horizontal * MOVE_SPEED, vertical * MOVE_SPEED);
 
-            if (dir.x != 0 || dir.y != 0)
-            {
-                moveMinions = true;
-            }
-            else
-            {
-                moveMinions = false;
-            }
             // Move the first minion (leader) towards the 'dir'
             Leader.transform.position += ((Vector3)dir) * MOVE_SPEED * Time.deltaTime;
 

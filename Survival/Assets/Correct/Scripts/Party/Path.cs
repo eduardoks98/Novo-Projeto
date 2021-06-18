@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Found_Other_solution_to_snake_walk
+namespace Assets.Correct.Party
 {
     public class Path
     {

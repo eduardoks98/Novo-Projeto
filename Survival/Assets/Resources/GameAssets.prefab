@@ -46,3 +46,4 @@ MonoBehaviour:
   pfDamagePopup: {fileID: 7280255757608165686, guid: 97120882d6efffa4cbce3b1217e8fed3,
     type: 3}
   Mage: {fileID: 5695054164425372915, guid: 50873d7b81a173c4486fcb0e6ae19114, type: 3}
+  Warrior: {fileID: 5952911164970010066, guid: 88e7b65a1fd830c4ca99580613e21b57, type: 3}
