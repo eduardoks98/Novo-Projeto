@@ -1,6 +1,7 @@
 using Assets.Correct.Characters;
 using Assets.New_fucking_test_to_controller;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Correct.Party
@@ -8,8 +9,8 @@ namespace Assets.Correct.Party
 
     public class Snake : MonoBehaviour
     {
-        public const float RADIUS = .8f; // distance between minions
-        public const float MOVE_SPEED = 2f; // movement speed
+        public float RADIUS = .8f; // distance between minions
+        public float MOVE_SPEED = 3f; // movement speed
 
         public Vector2 dir = Vector2.up; // movement direction
         public float headDist = 0f; // distance from path 'head' to leader (used for lerp-ing between points)
@@ -20,15 +21,21 @@ namespace Assets.Correct.Party
         float vertical;
         float moveLimiter = 0.7f;
 
-        public Minion Leader => minions[0];
+        [SerializeField]
+        public Minion Leader => GetLeader();
+        public Rigidbody2D rb => Leader.GetComponent<Rigidbody2D>();
+        public Minion GetLeader()
+        {
+            return minions.First(x => x.index == 0);
+        }
 
         void Awake()
         {
             path.Add(this.transform.position);
-            var minions = FindObjectsOfType<Minion>();
-            if (minions != null)
+            var min = FindObjectsOfType<Minion>();
+            if (min.Length != 0)
             {
-                foreach (var item in minions)
+                foreach (var item in min)
                 {
                     AddMinion(item);
                 }
@@ -98,7 +105,8 @@ namespace Assets.Correct.Party
             dir = new Vector2(horizontal * MOVE_SPEED, vertical * MOVE_SPEED);
 
             // Move the first minion (leader) towards the 'dir'
-            Leader.transform.position += ((Vector3)dir) * MOVE_SPEED * Time.deltaTime;
+            rb.velocity = ((Vector3)dir);
+            //Leader.transform.position += ((Vector3)dir) * MOVE_SPEED * Time.deltaTime;
 
             // Measure the distance between the leader and the 'head' of that path
             Vector2 headToLeader = ((Vector2)Leader.transform.position) - path.Head();

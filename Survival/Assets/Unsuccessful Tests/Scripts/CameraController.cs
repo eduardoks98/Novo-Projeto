@@ -1,3 +1,4 @@
+using Assets.Correct.Party;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,15 @@ public class CameraController : MonoBehaviour
     public float dampTime = 0.15f;
     private Vector3 velocity = Vector3.zero;
     public Transform target;
-    public MoveController move;
+    public Snake move;
     private void Start()
     {
-        move = FindObjectOfType<MoveController>();
+        move = FindObjectOfType<Snake>();
     }
     // Update is called once per frame
     void Update()
     {
-        target = move.body.transform;
+        target = move.Leader.transform;
         if (target)
         {
             /*
