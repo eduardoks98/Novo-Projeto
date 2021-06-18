@@ -39,9 +39,8 @@ namespace Assets.Found_Other_solution_to_snake_walk
 
         public void Add()
         {
-            var newMinion = Instantiate(prefab, Leader.transform.position, Quaternion.identity);
 
-            AddMinion(newMinion.GetComponent<Minion>());
+            AddMinion(Mage.Create());
         }
 
         void AddMinion(Minion minion)
@@ -50,7 +49,7 @@ namespace Assets.Found_Other_solution_to_snake_walk
             minion.Init(minions.Count);
 
             minions.Add(minion);
-            //minion.MoveOnPath(path, 10f);
+            minion.MoveOnPath(path, 0f);
 
             // Resize the capacity of the path if there are more minions in the snake than the path
             if (path.Capacity <= minions.Count) path.Resize();
@@ -129,7 +128,7 @@ namespace Assets.Found_Other_solution_to_snake_walk
                 }
             }
         }
-      
+
     }
 
 

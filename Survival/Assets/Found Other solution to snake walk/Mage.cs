@@ -7,16 +7,11 @@ namespace Assets.Found_Other_solution_to_snake_walk
     {
         public static Mage Create()
         {
-            var mage = Instantiate(pfText, transform.position, Quaternion.identity);
+            var mage = Instantiate(GameAssets.i.Mage, new Vector3(0,0), Quaternion.identity);
 
             Mage maguinho = mage.GetComponent<Mage>();
-            maguinho.Setup();
             return maguinho;
         }
 
-        public void Setup()
-        {
-
-        }
     }
 }
