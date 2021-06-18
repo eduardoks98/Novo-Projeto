@@ -8,6 +8,7 @@ namespace Assets.Correct.Characters
 {
     public class Mage : Minion
     {
+
         public static Mage Create()
         {
             var i = Instantiate(GameAssets.i.Mage, new Vector3(0, 0), Quaternion.identity);
