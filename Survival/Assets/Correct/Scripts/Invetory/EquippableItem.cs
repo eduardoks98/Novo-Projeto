@@ -16,7 +16,7 @@ namespace Assets.Correct.Scripts.Invetory
         Accessory2
     }
     [CreateAssetMenu]
-    public class EquipableItem : Item
+    public class EquippableItem : Item
     {
         public int StrengthBonus;
         public int AgilityBonus;
