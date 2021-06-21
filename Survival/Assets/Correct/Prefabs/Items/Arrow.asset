@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a4c29190cfbbe47a52eeb52a695ef5, type: 3}
+  m_Name: Arrow
+  m_EditorClassIdentifier: 
+  ItemName: Arrow
+  Icon: {fileID: 8734408466087547105, guid: d9a3e9555ca05a74b9173d15e4a3e3f7, type: 3}
+  StrengthBonus: 21
+  AgilityBonus: 15
+  IntelligenceBonus: 5
+  VitalityBonus: 7
+  StrengthPercentBonus: 0.12
+  AgilityPercentBonus: 0.15
+  IntelligencePercentBonus: 0.12
+  VitalityPercentBonus: 0.15
+  EquipmentType: 4
