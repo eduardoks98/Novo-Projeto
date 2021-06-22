@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Correct.Scripts.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Assets.Correct.Scripts.Invetory
 {
-    public class Inventory : MonoBehaviour
+    public class Inventory : MonoBehaviour, IItemContainer
     {
         //[FormerlySerializedAs("items")]
         [SerializeField] List<Item> startingItems;
@@ -110,7 +111,19 @@ namespace Assets.Correct.Scripts.Invetory
             }
             return true;
         }
+        public bool ContainsItem(Item item)
+        {
+           
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                if (itemSlots[i].Item == item)
+                {
+                    return true;
+                }
+            }
 
+            return false;
+        }
         public int ItemCount(string itemID)
         {
             int number = 0;
