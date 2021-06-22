@@ -174,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 6043554}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 0
 --- !u!114 &6043554
 MonoBehaviour:
@@ -435,6 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 57077013}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &66291806
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 101978371}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &103537812
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,6 +916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 109936080}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 7
 --- !u!114 &109936080
 MonoBehaviour:
@@ -1385,6 +1389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 218816868}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &231178880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 231178882}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &238897894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,6 +1960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 362867163}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &379599216
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,7 +2019,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2043,6 +2050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 379599218}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &392634683
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,6 +2102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 392634686}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 7
 --- !u!114 &392634686
 MonoBehaviour:
@@ -2184,6 +2193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 460314054}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 4
 --- !u!114 &460314054
 MonoBehaviour:
@@ -2313,6 +2323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 506560435}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &526444294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,6 +2585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 529666931}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0.8}
   EquipmentType: 1
 --- !u!114 &529666931
 MonoBehaviour:
@@ -2648,7 +2660,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 2}
+  m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &567262863
 MonoBehaviour:
@@ -2670,8 +2682,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f49bc9904a0da5645a38966f9ce11a15, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2778,6 +2790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 593253012}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &624208101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,6 +2999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 716342046}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &725536764
 GameObject:
   m_ObjectHideFlags: 0
@@ -3310,8 +3324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4681567935497998654, guid: 1aa41ccb447a80e46ac975de4ec29ba2,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3342,6 +3355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 764817257}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &803888920
 GameObject:
   m_ObjectHideFlags: 0
@@ -3902,7 +3916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3933,6 +3947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 921576768}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &937873628
 GameObject:
   m_ObjectHideFlags: 0
@@ -4074,6 +4089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 947265584}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 3
 --- !u!114 &947265584
 MonoBehaviour:
@@ -4203,6 +4219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 967093295}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1002434075
 GameObject:
   m_ObjectHideFlags: 0
@@ -4254,6 +4271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1002434078}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 6
 --- !u!114 &1002434078
 MonoBehaviour:
@@ -4976,6 +4994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1148699497}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 6
 --- !u!114 &1148699497
 MonoBehaviour:
@@ -5125,7 +5144,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 2}
+  m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1272287349
 MonoBehaviour:
@@ -5147,8 +5166,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f49bc9904a0da5645a38966f9ce11a15, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5832,7 +5851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5863,6 +5882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1371854526}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1372948508
 GameObject:
   m_ObjectHideFlags: 0
@@ -5953,6 +5973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1372948510}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1523293148
 GameObject:
   m_ObjectHideFlags: 0
@@ -6004,6 +6025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1523293151}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 2
 --- !u!114 &1523293151
 MonoBehaviour:
@@ -6133,6 +6155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1528015817}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1530836792
 GameObject:
   m_ObjectHideFlags: 0
@@ -6399,7 +6422,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6430,6 +6453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1554906349}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1570554136
 GameObject:
   m_ObjectHideFlags: 0
@@ -6532,7 +6556,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 2}
+  m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1622563719
 MonoBehaviour:
@@ -6554,8 +6578,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f49bc9904a0da5645a38966f9ce11a15, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6623,6 +6647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1637120657}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 3
 --- !u!114 &1637120657
 MonoBehaviour:
@@ -7320,7 +7345,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 2}
+  m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1838675648
 MonoBehaviour:
@@ -7342,8 +7367,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f49bc9904a0da5645a38966f9ce11a15, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7486,6 +7511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1848969763}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 2
 --- !u!114 &1848969763
 MonoBehaviour:
@@ -7827,6 +7853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1914765082}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1921811213
 GameObject:
   m_ObjectHideFlags: 0
@@ -7961,7 +7988,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7992,6 +8019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1930886990}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1932545016
 GameObject:
   m_ObjectHideFlags: 0
@@ -8043,6 +8071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1932545019}
+  disabledColor: {r: 1, g: 1, b: 1, a: 0}
   EquipmentType: 5
 --- !u!114 &1932545019
 MonoBehaviour:

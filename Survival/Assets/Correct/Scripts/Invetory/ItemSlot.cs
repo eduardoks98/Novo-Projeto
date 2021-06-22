@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using Assets.Correct.Util;
 
 namespace Assets.Correct.Scripts.Invetory
 {
@@ -19,7 +20,8 @@ namespace Assets.Correct.Scripts.Invetory
         public event Action<ItemSlot> OnDropEvent;
 
         private Color normalColor = Color.white;
-        private Color disabledColor = new Color(1, 1, 1, 0);
+        [SerializeField]
+        private Color disabledColor = new Color(1, 1, 1, 0.8F);
 
         private Item _item;
         public Item Item
@@ -30,6 +32,8 @@ namespace Assets.Correct.Scripts.Invetory
                 _item = value;
                 if (_item == null)
                 {
+                    if(GameAssets.i.DisabledSlot != null)
+                    Image.sprite = GameAssets.i.DisabledSlot;
                     Image.color = disabledColor;
                 }
                 else

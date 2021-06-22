@@ -47,3 +47,4 @@ MonoBehaviour:
     type: 3}
   Mage: {fileID: 5695054164425372915, guid: 50873d7b81a173c4486fcb0e6ae19114, type: 3}
   Warrior: {fileID: 5952911164970010066, guid: 88e7b65a1fd830c4ca99580613e21b57, type: 3}
+  DisabledSlot: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}

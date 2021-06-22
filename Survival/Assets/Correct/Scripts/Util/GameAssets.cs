@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Correct.Util
 {
@@ -26,5 +27,8 @@ namespace Assets.Correct.Util
         [Header("Characters")]
         public GameObject Mage;
         public GameObject Warrior;
+
+        [Header("UI")]
+        public Sprite DisabledSlot;
     }
 }
