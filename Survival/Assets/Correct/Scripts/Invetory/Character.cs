@@ -57,6 +57,10 @@ namespace Assets.Correct.Scripts.Invetory
             //Drag
             inventory.OnDragEvent += Drag;
             equipmentPanel.OnDragEvent += Drag;
+
+            //Drop
+            inventory.OnDropEvent += Drop;
+            equipmentPanel.OnDropEvent += Drop;
         }
 
         private void Equip(ItemSlot itemSlot)
@@ -117,21 +121,21 @@ namespace Assets.Correct.Scripts.Invetory
 
         private void Drop(ItemSlot dropItemSlot)
         {
-            if(dropItemSlot.CanReceiveItem(draggedSlot.Item)&& draggedSlot.CanReceiveItem(dropItemSlot.Item))
+            if (dropItemSlot.CanReceiveItem(draggedSlot.Item) && draggedSlot.CanReceiveItem(dropItemSlot.Item))
             {
                 EquippableItem dragItem = draggedSlot.Item as EquippableItem;
                 EquippableItem dropItem = dropItemSlot.Item as EquippableItem;
 
-                if(draggedSlot is EquipmentSlot)
+                if (draggedSlot is EquipmentSlot)
                 {
                     if (dragItem != null) dragItem.Unequip(this);
                     if (dropItem != null) dropItem.Equip(this);
                 }
-                if(dropItemSlot is EquipmentSlot)
+                if (dropItemSlot is EquipmentSlot)
                 {
 
-                    if (dropItem != null) dropItem.Equip(this);
-                    if (dragItem != null) dragItem.Unequip(this);
+                    if (dragItem != null) dragItem.Equip(this);
+                    if (dropItem != null) dropItem.Unequip(this);
                 }
                 statPanel.UpdateStatValues();
                 Item draggedItem = draggedSlot.Item;
