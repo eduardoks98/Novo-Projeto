@@ -117,6 +117,7 @@ namespace Assets.Correct.Scripts.Invetory
         {
             if (draggableItem.enabled)
                 draggableItem.transform.position = Input.mousePosition;
+            
         }
 
         private void Drop(ItemSlot dropItemSlot)

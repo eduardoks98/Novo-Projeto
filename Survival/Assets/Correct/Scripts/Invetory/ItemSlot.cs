@@ -19,7 +19,7 @@ namespace Assets.Correct.Scripts.Invetory
         public event Action<ItemSlot> OnDropEvent;
 
         private Color normalColor = Color.white;
-        private Color disabledColor = new Color(1,1,1,0);
+        private Color disabledColor = new Color(1, 1, 1, 0);
 
         private Item _item;
         public Item Item
@@ -46,7 +46,6 @@ namespace Assets.Correct.Scripts.Invetory
             {
                 if (OnRigtClickEvent != null)
                 {
-
                     OnRigtClickEvent(this);
                 }
             }
@@ -74,7 +73,7 @@ namespace Assets.Correct.Scripts.Invetory
         public void OnPointerExit(PointerEventData eventData)
         {
             if (OnPointerExitEvent != null)
-            {            
+            {
                 OnPointerExitEvent(this);
             }
         }
@@ -109,6 +108,6 @@ namespace Assets.Correct.Scripts.Invetory
             }
         }
 
-        
+
     }
 }
