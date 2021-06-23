@@ -122,6 +122,8 @@ namespace Assets.Correct.Scripts.Invetory
 
         private void Drop(ItemSlot dropItemSlot)
         {
+            //Se arrastar um item com os dois botoes o sistem entende que a funcao ja foi feita ao soltar um dos botoes e caso nao existir nenhum item send arrastado quando soltar algum botao do mouse simplesmente retorna pq nao tem nada pra trocar de slot
+            if (draggedSlot == null) { return; }
             if (dropItemSlot.CanReceiveItem(draggedSlot.Item) && draggedSlot.CanReceiveItem(dropItemSlot.Item))
             {
                 EquippableItem dragItem = draggedSlot.Item as EquippableItem;

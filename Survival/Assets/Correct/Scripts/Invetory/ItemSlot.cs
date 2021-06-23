@@ -79,9 +79,11 @@ namespace Assets.Correct.Scripts.Invetory
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
+
             if (OnBeginDragEvent != null)
             {
-                OnBeginDragEvent(this);
+                if (eventData != null && eventData.button == PointerEventData.InputButton.Left)
+                    OnBeginDragEvent(this);
             }
         }
         public void OnEndDrag(PointerEventData eventData)

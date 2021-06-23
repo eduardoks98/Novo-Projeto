@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4233763583014153271}
   - component: {fileID: 4859641289694515869}
   - component: {fileID: 7154146810826517346}
+  - component: {fileID: 6554028425269647232}
   m_Layer: 0
   m_Name: Warrior
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,6 +95,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.35, y: 0.5}
   m_EdgeRadius: 0
+--- !u!70 &6554028425269647232
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952911164970010066}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1, y: 0.8}
+  m_Size: {x: 0.75, y: 1.6}
+  m_Direction: 0
 --- !u!1001 &367064199
 PrefabInstance:
   m_ObjectHideFlags: 0
