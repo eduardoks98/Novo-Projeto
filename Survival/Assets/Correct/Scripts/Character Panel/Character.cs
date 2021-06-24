@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using Assets.Correct.Scripts.Crafting_System;
+using EKS.Stat;
+using EKS.Panel;
+using EKS.Crafting;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Characters.Panel
+
 {
     public class Character : MonoBehaviour
     {
@@ -48,7 +51,7 @@ namespace Assets.Correct.Scripts.Invetory
             //Pointer Exit
             inventory.OnPointerExitEvent += HideTooltip;
             equipmentPanel.OnPointerExitEvent += HideTooltip;
-           // craftingWindow.OnPointerExitEvent += HideTooltip;
+            // craftingWindow.OnPointerExitEvent += HideTooltip;
 
             //Begin Drag
             inventory.OnBeginDragEvent += BeginDrag;

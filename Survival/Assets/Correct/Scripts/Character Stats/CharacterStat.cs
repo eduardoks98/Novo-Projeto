@@ -1,115 +1,117 @@
-using Assets.Correct.Scripts.Stats2;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[Serializable]
-public class CharacterStat
+namespace EKS.Stat
 {
-    public float BaseValue;
-
-    public virtual float Value
+    [Serializable]
+    public class CharacterStat
     {
-        get
+        public float BaseValue;
+
+        public virtual float Value
         {
-            if (isDirty|| BaseValue!=lastBaseValue)
+            get
             {
-                lastBaseValue = BaseValue;
-                _value = CalculateFinalValue();
-                isDirty = false;
+                if (isDirty || BaseValue != lastBaseValue)
+                {
+                    lastBaseValue = BaseValue;
+                    _value = CalculateFinalValue();
+                    isDirty = false;
+                }
+                return _value;
             }
-            return _value;
         }
-    }
 
-    protected bool isDirty = true;
-    protected float _value;
-    protected float lastBaseValue = float.MinValue;
+        protected bool isDirty = true;
+        protected float _value;
+        protected float lastBaseValue = float.MinValue;
 
-    protected readonly List<StatModifier> statModifiers;
-    public readonly ReadOnlyCollection<StatModifier> StatModifers;
+        protected readonly List<StatModifier> statModifiers;
+        public readonly ReadOnlyCollection<StatModifier> StatModifers;
 
-   public CharacterStat()
-    {
-        this.statModifiers = new List<StatModifier>();
-        StatModifers = statModifiers.AsReadOnly();
-    }
+        public CharacterStat()
+        {
+            this.statModifiers = new List<StatModifier>();
+            StatModifers = statModifiers.AsReadOnly();
+        }
 
-    public CharacterStat(float baseValue) :this()
-    {
-        this.BaseValue = baseValue;
-    }
+        public CharacterStat(float baseValue) : this()
+        {
+            this.BaseValue = baseValue;
+        }
 
-    public virtual void AddModifier(StatModifier mod)
-    {
-        isDirty = true;
-        statModifiers.Add(mod);
-        statModifiers.Sort(CompareModifierOrder);
-    }
-
-    
-    public virtual bool RemoveModifier(StatModifier mod)
-    {
-        if (statModifiers.Remove(mod))
+        public virtual void AddModifier(StatModifier mod)
         {
             isDirty = true;
-            return true;
+            statModifiers.Add(mod);
+            statModifiers.Sort(CompareModifierOrder);
         }
-        return false;
-    }
 
-    public virtual bool RemoveAllModifiersFromSource(object source)
-    {
-        bool didRemove = false;
 
-        for (int i = statModifiers.Count-1; i >= 0; i--)
+        public virtual bool RemoveModifier(StatModifier mod)
         {
-            if (statModifiers[i].Source == source)
+            if (statModifiers.Remove(mod))
             {
                 isDirty = true;
-                didRemove = true;
-                statModifiers.RemoveAt(i);
+                return true;
             }
+            return false;
         }
-        return didRemove;
-    }
-    protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
-    {
-        if (a.Order < b.Order)
-            return -1;
-        else if (a.Order > b.Order)
-            return 1;
 
-        return 0;
-    }
-
-    protected virtual float CalculateFinalValue()
-    {
-        float finalValue = BaseValue;
-        float sumPercentAdd = 0;
-
-        for (int i = 0; i < statModifiers.Count; i++)
+        public virtual bool RemoveAllModifiersFromSource(object source)
         {
-            StatModifier mod = statModifiers[i];
-            if (mod.Type == StatModType.Flat)
+            bool didRemove = false;
+
+            for (int i = statModifiers.Count - 1; i >= 0; i--)
             {
-                finalValue += mod.Value;
-            }
-            else if (mod.Type == StatModType.PercentAdd)
-            {
-                sumPercentAdd += mod.Value;
-                if (i + 1 >= statModifiers.Count || statModifiers[i + 1].Type != StatModType.PercentAdd)
+                if (statModifiers[i].Source == source)
                 {
-                    finalValue *= 1 + sumPercentAdd;
-                    sumPercentAdd = 0;
+                    isDirty = true;
+                    didRemove = true;
+                    statModifiers.RemoveAt(i);
                 }
             }
-            else if (mod.Type == StatModType.PercentMult)
-            {
-                finalValue *= 1 + mod.Value;
-            }
+            return didRemove;
         }
-        return (float)Math.Round(finalValue, 1);
+        protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
+        {
+            if (a.Order < b.Order)
+                return -1;
+            else if (a.Order > b.Order)
+                return 1;
+
+            return 0;
+        }
+
+        protected virtual float CalculateFinalValue()
+        {
+            float finalValue = BaseValue;
+            float sumPercentAdd = 0;
+
+            for (int i = 0; i < statModifiers.Count; i++)
+            {
+                StatModifier mod = statModifiers[i];
+                if (mod.Type == StatModType.Flat)
+                {
+                    finalValue += mod.Value;
+                }
+                else if (mod.Type == StatModType.PercentAdd)
+                {
+                    sumPercentAdd += mod.Value;
+                    if (i + 1 >= statModifiers.Count || statModifiers[i + 1].Type != StatModType.PercentAdd)
+                    {
+                        finalValue *= 1 + sumPercentAdd;
+                        sumPercentAdd = 0;
+                    }
+                }
+                else if (mod.Type == StatModType.PercentMult)
+                {
+                    finalValue *= 1 + mod.Value;
+                }
+            }
+            return (float)Math.Round(finalValue, 1);
+        }
     }
 }

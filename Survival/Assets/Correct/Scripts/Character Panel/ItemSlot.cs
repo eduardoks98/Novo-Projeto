@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
-using Assets.Correct.Util;
-using TMPro;
+using EKS.Characters.Panel;
+using EKS.Items;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Panel
 {
     public class ItemSlot : BaseItemSlot, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
     {

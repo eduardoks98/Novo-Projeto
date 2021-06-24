@@ -1,7 +1,7 @@
-﻿using Assets.Correct.Scripts.Invetory;
-namespace Assets.Correct.Scripts.Interfaces
+﻿
+namespace EKS.Items
 {
-    public interface IItemContainer 
+	public interface IItemContainer 
     {
 		bool CanAddItem(Item item, int amount = 1);
 		bool AddItem(Item item);

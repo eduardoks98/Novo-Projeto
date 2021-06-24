@@ -1,12 +1,13 @@
-﻿using Assets.Correct.Scripts.Invetory;
+﻿using EKS.Characters.Panel;
+using EKS.Items;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Correct.Scripts.Crafting_System
+
+namespace EKS.Crafting
 {
-    public class CraftingWindow : MonoBehaviour
+	public class CraftingWindow : MonoBehaviour
 	{
 		[Header("References")]
 		[SerializeField] CraftingRecipeUI recipeUIPrefab;

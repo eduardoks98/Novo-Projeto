@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Items
 {
     [CreateAssetMenu]
     public class Item : ScriptableObject

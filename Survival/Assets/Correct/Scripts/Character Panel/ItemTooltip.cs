@@ -1,64 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Text;
-using Assets.Correct.Scripts.Invetory;
+using EKS.Items;
 
-public class ItemTooltip : MonoBehaviour
+namespace EKS.Panel
 {
-    [SerializeField] TextMeshProUGUI ItemNameText;
-    [SerializeField] TextMeshProUGUI ItemSlotText;
-    [SerializeField] TextMeshProUGUI ItemStatsText;
-
-    private StringBuilder sb = new StringBuilder();
-
-    public void ShowTooltip(EquippableItem item)
+    public class ItemTooltip : MonoBehaviour
     {
-        ItemNameText.text = item.ItemName;
-        ItemSlotText.text = item.EquipmentType.ToString();
-        sb.Length = 0;
-        AddStat(item.StrengthBonus, "Strength");
-        AddStat(item.AgilityBonus, "Agility");
-        AddStat(item.IntelligenceBonus, "Intelligence");
-        AddStat(item.VitalityBonus, "Vitality");
+        [SerializeField] TextMeshProUGUI ItemNameText;
+        [SerializeField] TextMeshProUGUI ItemSlotText;
+        [SerializeField] TextMeshProUGUI ItemStatsText;
 
+        private StringBuilder sb = new StringBuilder();
 
-        AddStat(item.StrengthPercentBonus, "Strength", isPercent: true);
-        AddStat(item.AgilityPercentBonus, "Agility", isPercent: true);
-        AddStat(item.IntelligencePercentBonus, "Intelligence", isPercent: true);
-        AddStat(item.VitalityPercentBonus, "Vitality", isPercent: true);
-
-        ItemStatsText.text = sb.ToString();
-
-        gameObject.SetActive(true);
-    }
-    public void HideTooltip()
-    {
-        gameObject.SetActive(false);
-
-    }
-    public void AddStat(float value, string statName, bool isPercent = false)
-    {
-        if (value != 0)
+        public void ShowTooltip(EquippableItem item)
         {
-            if (sb.Length > 0)
-                sb.AppendLine();
+            ItemNameText.text = item.ItemName;
+            ItemSlotText.text = item.EquipmentType.ToString();
+            sb.Length = 0;
+            AddStat(item.StrengthBonus, "Strength");
+            AddStat(item.AgilityBonus, "Agility");
+            AddStat(item.IntelligenceBonus, "Intelligence");
+            AddStat(item.VitalityBonus, "Vitality");
 
-            if (value > 0)
-                sb.Append("+");
 
-            if (isPercent)
+            AddStat(item.StrengthPercentBonus, "Strength", isPercent: true);
+            AddStat(item.AgilityPercentBonus, "Agility", isPercent: true);
+            AddStat(item.IntelligencePercentBonus, "Intelligence", isPercent: true);
+            AddStat(item.VitalityPercentBonus, "Vitality", isPercent: true);
+
+            ItemStatsText.text = sb.ToString();
+
+            gameObject.SetActive(true);
+        }
+        public void HideTooltip()
+        {
+            gameObject.SetActive(false);
+
+        }
+        public void AddStat(float value, string statName, bool isPercent = false)
+        {
+            if (value != 0)
             {
-                sb.Append(value * 100);
-                sb.Append("% ");
+                if (sb.Length > 0)
+                    sb.AppendLine();
+
+                if (value > 0)
+                    sb.Append("+");
+
+                if (isPercent)
+                {
+                    sb.Append(value * 100);
+                    sb.Append("% ");
+                }
+                else
+                {
+                    sb.Append(value);
+                    sb.Append(" ");
+                }
+                sb.Append(statName);
             }
-            else
-            {
-                sb.Append(value);
-                sb.Append(" ");
-            }
-            sb.Append(statName);
         }
     }
-}

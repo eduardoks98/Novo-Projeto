@@ -1,11 +1,10 @@
-﻿using Assets.Correct.Scripts.Stats2;
-using System.Collections;
-using System.Collections.ObjectModel;
+﻿using EKS.Items;
+using EKS.Stat;
 using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Panel
 {
     public class StatTooltip : MonoBehaviour
     {
@@ -47,7 +46,7 @@ namespace Assets.Correct.Scripts.Invetory
                 sb.Append(System.Math.Round(stat.Value - stat.BaseValue, 1));
                 sb.Append(")");
             }
- 
+
             return sb.ToString();
         }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Correct.Scripts.Stats2
+namespace EKS.Stat
 {
 
     public enum StatModType
@@ -34,4 +34,5 @@ namespace Assets.Correct.Scripts.Stats2
         //need source and default order
         public StatModifier(float value, StatModType type, object source) : this(value, type, (int)type, source) { }
     }
+}
 }

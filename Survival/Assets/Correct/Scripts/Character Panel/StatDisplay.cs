@@ -1,66 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
-using Assets.Correct.Scripts.Invetory;
+using EKS.Stat;
 
-public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+namespace EKS.Panel
 {
-    private CharacterStat _stat;
-    public CharacterStat Stat
+    public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        get
+        private CharacterStat _stat;
+        public CharacterStat Stat
         {
-            return _stat;
+            get
+            {
+                return _stat;
+            }
+            set
+            {
+                _stat = value;
+                UpdateStatValue();
+            }
         }
-        set
+
+
+
+        private string _name;
+        public string Name
         {
-            _stat = value;
-            UpdateStatValue();
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                nameText.text = _name.ToLower();
+            }
         }
-    }
 
-
-
-    private string _name;
-    public string Name
-    {
-        get
+        [SerializeField] TextMeshProUGUI nameText;
+        [SerializeField] TextMeshProUGUI valueText;
+        [SerializeField] StatTooltip tooltip;
+        public void OnPointerEnter(PointerEventData eventData)
         {
-            return _name;
+            tooltip.ShowTooltip(Stat, Name);
         }
-        set {
-            _name = value;
-            nameText.text = _name.ToLower();
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            tooltip.HideTooltip();
         }
-    }
 
-    [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] TextMeshProUGUI valueText;
-    [SerializeField] StatTooltip tooltip;
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        tooltip.ShowTooltip(Stat, Name);
-    }
+        private void OnValidate()
+        {
+            TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
+            nameText = texts[0];
+            valueText = texts[1];
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        tooltip.HideTooltip();
-    }
-
-    private void OnValidate()
-    {
-        TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
-        nameText = texts[0];
-        valueText = texts[1];
-
-        if (tooltip == null)
-            tooltip = FindObjectOfType<StatTooltip>();
-    }
-    public void UpdateStatValue()
-    {
-        valueText.text = _stat.Value.ToString();
+            if (tooltip == null)
+                tooltip = FindObjectOfType<StatTooltip>();
+        }
+        public void UpdateStatValue()
+        {
+            valueText.text = _stat.Value.ToString();
+        }
     }
 }

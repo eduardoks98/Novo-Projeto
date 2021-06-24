@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Correct.Scripts.Invetory
-{
+namespace EKS.Inputs 
+{ 
     public class InventoryInput : MonoBehaviour
     {
         [SerializeField] GameObject characterPanelGameObject;

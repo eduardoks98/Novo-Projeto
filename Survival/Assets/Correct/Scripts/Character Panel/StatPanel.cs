@@ -1,49 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
+using EKS.Stat;
 using UnityEngine;
 
-public class StatPanel : MonoBehaviour
+namespace EKS.Panel
 {
-    [SerializeField] StatDisplay[] statDisplays;
-    [SerializeField] string[] statNames;
-
-    private CharacterStat[] stats;
-
-    private void OnValidate()
+    public class StatPanel : MonoBehaviour
     {
-        statDisplays = GetComponentsInChildren<StatDisplay>();
-        UpdateStatNames();
-    }
+        [SerializeField] StatDisplay[] statDisplays;
+        [SerializeField] string[] statNames;
 
-    public void SetStats(params CharacterStat[] charStas)
-    {
-        stats = charStas;
-        if (stats.Length > statDisplays.Length)
+        private CharacterStat[] stats;
+
+        private void OnValidate()
         {
-            Debug.LogError("Not Enough Stats Displays!");
-            return;
+            statDisplays = GetComponentsInChildren<StatDisplay>();
+            UpdateStatNames();
         }
 
-        for (int i = 0; i < statDisplays.Length; i++)
+        public void SetStats(params CharacterStat[] charStas)
         {
-            statDisplays[i].gameObject.SetActive(i < stats.Length);
-            if (i < stats.Length)
-                statDisplays[i].Stat = stats[i];
-        }
-    }
+            stats = charStas;
+            if (stats.Length > statDisplays.Length)
+            {
+                Debug.LogError("Not Enough Stats Displays!");
+                return;
+            }
 
-    public void UpdateStatValues()
-    {
-        for (int i = 0; i < stats.Length; i++)
-        {
-            statDisplays[i].UpdateStatValue();
+            for (int i = 0; i < statDisplays.Length; i++)
+            {
+                statDisplays[i].gameObject.SetActive(i < stats.Length);
+                if (i < stats.Length)
+                    statDisplays[i].Stat = stats[i];
+            }
         }
-    }
-    public void UpdateStatNames()
-    {
-        for (int i = 0; i < statNames.Length; i++)
+
+        public void UpdateStatValues()
         {
-            statDisplays[i].Name = statNames[i];
+            for (int i = 0; i < stats.Length; i++)
+            {
+                statDisplays[i].UpdateStatValue();
+            }
+        }
+        public void UpdateStatNames()
+        {
+            for (int i = 0; i < statNames.Length; i++)
+            {
+                statDisplays[i].Name = statNames[i];
+            }
         }
     }
 }

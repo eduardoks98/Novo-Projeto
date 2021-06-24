@@ -1,7 +1,9 @@
-﻿using System;
+﻿using EKS.Items;
+using EKS.Panel;
+using System;
 using UnityEngine;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Inputs.Chest
 {
     public class ItemChest : MonoBehaviour
     {

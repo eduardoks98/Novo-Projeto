@@ -1,8 +1,8 @@
-﻿using Assets.Correct.Scripts.Stats2;
-using System.Collections;
+﻿using EKS.Characters.Panel;
+using EKS.Stat;
 using UnityEngine;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Items
 {
     public enum EquipmentType
     {

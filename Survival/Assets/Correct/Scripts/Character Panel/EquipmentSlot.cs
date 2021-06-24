@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Panel
 {
     public class EquipmentSlot : ItemSlot
     {

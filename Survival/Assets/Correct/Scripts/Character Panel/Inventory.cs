@@ -1,11 +1,10 @@
-﻿using Assets.Correct.Scripts.Interfaces;
+﻿using EKS.Characters.Panel;
+using EKS.Items;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Panel
 {
     public class Inventory : ItemContainer
     {

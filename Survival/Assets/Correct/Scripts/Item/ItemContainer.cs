@@ -1,10 +1,9 @@
-﻿using Assets.Correct.Scripts.Interfaces;
+﻿
+using EKS.Panel;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Correct.Scripts.Invetory
+namespace EKS.Items
 {
     public class ItemContainer : MonoBehaviour, IItemContainer
     {
