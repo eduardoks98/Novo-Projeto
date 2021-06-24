@@ -49,12 +49,14 @@ namespace Assets.Correct.Scripts.Invetory
             int i = 0;
             for (; i < startingItems.Count && i < itemSlots.Length; i++)
             {
-                itemSlots[i].Item = Instantiate(startingItems[i]);
+                itemSlots[i].Item = startingItems[i].GetCopy();
+                itemSlots[i].Amount = 1;
             }
 
             for (; i < itemSlots.Length; i++)
             {
                 itemSlots[i].Item = null;
+                itemSlots[i].Amount = 0;
             }
         }
 
@@ -62,10 +64,11 @@ namespace Assets.Correct.Scripts.Invetory
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
-                if (itemSlots[i].Item == null)
+                if (itemSlots[i].Item == null || (itemSlots[i].Item.ID == item.ID && itemSlots[i].Amount < item.MaximumStacks))
                 {
 
                     itemSlots[i].Item = item;
+                    itemSlots[i].Amount++;
                     return true;
                 }
             }
@@ -77,8 +80,11 @@ namespace Assets.Correct.Scripts.Invetory
             {
                 if (itemSlots[i].Item == item)
                 {
-
-                    itemSlots[i].Item = null;
+                    itemSlots[i].Amount--;
+                    if (itemSlots[i].Amount == 0)
+                    {
+                        itemSlots[i].Item = null;
+                    }
                     return true;
                 }
             }
@@ -93,7 +99,11 @@ namespace Assets.Correct.Scripts.Invetory
                 if (item != null && item.ID == itemID)
                 {
 
-                    itemSlots[i].Item = null;
+                    itemSlots[i].Amount--;
+                    if (itemSlots[i].Amount == 0)
+                    {
+                        itemSlots[i].Item = null;
+                    }
                     return item;
                 }
             }
@@ -113,7 +123,7 @@ namespace Assets.Correct.Scripts.Invetory
         }
         public bool ContainsItem(Item item)
         {
-           
+
             for (int i = 0; i < itemSlots.Length; i++)
             {
                 if (itemSlots[i].Item == item)

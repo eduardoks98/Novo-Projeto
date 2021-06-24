@@ -110,6 +110,6 @@ public class CharacterStat
                 finalValue *= 1 + mod.Value;
             }
         }
-        return (float)Math.Round(finalValue, 4);
+        return (float)Math.Round(finalValue, 1);
     }
 }

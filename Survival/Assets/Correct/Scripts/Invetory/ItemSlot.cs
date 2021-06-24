@@ -4,13 +4,14 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 using Assets.Correct.Util;
+using TMPro;
 
 namespace Assets.Correct.Scripts.Invetory
 {
     public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
     {
-        [SerializeField] Image Image;
-
+        [SerializeField] Image image;
+        [SerializeField] TextMeshProUGUI amountText;
         public event Action<ItemSlot> OnPointerEnterEvent;
         public event Action<ItemSlot> OnPointerExitEvent;
         public event Action<ItemSlot> OnRigtClickEvent;
@@ -20,8 +21,9 @@ namespace Assets.Correct.Scripts.Invetory
         public event Action<ItemSlot> OnDropEvent;
 
         private Color normalColor = Color.white;
-        [SerializeField]
-        private Color disabledColor = new Color(1, 1, 1, 0.8F);
+       
+        private Color disabledColor = new Color(1, 1, 1, 0.2f);
+        [SerializeField] private Sprite disabledSprite = null;
 
         private Item _item;
         public Item Item
@@ -32,14 +34,28 @@ namespace Assets.Correct.Scripts.Invetory
                 _item = value;
                 if (_item == null)
                 {
-                    if(GameAssets.i.DisabledSlot != null)
-                    Image.sprite = GameAssets.i.DisabledSlot;
-                    Image.color = disabledColor;
+                    if (disabledSprite != null)
+                        image.sprite = disabledSprite;
+                    image.color = disabledColor;
                 }
                 else
                 {
-                    Image.sprite = _item.Icon;
-                    Image.color = normalColor;
+                    image.sprite = _item.Icon;
+                    image.color = normalColor;
+                }
+            }
+        }
+        private int _amount;
+        public int Amount
+        {
+            get { return _amount; }
+            set
+            {
+                _amount = value;
+                amountText.enabled = _item != null && _item.MaximumStacks > 1 && _amount > 1 ;
+                if (amountText.enabled)
+                {
+                    amountText.text = _amount.ToString();
                 }
             }
         }
@@ -55,11 +71,16 @@ namespace Assets.Correct.Scripts.Invetory
             }
         }
 
+
         protected virtual void OnValidate()
         {
-            if (Image == null)
-                Image = GetComponent<Image>();
+            if (image == null)
+                image = GetComponent<Image>();
 
+            if(amountText == null)
+            {
+                amountText = GetComponent<TextMeshProUGUI>();
+            }
         }
 
         public virtual bool CanReceiveItem(Item item)

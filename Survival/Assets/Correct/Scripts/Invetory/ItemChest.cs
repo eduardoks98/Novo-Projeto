@@ -7,6 +7,7 @@ namespace Assets.Correct.Scripts.Invetory
     {
 
         [SerializeField] Item item;
+        [SerializeField] int amount = 1;
         [SerializeField] Inventory inventory;
         [SerializeField] SpriteRenderer spriteRenderer;
         [SerializeField] Color emptyColor;
@@ -33,9 +34,23 @@ namespace Assets.Correct.Scripts.Invetory
             {
                 if (!isEmpty)
                 {
-                    inventory.AddItem(Instantiate(item));
-                    isEmpty = true;
-                    spriteRenderer.color = emptyColor;
+                    Item itemCopy = item.GetCopy();
+                    if (inventory.AddItem(itemCopy))
+                    {
+
+                        amount--;
+                        if (amount == 0)
+                        {
+
+                            isEmpty = true;
+                            spriteRenderer.color = emptyColor;
+                        }
+                    }
+                    else
+                    {
+                        itemCopy.Destroy();
+                    }
+
                 }
             }
         }

@@ -19,7 +19,7 @@ namespace Assets.Correct.Scripts.Invetory
         [SerializeField] ItemTooltip itemTooltip;
         [SerializeField] Image draggableItem;
 
-        private ItemSlot draggedSlot;
+        private ItemSlot dragItemSlot;
 
         private void OnValidate()
         {
@@ -99,7 +99,7 @@ namespace Assets.Correct.Scripts.Invetory
         {
             if (itemSlot.Item != null)
             {
-                draggedSlot = itemSlot;
+                dragItemSlot = itemSlot;
                 draggableItem.sprite = itemSlot.Item.Icon;
                 draggableItem.transform.position = Input.mousePosition;
                 draggableItem.enabled = true;
@@ -109,7 +109,7 @@ namespace Assets.Correct.Scripts.Invetory
 
         private void EndDrag(ItemSlot itemSlot)
         {
-            draggedSlot = null;
+            dragItemSlot = null;
             draggableItem.enabled = false;
         }
 
@@ -117,19 +117,25 @@ namespace Assets.Correct.Scripts.Invetory
         {
             if (draggableItem.enabled)
                 draggableItem.transform.position = Input.mousePosition;
-            
+
         }
 
         private void Drop(ItemSlot dropItemSlot)
         {
             //Se arrastar um item com os dois botoes o sistem entende que a funcao ja foi feita ao soltar um dos botoes e caso nao existir nenhum item send arrastado quando soltar algum botao do mouse simplesmente retorna pq nao tem nada pra trocar de slot
-            if (draggedSlot == null) { return; }
-            if (dropItemSlot.CanReceiveItem(draggedSlot.Item) && draggedSlot.CanReceiveItem(dropItemSlot.Item))
+            if (dragItemSlot == null) { return; }
+
+            if ()
             {
-                EquippableItem dragItem = draggedSlot.Item as EquippableItem;
+
+            }
+            else
+            if (dropItemSlot.CanReceiveItem(dragItemSlot.Item) && dragItemSlot.CanReceiveItem(dropItemSlot.Item))
+            {
+                EquippableItem dragItem = dragItemSlot.Item as EquippableItem;
                 EquippableItem dropItem = dropItemSlot.Item as EquippableItem;
 
-                if (draggedSlot is EquipmentSlot)
+                if (dragItemSlot is EquipmentSlot)
                 {
                     if (dragItem != null) dragItem.Unequip(this);
                     if (dropItem != null) dropItem.Equip(this);
@@ -141,9 +147,14 @@ namespace Assets.Correct.Scripts.Invetory
                     if (dropItem != null) dropItem.Unequip(this);
                 }
                 statPanel.UpdateStatValues();
-                Item draggedItem = draggedSlot.Item;
-                draggedSlot.Item = dropItemSlot.Item;
+                Item draggedItem = dragItemSlot.Item;
+                int draggedItemAmount = dragItemSlot.Amount;
+
+                dragItemSlot.Item = dropItemSlot.Item;
+                dragItemSlot.Amount = dropItemSlot.Amount;
+
                 dropItemSlot.Item = draggedItem;
+                dropItemSlot.Amount = draggedItemAmount;
             }
         }
 
