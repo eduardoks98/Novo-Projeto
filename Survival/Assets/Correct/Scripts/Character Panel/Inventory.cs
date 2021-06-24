@@ -23,13 +23,13 @@ namespace EKS.Panel
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
-                itemSlots[i].OnPointerEnterEvent += OnPointerEnterEvent;
-                itemSlots[i].OnPointerExitEvent += OnPointerExitEvent;
-                itemSlots[i].OnRigtClickEvent += OnRigtClickEvent;
-                itemSlots[i].OnBeginDragEvent += OnBeginDragEvent;
-                itemSlots[i].OnEndDragEvet += OnEndDragEvet;
-                itemSlots[i].OnDragEvent += OnDragEvent;
-                itemSlots[i].OnDropEvent += OnDropEvent;
+                itemSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
+                itemSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
+                itemSlots[i].OnRigtClickEvent += slot => OnRigtClickEvent(slot);
+                itemSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
+                itemSlots[i].OnEndDragEvet += slot => OnEndDragEvet(slot);
+                itemSlots[i].OnDragEvent += slot => OnDragEvent(slot);
+                itemSlots[i].OnDropEvent +=  slot =>OnDropEvent(slot);
             }
             SetStartingItems();
         }
@@ -44,17 +44,10 @@ namespace EKS.Panel
 
         public void SetStartingItems()
         {
-            int i = 0;
-            for (; i < startingItems.Count && i < itemSlots.Length; i++)
+            Clear();
+            for (int i = 0; i < startingItems.Count; i++)
             {
-                itemSlots[i].Item = startingItems[i].GetCopy();
-                itemSlots[i].Amount = 1;
-            }
-
-            for (; i < itemSlots.Length; i++)
-            {
-                itemSlots[i].Item = null;
-                itemSlots[i].Amount = 0;
+                AddItem(startingItems[i].GetCopy());
             }
         }
 

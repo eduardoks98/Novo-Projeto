@@ -4,12 +4,14 @@ using UnityEngine.UI;
 using EKS.Stat;
 using EKS.Panel;
 using EKS.Crafting;
+using EKS.Items;
 
 namespace EKS.Characters.Panel
 
 {
     public class Character : MonoBehaviour
     {
+        public int Health = 50;
 
         public CharacterStat Strength;
         public CharacterStat Vitality;
@@ -26,22 +28,19 @@ namespace EKS.Characters.Panel
 
         private BaseItemSlot dragItemSlot;
 
-        private void OnValidate()
+        private void Start()
         {
             if (itemTooltip == null)
             {
                 itemTooltip = FindObjectOfType<ItemTooltip>();
             }
-        }
-        private void Start()
-        {
-            statPanel.SetStats(Strength, Vitality, Intelligence, Agility);
+            statPanel.SetStats(Strength, Agility, Intelligence, Vitality);
             statPanel.UpdateStatValues();
 
             //Setup Events;
             //Right Click
-            inventory.OnRigtClickEvent += Equip;
-            equipmentPanel.OnRigtClickEvent += Unequip;
+            inventory.OnRigtClickEvent += InventoryRightClick;
+            equipmentPanel.OnRigtClickEvent += EquipmentPanelRightClick;
 
             //Pointer Enter
             inventory.OnPointerEnterEvent += ShowTooltip;
@@ -70,30 +69,37 @@ namespace EKS.Characters.Panel
             equipmentPanel.OnDropEvent += Drop;
         }
 
-        private void Equip(BaseItemSlot itemSlot)
+        private void InventoryRightClick(BaseItemSlot itemSlot)
         {
-            EquippableItem equippableItem = itemSlot.Item as EquippableItem;
-            if (equippableItem != null)
+            if(itemSlot.Item is EquippableItem)
             {
-                Equip(equippableItem);
+                Equip((EquippableItem)itemSlot.Item);
+            }else if(itemSlot.Item is UsableItem)
+            {
+                UsableItem usableItem = (UsableItem)itemSlot.Item;
+                usableItem.Use(this);
+
+                if (usableItem.IsConsumable)
+                {
+                    inventory.RemoveItem(usableItem);
+                    usableItem.Destroy();
+                }
             }
         }
 
-        private void Unequip(BaseItemSlot itemSlot)
+        private void EquipmentPanelRightClick(BaseItemSlot itemSlot)
         {
-            EquippableItem equippableItem = itemSlot.Item as EquippableItem;
-            if (equippableItem != null)
+            if (itemSlot.Item is EquippableItem)
             {
-                Unequip(equippableItem);
+                Unequip((EquippableItem)itemSlot.Item);
             }
         }
 
         private void ShowTooltip(BaseItemSlot itemSlot)
         {
-            EquippableItem equippableItem = itemSlot.Item as EquippableItem;
-            if (equippableItem != null)
+            if (itemSlot.Item != null)
             {
-                itemTooltip.ShowTooltip(equippableItem);
+                itemTooltip.ShowTooltip(itemSlot.Item);
             }
         }
 
@@ -117,7 +123,7 @@ namespace EKS.Characters.Panel
         private void EndDrag(BaseItemSlot itemSlot)
         {
             dragItemSlot = null;
-            draggableItem.gameObject.SetActive(false);
+            draggableItem.enabled = false;
         }
 
         private void Drag(BaseItemSlot itemSlot)
@@ -201,12 +207,17 @@ namespace EKS.Characters.Panel
 
         public void Unequip(EquippableItem item)
         {
-            if (!inventory.IsFull() && equipmentPanel.RemoveItem(item))
+            if (!inventory.CanAddItem(item) && equipmentPanel.RemoveItem(item))
             {
                 inventory.AddItem(item);
                 item.Unequip(this);
                 statPanel.UpdateStatValues();
             }
+        }
+
+        public void UpdateStatValues()
+        {
+            statPanel.UpdateStatValues();
         }
     }
 }

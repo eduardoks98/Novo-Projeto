@@ -1,9 +1,10 @@
 ﻿using EKS.Characters.Panel;
+using EKS.Items.Equipment;
 using EKS.Stat;
 using UnityEngine;
-
-namespace EKS.Items
+namespace EKS.Items.Equipment
 {
+
     public enum EquipmentType
     {
         Helmet,
@@ -15,7 +16,11 @@ namespace EKS.Items
         Accessory1,
         Accessory2
     }
-    [CreateAssetMenu]
+}
+namespace EKS.Items
+{
+
+    [CreateAssetMenu(menuName = "Items/Equippable Item")]
     public class EquippableItem : Item
     {
         public int StrengthBonus;
@@ -68,5 +73,49 @@ namespace EKS.Items
             c.Vitality.RemoveAllModifiersFromSource(this);
         }
 
+        public override string GetItemType()
+        {
+            return EquipmentType.ToString();
+        }
+
+        public override string GetDescription()
+        {
+
+            sb.Length = 0;
+            AddStat(StrengthBonus, "Strength");
+            AddStat(AgilityBonus, "Agility");
+            AddStat(IntelligenceBonus, "Intelligence");
+            AddStat(VitalityBonus, "Vitality");
+
+
+            AddStat(StrengthPercentBonus, "Strength", isPercent: true);
+            AddStat(AgilityPercentBonus, "Agility", isPercent: true);
+            AddStat(IntelligencePercentBonus, "Intelligence", isPercent: true);
+            AddStat(VitalityPercentBonus, "Vitality", isPercent: true);
+            return sb.ToString();
+        }
+        public void AddStat(float value, string statName, bool isPercent = false)
+        {
+            if (value != 0)
+            {
+                if (sb.Length > 0)
+                    sb.AppendLine();
+
+                if (value > 0)
+                    sb.Append("+");
+
+                if (isPercent)
+                {
+                    sb.Append(value * 100);
+                    sb.Append("% ");
+                }
+                else
+                {
+                    sb.Append(value);
+                    sb.Append(" ");
+                }
+                sb.Append(statName);
+            }
+        }
     }
 }

@@ -43,25 +43,7 @@ namespace EKS.Crafting
 
 		public void OnCraftButtonClick()
 		{
-			if (craftingRecipe != null && ItemContainer != null)
-			{
-                if (craftingRecipe.CanCraft(ItemContainer))
-                {
-                    if (!ItemContainer.IsFull())
-                    {
-						craftingRecipe.Craft(ItemContainer);
-                    }
-                    else
-                    {
-						Debug.LogError("inventory is full");
-                    }
-                }
-                else
-                {
-					Debug.LogError("You dont have the required materials");
-
-				}
-			}
+			craftingRecipe.Craft(ItemContainer);
 		}
 
 		private void SetCraftingRecipe(CraftingRecipe newCraftingRecipe)

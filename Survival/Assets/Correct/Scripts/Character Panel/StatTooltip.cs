@@ -73,7 +73,7 @@ namespace EKS.Panel
                     sb.Append("%");
                 }
 
-                EquippableItem item = mod.Source as EquippableItem;
+                Item item = mod.Source as Item;
 
                 if (item != null)
                 {
@@ -82,7 +82,7 @@ namespace EKS.Panel
                 }
                 else
                 {
-                    Debug.LogError("Modifier is not EquippableItem!");
+                    Debug.LogError("Modifier is not Item!");
                 }
             }
             return sb.ToString();

@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using System.Text;
 
 namespace EKS.Items
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Items/Item")]
     public class Item : ScriptableObject
     {
         [SerializeField] string id;
@@ -13,6 +14,7 @@ namespace EKS.Items
         [Range(1,999)]
         public int MaximumStacks = 1;
         public Sprite Icon;
+        protected static readonly StringBuilder sb = new StringBuilder();
 
         private void OnValidate()
         {
@@ -28,6 +30,16 @@ namespace EKS.Items
         public virtual void Destroy()
         {
 
+        }
+
+        public virtual string GetItemType()
+        {
+            return "";
+        }
+
+        public virtual string GetDescription()
+        {
+            return "";
         }
     }
 }

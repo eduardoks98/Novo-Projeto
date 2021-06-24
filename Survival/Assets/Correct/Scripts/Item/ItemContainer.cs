@@ -10,11 +10,33 @@ namespace EKS.Items
         [SerializeField]protected ItemSlot[] itemSlots;
 
 
+        public virtual bool CanAddItem(Item item, int amount = 1)
+        {
+            int freeSpaces = 0;
+
+            foreach (ItemSlot itemSlot in itemSlots)
+            {
+                if (itemSlot.Item == null || itemSlot.Item.ID == item.ID)
+                    freeSpaces += item.MaximumStacks - itemSlot.Amount;
+            }
+            return freeSpaces > amount;
+        }
         public virtual bool AddItem(Item item)
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
-                if (itemSlots[i].Item == null || itemSlots[i].CanAddStack(item))
+                if (itemSlots[i].CanAddStack(item))
+                {
+
+                    itemSlots[i].Item = item;
+                    itemSlots[i].Amount++;
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                if (itemSlots[i].Item == null)
                 {
 
                     itemSlots[i].Item = item;
@@ -52,17 +74,6 @@ namespace EKS.Items
             return null;
         }
 
-        public virtual bool IsFull()
-        {
-            for (int i = 0; i < itemSlots.Length; i++)
-            {
-                if (itemSlots[i].Item == null)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
         public bool ContainsItem(Item item)
         {
 
@@ -83,21 +94,20 @@ namespace EKS.Items
             {
                 if (itemSlots[i].Item.ID == itemID)
                 {
-                    number++;
+                    number += itemSlots[i].Amount;
                 }
             }
 
             return number;
         }
 
-        public bool CanAddItem(Item item, int amount = 1)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                itemSlots[i].Item = null;
+            }
         }
     }
 }

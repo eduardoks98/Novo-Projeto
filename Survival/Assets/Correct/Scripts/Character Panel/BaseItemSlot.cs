@@ -18,6 +18,8 @@ namespace EKS.Characters.Panel
         protected Color normalColor = Color.white;
         protected Color disabledColor = new Color(1, 1, 1, 0.2f);
 
+        public bool isPointerOver;
+
         [SerializeField] private Sprite disabledSprite = null;
 
         protected Item _item;
@@ -27,6 +29,8 @@ namespace EKS.Characters.Panel
             {
 
                 _item = value;
+                if (_item == null && Amount != 0) Amount = 0;
+
                 if (_item == null)
                 {
                     if (disabledSprite != null)
@@ -37,6 +41,12 @@ namespace EKS.Characters.Panel
                 {
                     image.sprite = _item.Icon;
                     image.color = normalColor;
+                }
+
+                if (isPointerOver)
+                {
+                    OnPointerExit(null);
+                    OnPointerEnter(null);
                 }
             }
         }
@@ -70,6 +80,13 @@ namespace EKS.Characters.Panel
                 amountText = GetComponent<TextMeshProUGUI>();
             }
         }
+
+        protected virtual void OnDisable()
+        {
+
+            if (isPointerOver)
+                OnPointerExit(null);
+        }
         public virtual bool CanAddStack(Item item, int amount = 1)
         {
             return Item != null && Item.ID == Item.ID;
@@ -92,6 +109,7 @@ namespace EKS.Characters.Panel
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            isPointerOver = true;
             if (OnPointerEnterEvent != null)
             {
                 OnPointerEnterEvent(this);
@@ -100,6 +118,8 @@ namespace EKS.Characters.Panel
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            isPointerOver = false;
+
             if (OnPointerExitEvent != null)
             {
                 OnPointerExitEvent(this);

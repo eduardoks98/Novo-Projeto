@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EKS.Characters.Panel;
+using EKS.Items;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -19,13 +21,13 @@ namespace EKS.Panel
         {
             for (int i = 0; i < equipmentSlots.Length; i++)
             {
-                equipmentSlots[i].OnPointerEnterEvent += OnPointerEnterEvent;
-                equipmentSlots[i].OnPointerExitEvent += OnPointerExitEvent;
-                equipmentSlots[i].OnRigtClickEvent += OnRigtClickEvent;
-                equipmentSlots[i].OnBeginDragEvent += OnBeginDragEvent;
-                equipmentSlots[i].OnEndDragEvet += OnEndDragEvet;
-                equipmentSlots[i].OnDragEvent += OnDragEvent;
-                equipmentSlots[i].OnDropEvent += OnDropEvent;
+                equipmentSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
+                equipmentSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
+                equipmentSlots[i].OnRigtClickEvent +=  slot =>OnRigtClickEvent(slot);
+                equipmentSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
+                equipmentSlots[i].OnEndDragEvet += slot => OnEndDragEvet(slot);
+                equipmentSlots[i].OnDragEvent += slot => OnDragEvent(slot);
+                equipmentSlots[i].OnDropEvent += slot => OnDropEvent(slot);
             }
         }
         public void OnValidate()

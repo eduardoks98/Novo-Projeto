@@ -1,5 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿
+
+using EKS.Items;
+using EKS.Items.Equipment;
 
 namespace EKS.Panel
 {

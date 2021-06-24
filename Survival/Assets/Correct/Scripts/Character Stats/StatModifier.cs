@@ -35,4 +35,3 @@ namespace EKS.Stat
         public StatModifier(float value, StatModType type, object source) : this(value, type, (int)type, source) { }
     }
 }
-}
