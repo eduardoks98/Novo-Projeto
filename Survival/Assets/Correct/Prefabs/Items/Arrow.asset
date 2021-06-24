@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a4c29190cfbbe47a52eeb52a695ef5, type: 3}
   m_Name: Arrow
   m_EditorClassIdentifier: 
+  id: 4bb637e41aff0b94888152b39fadb1d0
   ItemName: Arrow
+  MaximumStacks: 999
   Icon: {fileID: 8734408466087547105, guid: d9a3e9555ca05a74b9173d15e4a3e3f7, type: 3}
   StrengthBonus: 21
   AgilityBonus: 15

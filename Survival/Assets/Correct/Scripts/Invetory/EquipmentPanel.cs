@@ -8,13 +8,13 @@ namespace Assets.Correct.Scripts.Invetory
     {
         [SerializeField] Transform equipmentParent;
         [SerializeField] EquipmentSlot[] equipmentSlots;
-        public event Action<ItemSlot> OnPointerEnterEvent;
-        public event Action<ItemSlot> OnPointerExitEvent;
-        public event Action<ItemSlot> OnRigtClickEvent;
-        public event Action<ItemSlot> OnBeginDragEvent;
-        public event Action<ItemSlot> OnEndDragEvet;
-        public event Action<ItemSlot> OnDragEvent;
-        public event Action<ItemSlot> OnDropEvent;
+        public event Action<BaseItemSlot> OnPointerEnterEvent;
+        public event Action<BaseItemSlot> OnPointerExitEvent;
+        public event Action<BaseItemSlot> OnRigtClickEvent;
+        public event Action<BaseItemSlot> OnBeginDragEvent;
+        public event Action<BaseItemSlot> OnEndDragEvet;
+        public event Action<BaseItemSlot> OnDragEvent;
+        public event Action<BaseItemSlot> OnDropEvent;
         private void Start()
         {
             for (int i = 0; i < equipmentSlots.Length; i++)
