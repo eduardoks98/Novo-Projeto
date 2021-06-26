@@ -71,10 +71,11 @@ namespace EKS.Characters.Panel
 
         private void InventoryRightClick(BaseItemSlot itemSlot)
         {
-            if(itemSlot.Item is EquippableItem)
+            if (itemSlot.Item is EquippableItem)
             {
                 Equip((EquippableItem)itemSlot.Item);
-            }else if(itemSlot.Item is UsableItem)
+            }
+            else if (itemSlot.Item is UsableItem)
             {
                 UsableItem usableItem = (UsableItem)itemSlot.Item;
                 usableItem.Use(this);
@@ -105,7 +106,8 @@ namespace EKS.Characters.Panel
 
         private void HideTooltip(BaseItemSlot itemSlot)
         {
-            itemTooltip.HideTooltip();
+            if (itemTooltip.gameObject.activeSelf)
+                itemTooltip.HideTooltip();
         }
 
         private void BeginDrag(BaseItemSlot itemSlot)
@@ -115,54 +117,80 @@ namespace EKS.Characters.Panel
                 dragItemSlot = itemSlot;
                 draggableItem.sprite = itemSlot.Item.Icon;
                 draggableItem.transform.position = Input.mousePosition;
-                draggableItem.enabled = true;
+                draggableItem.gameObject.SetActive(true);
 
             }
         }
-
-        private void EndDrag(BaseItemSlot itemSlot)
-        {
-            dragItemSlot = null;
-            draggableItem.enabled = false;
-        }
-
         private void Drag(BaseItemSlot itemSlot)
         {
-            if (draggableItem.enabled)
+            if (draggableItem != null)
                 draggableItem.transform.position = Input.mousePosition;
 
         }
+        private void EndDrag(BaseItemSlot itemSlot)
+        {
+            dragItemSlot = null;
+            draggableItem.gameObject.SetActive(false);
+        }
+
+
 
         private void Drop(BaseItemSlot dropItemSlot)
         {
             //Se arrastar um item com os dois botoes o sistem entende que a funcao ja foi feita ao soltar um dos botoes e caso nao existir nenhum item send arrastado quando soltar algum botao do mouse simplesmente retorna pq nao tem nada pra trocar de slot
-            if (dragItemSlot == null) { return; }
+            if (dragItemSlot == null) {
+                Debug.Log("DRAG SLOT TA NULL!");
+                return; }
+
             if (dropItemSlot.CanAddStack(dragItemSlot.Item))
             {
+                Debug.Log("add stack!!");
+
                 AddStacks(dropItemSlot);
             }
             else if (dropItemSlot.CanReceiveItem(dragItemSlot.Item) && dragItemSlot.CanReceiveItem(dropItemSlot.Item))
             {
+                Debug.Log("Swap items");
+
                 SwapItems(dropItemSlot);
             }
-        }
+            else
+            {
+                Debug.Log("nenhum nem outro");
 
+            }
+
+            Debug.Log("----------------------");
+
+        }
+        private void AddStacks(BaseItemSlot dropItemSlot)
+        {
+            int numAddableStacks = dropItemSlot.Item.MaximumStacks - dropItemSlot.Amount;
+            int stacksToAdd = Mathf.Min(numAddableStacks, dragItemSlot.Amount);
+
+            dropItemSlot.Amount += stacksToAdd;
+            dragItemSlot.Amount -= stacksToAdd;
+        }
         private void SwapItems(BaseItemSlot dropItemSlot)
         {
             EquippableItem dragEquipItem = dragItemSlot.Item as EquippableItem;
             EquippableItem dropEquipItem = dropItemSlot.Item as EquippableItem;
 
-            if (dragItemSlot is EquipmentSlot)
-            {
-                if (dragEquipItem != null) dragEquipItem.Unequip(this);
-                if (dropEquipItem != null) dropEquipItem.Equip(this);
-            }
             if (dropItemSlot is EquipmentSlot)
             {
+                Debug.Log("DROP ITEM É EQUIPAVEL!");
                 if (dragEquipItem != null) dragEquipItem.Equip(this);
                 if (dropEquipItem != null) dropEquipItem.Unequip(this);
             }
+            if (dragItemSlot is EquipmentSlot)
+            {
+                Debug.Log("DRAG ITEM É EQUIPAVEL!");
+                Debug.Log(dragEquipItem.ItemName);
+                if (dragEquipItem != null) dragEquipItem.Unequip(this);
+                if (dropEquipItem != null) dropEquipItem.Equip(this);
+            }
             statPanel.UpdateStatValues();
+
             Item draggedItem = dragItemSlot.Item;
             int draggedItemAmount = dragItemSlot.Amount;
 
@@ -173,19 +201,15 @@ namespace EKS.Characters.Panel
             dropItemSlot.Amount = draggedItemAmount;
         }
 
-        private void AddStacks(BaseItemSlot dropItemSlot)
-        {
-            int numAddableStacks = dropItemSlot.Item.MaximumStacks - dropItemSlot.Amount;
-            int stacksToAdd = Mathf.Min(numAddableStacks, dragItemSlot.Amount);
 
-            dropItemSlot.Amount += stacksToAdd;
-            dragItemSlot.Amount -= stacksToAdd;
-        }
 
         public void Equip(EquippableItem item)
         {
+            Debug.Log("EQUIPU!");
             if (inventory.RemoveItem(item))
             {
+                Debug.Log("REMOVEU ITEM INVETARIO");
+
                 EquippableItem previousItem;
                 if (equipmentPanel.AddItem(item, out previousItem))
                 {
@@ -200,6 +224,7 @@ namespace EKS.Characters.Panel
                 }
                 else
                 {
+                    Debug.Log("ADD ITEM");
                     inventory.AddItem(item);
                 }
             }
@@ -207,17 +232,53 @@ namespace EKS.Characters.Panel
 
         public void Unequip(EquippableItem item)
         {
-            if (!inventory.CanAddItem(item) && equipmentPanel.RemoveItem(item))
+            Debug.Log("DESEQUIPU!");
+
+            if (inventory.CanAddItem(item) && equipmentPanel.RemoveItem(item))
             {
-                inventory.AddItem(item);
+                Debug.Log("REMOVEU EQUIP PANEL E ADD NO INVETARIO!!");
                 item.Unequip(this);
                 statPanel.UpdateStatValues();
+                inventory.AddItem(item);
             }
         }
 
         public void UpdateStatValues()
         {
             statPanel.UpdateStatValues();
+        }
+        private ItemContainer openItemContainer;
+        private void TransferToItemContainer(BaseItemSlot itemSlot)
+        {
+
+        }
+        private void TransferToInventory(BaseItemSlot itemSlot)
+        {
+
+        }
+        public void OpenItemContainer(ItemContainer itemContainer)
+        {
+            inventory.OnRigtClickEvent -= InventoryRightClick;
+            inventory.OnRigtClickEvent += TransferToItemContainer;
+
+            itemContainer.OnRigtClickEvent += TransferToItemContainer;
+
+            itemContainer.OnPointerEnterEvent += ShowTooltip;
+            itemContainer.OnPointerExitEvent += HideTooltip;
+            itemContainer.OnBeginDragEvent += BeginDrag;
+            itemContainer.OnEndDragEvet += EndDrag;
+            itemContainer.OnDragEvent += Drag;
+            itemContainer.OnDropEvent += Drop;
+        }
+
+        public void CloseItemContainer(ItemContainer itemContainer)
+        {
+            itemContainer.OnPointerEnterEvent -= ShowTooltip;
+            itemContainer.OnPointerExitEvent -= HideTooltip;
+            itemContainer.OnBeginDragEvent -= BeginDrag;
+            itemContainer.OnEndDragEvet -= EndDrag;
+            itemContainer.OnDragEvent -= Drag;
+            itemContainer.OnDropEvent -= Drop;
         }
     }
 }

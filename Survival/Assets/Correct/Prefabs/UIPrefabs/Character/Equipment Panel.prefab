@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664104598193657}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 3
 --- !u!1 &2726664104653327314
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664104653327319}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 6
 --- !u!1 &2726664105187061770
@@ -274,6 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664105187061775}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 4
 --- !u!1 &2726664105254876857
@@ -366,6 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664105254876858}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 1
 --- !u!1 &2726664105387836658
@@ -458,6 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664105387836663}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 7
 --- !u!1 &2726664105536016982
@@ -550,6 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664105536017003}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 0
 --- !u!1 &2726664105641973764
@@ -642,6 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664105641973785}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 7
 --- !u!1 &2726664105771382391
@@ -808,6 +815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664105852415538}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 5
 --- !u!1 &2726664106036785129
@@ -900,6 +908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664106036785130}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 2
 --- !u!1 &2726664106093322055
@@ -992,6 +1001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664106093322072}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 3
 --- !u!1 &2726664106250599957
@@ -1084,6 +1094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664106250599958}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 2
 --- !u!1 &2726664106678658735
@@ -1176,5 +1187,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2726664106678658720}
   amountText: {fileID: 0}
+  isPointerOver: 0
   disabledSprite: {fileID: 21300000, guid: bc628cfc1c623894fab43b5ab7355f98, type: 3}
   EquipmentType: 6

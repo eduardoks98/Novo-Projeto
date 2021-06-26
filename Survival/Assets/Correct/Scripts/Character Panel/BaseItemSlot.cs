@@ -25,9 +25,9 @@ namespace EKS.Characters.Panel
         protected Item _item;
         public Item Item
         {
-            get => _item; set
+            get => _item; 
+            set
             {
-
                 _item = value;
                 if (_item == null && Amount != 0) Amount = 0;
 
@@ -89,7 +89,7 @@ namespace EKS.Characters.Panel
         }
         public virtual bool CanAddStack(Item item, int amount = 1)
         {
-            return Item != null && Item.ID == Item.ID;
+            return Item != null && Item.ID == item.ID;
         }
         public virtual bool CanReceiveItem(Item item)
         {

@@ -1,4 +1,5 @@
 ﻿
+using EKS.Characters.Panel;
 using EKS.Panel;
 using System;
 using UnityEngine;
@@ -9,7 +10,31 @@ namespace EKS.Items
     {
         [SerializeField]protected ItemSlot[] itemSlots;
 
+        public event Action<BaseItemSlot> OnPointerEnterEvent;
+        public event Action<BaseItemSlot> OnPointerExitEvent;
+        public event Action<BaseItemSlot> OnRigtClickEvent;
+        public event Action<BaseItemSlot> OnBeginDragEvent;
+        public event Action<BaseItemSlot> OnEndDragEvet;
+        public event Action<BaseItemSlot> OnDragEvent;
+        public event Action<BaseItemSlot> OnDropEvent;
 
+        protected virtual void OnValidate()
+        {
+            itemSlots = GetComponentsInChildren<ItemSlot>();
+        }
+        protected virtual void Start()
+        {
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                itemSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
+                itemSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
+                itemSlots[i].OnRigtClickEvent += slot => OnRigtClickEvent(slot);
+                itemSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
+                itemSlots[i].OnEndDragEvet += slot => OnEndDragEvet(slot);
+                itemSlots[i].OnDragEvent += slot => OnDragEvent(slot);
+                itemSlots[i].OnDropEvent += slot => OnDropEvent(slot);
+            }
+        }
         public virtual bool CanAddItem(Item item, int amount = 1)
         {
             int freeSpaces = 0;
@@ -19,7 +44,7 @@ namespace EKS.Items
                 if (itemSlot.Item == null || itemSlot.Item.ID == item.ID)
                     freeSpaces += item.MaximumStacks - itemSlot.Amount;
             }
-            return freeSpaces > amount;
+            return freeSpaces >= amount;
         }
         public virtual bool AddItem(Item item)
         {
@@ -92,7 +117,8 @@ namespace EKS.Items
             int number = 0;
             for (int i = 0; i < itemSlots.Length; i++)
             {
-                if (itemSlots[i].Item.ID == itemID)
+                Item item = itemSlots[i].Item;
+                if (item != null && item.ID == itemID)
                 {
                     number += itemSlots[i].Amount;
                 }
@@ -107,6 +133,7 @@ namespace EKS.Items
             for (int i = 0; i < itemSlots.Length; i++)
             {
                 itemSlots[i].Item = null;
+                itemSlots[i].Amount = 0;
             }
         }
     }
