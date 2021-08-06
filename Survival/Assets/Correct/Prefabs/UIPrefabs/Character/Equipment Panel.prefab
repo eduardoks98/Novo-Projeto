@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentParent: {fileID: 2726664105771382390}
-  equipmentSlots:
+  EquipmentSlots:
   - {fileID: 2726664104653327316}
   - {fileID: 2726664105536017000}
   - {fileID: 2726664105641973766}

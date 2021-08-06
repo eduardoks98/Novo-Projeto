@@ -2,13 +2,14 @@
 using EKS.Characters.Panel;
 using EKS.Panel;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace EKS.Items
 {
     public class ItemContainer : MonoBehaviour, IItemContainer
     {
-        [SerializeField]protected ItemSlot[] itemSlots;
+        public List<ItemSlot> ItemSlots;
 
         public event Action<BaseItemSlot> OnPointerEnterEvent;
         public event Action<BaseItemSlot> OnPointerExitEvent;
@@ -20,52 +21,60 @@ namespace EKS.Items
 
         protected virtual void OnValidate()
         {
-            itemSlots = GetComponentsInChildren<ItemSlot>(includeInactive:true);
+            GetComponentsInChildren<ItemSlot>(includeInactive:true, result:ItemSlots);
         }
-        protected virtual void Start()
+        protected virtual void Awake()
         {
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < ItemSlots.Count; i++)
             {
-                itemSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
-                itemSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
-                itemSlots[i].OnRigtClickEvent += slot => OnRigtClickEvent(slot);
-                itemSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
-                itemSlots[i].OnEndDragEvet += slot => OnEndDragEvet(slot);
-                itemSlots[i].OnDragEvent += slot => OnDragEvent(slot);
-                itemSlots[i].OnDropEvent += slot => OnDropEvent(slot);
+                AddListenerToSlot(i);
             }
+        }
+
+        public virtual void AddListenerToSlot(int i)
+        {
+            ItemSlots[i].OnPointerEnterEvent += slot => { if (OnPointerEnterEvent != null) OnPointerEnterEvent(slot); };
+            ItemSlots[i].OnPointerExitEvent += slot => { if (OnPointerExitEvent != null) OnPointerExitEvent(slot); };
+            ItemSlots[i].OnRigtClickEvent += slot => { if (OnRigtClickEvent != null) OnRigtClickEvent(slot); };
+            ItemSlots[i].OnBeginDragEvent += slot => { if (OnBeginDragEvent != null) OnBeginDragEvent(slot); };
+            ItemSlots[i].OnEndDragEvet += slot => { if (OnEndDragEvet != null) OnEndDragEvet(slot); };
+            ItemSlots[i].OnDragEvent += slot => { if (OnDragEvent != null) OnDragEvent(slot); };
+            ItemSlots[i].OnDropEvent += slot => { if (OnDropEvent != null) OnDropEvent(slot); };
         }
         public virtual bool CanAddItem(Item item, int amount = 1)
         {
             int freeSpaces = 0;
 
-            foreach (ItemSlot itemSlot in itemSlots)
+            foreach (ItemSlot itemSlot in ItemSlots)
             {
                 if (itemSlot.Item == null || itemSlot.Item.ID == item.ID)
                     freeSpaces += item.MaximumStacks - itemSlot.Amount;
             }
+
             return freeSpaces >= amount;
         }
         public virtual bool AddItem(Item item)
         {
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < ItemSlots.Count; i++)
             {
-                if (itemSlots[i].CanAddStack(item))
+                if (ItemSlots[i].CanAddStack(item))
                 {
 
-                    itemSlots[i].Item = item;
-                    itemSlots[i].Amount++;
+                    ItemSlots[i].Item = item;
+                    ItemSlots[i].Amount++;
+                    AddListenerToSlot(i);
                     return true;
                 }
             }
 
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < ItemSlots.Count; i++)
             {
-                if (itemSlots[i].Item == null)
+                if (ItemSlots[i].Item == null)
                 {
 
-                    itemSlots[i].Item = item;
-                    itemSlots[i].Amount++;
+                    ItemSlots[i].Item = item;
+                    ItemSlots[i].Amount++;
+                    AddListenerToSlot(i);
                     return true;
                 }
             }
@@ -73,11 +82,11 @@ namespace EKS.Items
         }
         public virtual bool RemoveItem(Item item)
         {
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < ItemSlots.Count; i++)
             {
-                if (itemSlots[i].Item == item)
+                if (ItemSlots[i].Item == item)
                 {
-                    itemSlots[i].Amount--;
+                    ItemSlots[i].Amount--;
                     return true;
                 }
             }
@@ -86,13 +95,13 @@ namespace EKS.Items
 
         public virtual Item RemoveItem(string itemID)
         {
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < ItemSlots.Count; i++)
             {
-                Item item = itemSlots[i].Item;
+                Item item = ItemSlots[i].Item;
                 if (item != null && item.ID == itemID)
                 {
 
-                    itemSlots[i].Amount--;
+                    ItemSlots[i].Amount--;
                     return item;
                 }
             }
@@ -102,9 +111,9 @@ namespace EKS.Items
         public bool ContainsItem(Item item)
         {
 
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < ItemSlots.Count; i++)
             {
-                if (itemSlots[i].Item == item)
+                if (ItemSlots[i].Item == item)
                 {
                     return true;
                 }
@@ -115,12 +124,12 @@ namespace EKS.Items
         public virtual int ItemCount(string itemID)
         {
             int number = 0;
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < ItemSlots.Count; i++)
             {
-                Item item = itemSlots[i].Item;
+                Item item = ItemSlots[i].Item;
                 if (item != null && item.ID == itemID)
                 {
-                    number += itemSlots[i].Amount;
+                    number += ItemSlots[i].Amount;
                 }
             }
 
@@ -130,10 +139,10 @@ namespace EKS.Items
 
         public void Clear()
         {
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < ItemSlots.Count; i++)
             {
-                itemSlots[i].Item = null;
-                itemSlots[i].Amount = 0;
+                ItemSlots[i].Item = null;
+                ItemSlots[i].Amount = 0;
             }
         }
     }

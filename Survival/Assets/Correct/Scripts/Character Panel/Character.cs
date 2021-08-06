@@ -19,14 +19,16 @@ namespace EKS.Characters.Panel
         public CharacterStat Agility;
 
 
-        [SerializeField] Inventory inventory;
-        [SerializeField] EquipmentPanel equipmentPanel;
+        public InfiniteInventory Inventory;
+        public EquipmentPanel EquipmentPanel;
+
         [SerializeField] CraftingWindow craftingWindow;
         [SerializeField] StatPanel statPanel;
         [SerializeField] ItemTooltip itemTooltip;
         [SerializeField] Image draggableItem;
         [SerializeField] DropItemArea dropItemArea;
         [SerializeField] QuestionDialog questionDialog;
+        [SerializeField] ItemSaveManager itemSaveManager;
 
         private BaseItemSlot dragItemSlot;
 
@@ -41,36 +43,45 @@ namespace EKS.Characters.Panel
 
             //Setup Events;
             //Right Click
-            inventory.OnRigtClickEvent += InventoryRightClick;
-            equipmentPanel.OnRigtClickEvent += EquipmentPanelRightClick;
+            Inventory.OnRigtClickEvent += InventoryRightClick;
+            EquipmentPanel.OnRigtClickEvent += EquipmentPanelRightClick;
 
             //Pointer Enter
-            inventory.OnPointerEnterEvent += ShowTooltip;
-            equipmentPanel.OnPointerEnterEvent += ShowTooltip;
+            Inventory.OnPointerEnterEvent += ShowTooltip;
+            EquipmentPanel.OnPointerEnterEvent += ShowTooltip;
             craftingWindow.OnPointerEnterEvent += ShowTooltip;
 
             //Pointer Exit
-            inventory.OnPointerExitEvent += HideTooltip;
-            equipmentPanel.OnPointerExitEvent += HideTooltip;
+            Inventory.OnPointerExitEvent += HideTooltip;
+            EquipmentPanel.OnPointerExitEvent += HideTooltip;
              craftingWindow.OnPointerExitEvent += HideTooltip;
 
             //Begin Drag
-            inventory.OnBeginDragEvent += BeginDrag;
-            equipmentPanel.OnBeginDragEvent += BeginDrag;
+            Inventory.OnBeginDragEvent += BeginDrag;
+            EquipmentPanel.OnBeginDragEvent += BeginDrag;
 
             //End Drag
-            inventory.OnEndDragEvet += EndDrag;
-            equipmentPanel.OnEndDragEvet += EndDrag;
+            Inventory.OnEndDragEvet += EndDrag;
+            EquipmentPanel.OnEndDragEvet += EndDrag;
 
             //Drag
-            inventory.OnDragEvent += Drag;
-            equipmentPanel.OnDragEvent += Drag;
+            Inventory.OnDragEvent += Drag;
+            EquipmentPanel.OnDragEvent += Drag;
 
             //Drop
-            inventory.OnDropEvent += Drop;
-            equipmentPanel.OnDropEvent += Drop;
+            Inventory.OnDropEvent += Drop;
+            EquipmentPanel.OnDropEvent += Drop;
             dropItemArea.OnDropEvent += DropItemOutSideUI;
 
+            itemSaveManager.LoadEquipment(this);
+            itemSaveManager.LoadInventory(this);
+
+        }
+
+        private void OnDestroy()
+        {
+            itemSaveManager.SaveEquipment(this);
+            itemSaveManager.SaveInventory(this);
         }
         private void InventoryRightClick(BaseItemSlot itemSlot)
         {
@@ -85,7 +96,7 @@ namespace EKS.Characters.Panel
 
                 if (usableItem.IsConsumable)
                 {
-                    inventory.RemoveItem(usableItem);
+                    Inventory.RemoveItem(usableItem);
                     usableItem.Destroy();
                 }
             }
@@ -214,16 +225,16 @@ namespace EKS.Characters.Panel
         public void Equip(EquippableItem item)
         {
             Debug.Log("EQUIPU!");
-            if (inventory.RemoveItem(item))
+            if (Inventory.RemoveItem(item))
             {
                 Debug.Log("REMOVEU ITEM INVETARIO");
 
                 EquippableItem previousItem;
-                if (equipmentPanel.AddItem(item, out previousItem))
+                if (EquipmentPanel.AddItem(item, out previousItem))
                 {
                     if (previousItem != null)
                     {
-                        inventory.AddItem(previousItem);
+                        Inventory.AddItem(previousItem);
                         previousItem.Unequip(this);
                         statPanel.UpdateStatValues();
                     }
@@ -233,7 +244,7 @@ namespace EKS.Characters.Panel
                 else
                 {
                     Debug.Log("ADD ITEM");
-                    inventory.AddItem(item);
+                    Inventory.AddItem(item);
                 }
             }
         }
@@ -241,12 +252,12 @@ namespace EKS.Characters.Panel
         {
             Debug.Log("DESEQUIPU!");
 
-            if (inventory.CanAddItem(item) && equipmentPanel.RemoveItem(item))
+            if (Inventory.CanAddItem(item) && EquipmentPanel.RemoveItem(item))
             {
                 Debug.Log("REMOVEU EQUIP PANEL E ADD NO INVETARIO!!");
                 item.Unequip(this);
                 statPanel.UpdateStatValues();
-                inventory.AddItem(item);
+                Inventory.AddItem(item);
             }
         }
         public void UpdateStatValues()
@@ -257,26 +268,29 @@ namespace EKS.Characters.Panel
         private void TransferToItemContainer(BaseItemSlot itemSlot)
         {
             Item item = itemSlot.Item;
-            if (item != null && openItemContainer.CanAddItem(item)) ;
+            if (item == null) return;
+            if (openItemContainer.CanAddItem(item))
             {
-                inventory.RemoveItem(item);
+                Inventory.RemoveItem(item);
                 openItemContainer.AddItem(item);
             }
         }
         private void TransferToInventory(BaseItemSlot itemSlot)
         {
             Item item = itemSlot.Item;
-            if (item != null && inventory.CanAddItem(item)) ;
+            Debug.Log(item);
+            if (item == null) return;
+            if (Inventory.CanAddItem(item))
             {
                 openItemContainer.RemoveItem(item);
-                inventory.AddItem(item);
+                Inventory.AddItem(item);
             }
         }
         public void OpenItemContainer(ItemContainer itemContainer)
         {
             openItemContainer = itemContainer;
-            inventory.OnRigtClickEvent -= InventoryRightClick;
-            inventory.OnRigtClickEvent += TransferToItemContainer;
+            Inventory.OnRigtClickEvent -= InventoryRightClick;
+            Inventory.OnRigtClickEvent += TransferToItemContainer;
             itemContainer.OnRigtClickEvent += TransferToInventory;
 
             itemContainer.OnPointerEnterEvent += ShowTooltip;
@@ -289,8 +303,8 @@ namespace EKS.Characters.Panel
         public void CloseItemContainer(ItemContainer itemContainer)
         {
             openItemContainer = null;
-            inventory.OnRigtClickEvent += InventoryRightClick;
-            inventory.OnRigtClickEvent -= TransferToItemContainer;
+            Inventory.OnRigtClickEvent += InventoryRightClick;
+            Inventory.OnRigtClickEvent -= TransferToItemContainer;
             itemContainer.OnRigtClickEvent -= TransferToInventory;
 
             itemContainer.OnPointerEnterEvent -= ShowTooltip;

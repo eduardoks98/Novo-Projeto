@@ -25,7 +25,7 @@ namespace EKS.Characters.Panel
         protected Item _item;
         public Item Item
         {
-            get => _item; 
+            get => _item;
             set
             {
                 _item = value;
@@ -79,6 +79,9 @@ namespace EKS.Characters.Panel
             {
                 amountText = GetComponent<TextMeshProUGUI>();
             }
+
+            Item = _item;
+            Amount = _amount;
         }
 
         protected virtual void OnDisable()

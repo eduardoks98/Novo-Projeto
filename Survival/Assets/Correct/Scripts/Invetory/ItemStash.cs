@@ -23,7 +23,7 @@ namespace Assets.Correct.Scripts.Invetory
                 spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
             if (itemsParent != null)
-                itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive: true);
+             itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive: true, result:ItemSlots);
 
             spriteRenderer.enabled = false;
         }
@@ -42,9 +42,9 @@ namespace Assets.Correct.Scripts.Invetory
             }
         }
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
             itemsParent.gameObject.SetActive(false);
         }
 

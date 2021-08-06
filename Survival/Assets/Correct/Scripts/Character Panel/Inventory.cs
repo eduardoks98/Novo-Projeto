@@ -7,20 +7,22 @@ namespace EKS.Panel
     {
         //[FormerlySerializedAs("items")]
         [SerializeField] Item[] startingItems;
-        [SerializeField] Transform itemsParent;
+        [SerializeField] protected Transform itemsParent;
         protected override void OnValidate()
         {
             if (itemsParent != null)
-                itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive:true);
+            {
+                itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive: true, result: ItemSlots);
+            }
 
             if (!Application.isPlaying)
             {
                 SetStartingItems();
             }
         }
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
             SetStartingItems();
         }
 

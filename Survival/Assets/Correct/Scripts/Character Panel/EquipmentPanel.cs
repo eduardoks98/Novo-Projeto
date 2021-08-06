@@ -9,7 +9,8 @@ namespace EKS.Panel
     public class EquipmentPanel : MonoBehaviour
     {
         [SerializeField] Transform equipmentParent;
-        [SerializeField] EquipmentSlot[] equipmentSlots;
+        public EquipmentSlot[] EquipmentSlots;
+
         public event Action<BaseItemSlot> OnPointerEnterEvent;
         public event Action<BaseItemSlot> OnPointerExitEvent;
         public event Action<BaseItemSlot> OnRigtClickEvent;
@@ -19,30 +20,30 @@ namespace EKS.Panel
         public event Action<BaseItemSlot> OnDropEvent;
         private void Start()
         {
-            for (int i = 0; i < equipmentSlots.Length; i++)
+            for (int i = 0; i < EquipmentSlots.Length; i++)
             {
-                equipmentSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
-                equipmentSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
-                equipmentSlots[i].OnRigtClickEvent +=  slot =>OnRigtClickEvent(slot);
-                equipmentSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
-                equipmentSlots[i].OnEndDragEvet += slot => OnEndDragEvet(slot);
-                equipmentSlots[i].OnDragEvent += slot => OnDragEvent(slot);
-                equipmentSlots[i].OnDropEvent += slot => OnDropEvent(slot);
+                EquipmentSlots[i].OnPointerEnterEvent += slot => { if (OnPointerEnterEvent != null) OnPointerEnterEvent(slot); };
+                EquipmentSlots[i].OnPointerExitEvent += slot => { if (OnPointerExitEvent != null) OnPointerExitEvent(slot); };
+                EquipmentSlots[i].OnRigtClickEvent += slot => { if (OnRigtClickEvent != null) OnRigtClickEvent(slot); };
+                EquipmentSlots[i].OnBeginDragEvent += slot => { if (OnBeginDragEvent != null) OnBeginDragEvent(slot); };
+                EquipmentSlots[i].OnEndDragEvet += slot => { if (OnEndDragEvet != null) OnEndDragEvet(slot); };
+                EquipmentSlots[i].OnDragEvent += slot => { if (OnDragEvent != null) OnDragEvent(slot); };
+                EquipmentSlots[i].OnDropEvent += slot => { if (OnDropEvent != null) OnDropEvent(slot); };
             }
         }
         public void OnValidate()
         {
-            equipmentSlots = equipmentParent.GetComponentsInChildren<EquipmentSlot>();
+            EquipmentSlots = equipmentParent.GetComponentsInChildren<EquipmentSlot>();
         }
 
         public bool AddItem(EquippableItem item, out EquippableItem previousItem)
         {
-            for (int i = 0; i < equipmentSlots.Length; i++)
+            for (int i = 0; i < EquipmentSlots.Length; i++)
             {
-                if (equipmentSlots[i].EquipmentType == item.EquipmentType)
+                if (EquipmentSlots[i].EquipmentType == item.EquipmentType)
                 {
-                    previousItem = (EquippableItem)equipmentSlots[i].Item;
-                    equipmentSlots[i].Item = item;
+                    previousItem = (EquippableItem)EquipmentSlots[i].Item;
+                    EquipmentSlots[i].Item = item;
                     return true;
                 }
             }
@@ -52,11 +53,11 @@ namespace EKS.Panel
 
         public bool RemoveItem(EquippableItem item)
         {
-            for (int i = 0; i < equipmentSlots.Length; i++)
+            for (int i = 0; i < EquipmentSlots.Length; i++)
             {
-                if (equipmentSlots[i].Item == item)
+                if (EquipmentSlots[i].Item == item)
                 {
-                    equipmentSlots[i].Item = null;
+                    EquipmentSlots[i].Item = null;
                     return true;
                 }
             }
