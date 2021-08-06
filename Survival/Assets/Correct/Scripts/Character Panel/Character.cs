@@ -25,6 +25,8 @@ namespace EKS.Characters.Panel
         [SerializeField] StatPanel statPanel;
         [SerializeField] ItemTooltip itemTooltip;
         [SerializeField] Image draggableItem;
+        [SerializeField] DropItemArea dropItemArea;
+        [SerializeField] QuestionDialog questionDialog;
 
         private BaseItemSlot dragItemSlot;
 
@@ -45,12 +47,12 @@ namespace EKS.Characters.Panel
             //Pointer Enter
             inventory.OnPointerEnterEvent += ShowTooltip;
             equipmentPanel.OnPointerEnterEvent += ShowTooltip;
-            //craftingWindow.OnPointerEnterEvent += ShowTooltip;
+            craftingWindow.OnPointerEnterEvent += ShowTooltip;
 
             //Pointer Exit
             inventory.OnPointerExitEvent += HideTooltip;
             equipmentPanel.OnPointerExitEvent += HideTooltip;
-            // craftingWindow.OnPointerExitEvent += HideTooltip;
+             craftingWindow.OnPointerExitEvent += HideTooltip;
 
             //Begin Drag
             inventory.OnBeginDragEvent += BeginDrag;
@@ -67,8 +69,9 @@ namespace EKS.Characters.Panel
             //Drop
             inventory.OnDropEvent += Drop;
             equipmentPanel.OnDropEvent += Drop;
-        }
+            dropItemArea.OnDropEvent += DropItemOutSideUI;
 
+        }
         private void InventoryRightClick(BaseItemSlot itemSlot)
         {
             if (itemSlot.Item is EquippableItem)
@@ -87,7 +90,6 @@ namespace EKS.Characters.Panel
                 }
             }
         }
-
         private void EquipmentPanelRightClick(BaseItemSlot itemSlot)
         {
             if (itemSlot.Item is EquippableItem)
@@ -95,7 +97,6 @@ namespace EKS.Characters.Panel
                 Unequip((EquippableItem)itemSlot.Item);
             }
         }
-
         private void ShowTooltip(BaseItemSlot itemSlot)
         {
             if (itemSlot.Item != null)
@@ -103,13 +104,11 @@ namespace EKS.Characters.Panel
                 itemTooltip.ShowTooltip(itemSlot.Item);
             }
         }
-
         private void HideTooltip(BaseItemSlot itemSlot)
         {
             if (itemTooltip.gameObject.activeSelf)
                 itemTooltip.HideTooltip();
         }
-
         private void BeginDrag(BaseItemSlot itemSlot)
         {
             if (itemSlot.Item != null)
@@ -132,9 +131,6 @@ namespace EKS.Characters.Panel
             dragItemSlot = null;
             draggableItem.gameObject.SetActive(false);
         }
-
-
-
         private void Drop(BaseItemSlot dropItemSlot)
         {
             //Se arrastar um item com os dois botoes o sistem entende que a funcao ja foi feita ao soltar um dos botoes e caso nao existir nenhum item send arrastado quando soltar algum botao do mouse simplesmente retorna pq nao tem nada pra trocar de slot
@@ -162,6 +158,21 @@ namespace EKS.Characters.Panel
 
             Debug.Log("----------------------");
 
+        }
+        private void DropItemOutSideUI()
+        {
+            if (dragItemSlot == null) return;
+
+            questionDialog.Show();
+            BaseItemSlot baseItemSlot = dragItemSlot;
+            questionDialog.OnYesEvent += () =>DestroyItemInSlot(baseItemSlot);
+
+        }
+
+        private void DestroyItemInSlot(BaseItemSlot baseItemSlot)
+        {
+            baseItemSlot.Item.Destroy();
+            baseItemSlot.Item = null;
         }
         private void AddStacks(BaseItemSlot dropItemSlot)
         {
@@ -200,9 +211,6 @@ namespace EKS.Characters.Panel
             dropItemSlot.Item = draggedItem;
             dropItemSlot.Amount = draggedItemAmount;
         }
-
-
-
         public void Equip(EquippableItem item)
         {
             Debug.Log("EQUIPU!");
@@ -229,7 +237,6 @@ namespace EKS.Characters.Panel
                 }
             }
         }
-
         public void Unequip(EquippableItem item)
         {
             Debug.Log("DESEQUIPU!");
@@ -242,7 +249,6 @@ namespace EKS.Characters.Panel
                 inventory.AddItem(item);
             }
         }
-
         public void UpdateStatValues()
         {
             statPanel.UpdateStatValues();
@@ -250,18 +256,28 @@ namespace EKS.Characters.Panel
         private ItemContainer openItemContainer;
         private void TransferToItemContainer(BaseItemSlot itemSlot)
         {
-
+            Item item = itemSlot.Item;
+            if (item != null && openItemContainer.CanAddItem(item)) ;
+            {
+                inventory.RemoveItem(item);
+                openItemContainer.AddItem(item);
+            }
         }
         private void TransferToInventory(BaseItemSlot itemSlot)
         {
-
+            Item item = itemSlot.Item;
+            if (item != null && inventory.CanAddItem(item)) ;
+            {
+                openItemContainer.RemoveItem(item);
+                inventory.AddItem(item);
+            }
         }
         public void OpenItemContainer(ItemContainer itemContainer)
         {
+            openItemContainer = itemContainer;
             inventory.OnRigtClickEvent -= InventoryRightClick;
             inventory.OnRigtClickEvent += TransferToItemContainer;
-
-            itemContainer.OnRigtClickEvent += TransferToItemContainer;
+            itemContainer.OnRigtClickEvent += TransferToInventory;
 
             itemContainer.OnPointerEnterEvent += ShowTooltip;
             itemContainer.OnPointerExitEvent += HideTooltip;
@@ -270,9 +286,13 @@ namespace EKS.Characters.Panel
             itemContainer.OnDragEvent += Drag;
             itemContainer.OnDropEvent += Drop;
         }
-
         public void CloseItemContainer(ItemContainer itemContainer)
         {
+            openItemContainer = null;
+            inventory.OnRigtClickEvent += InventoryRightClick;
+            inventory.OnRigtClickEvent -= TransferToItemContainer;
+            itemContainer.OnRigtClickEvent -= TransferToInventory;
+
             itemContainer.OnPointerEnterEvent -= ShowTooltip;
             itemContainer.OnPointerExitEvent -= HideTooltip;
             itemContainer.OnBeginDragEvent -= BeginDrag;

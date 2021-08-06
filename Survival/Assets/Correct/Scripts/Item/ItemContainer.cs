@@ -20,7 +20,7 @@ namespace EKS.Items
 
         protected virtual void OnValidate()
         {
-            itemSlots = GetComponentsInChildren<ItemSlot>();
+            itemSlots = GetComponentsInChildren<ItemSlot>(includeInactive:true);
         }
         protected virtual void Start()
         {

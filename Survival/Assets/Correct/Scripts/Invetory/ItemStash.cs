@@ -1,4 +1,5 @@
-﻿using EKS.Items;
+﻿using EKS.Characters.Panel;
+using EKS.Items;
 using EKS.Panel;
 using System.Collections;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Assets.Correct.Scripts.Invetory
         [SerializeField] SpriteRenderer spriteRenderer;
         [SerializeField] KeyCode openKeyCode = KeyCode.E;
 
+        private Character character;
 
         private bool isInRange;
         private bool isOpen;
@@ -33,6 +35,10 @@ namespace Assets.Correct.Scripts.Invetory
 
                 isOpen = !isOpen;
                 itemsParent.gameObject.SetActive(isOpen);
+                if (isOpen)
+                    character.OpenItemContainer(this);
+                else
+                    character.CloseItemContainer(this);
             }
         }
 
@@ -59,11 +65,19 @@ namespace Assets.Correct.Scripts.Invetory
             {
                 isInRange = state;
                 spriteRenderer.enabled = state;
+
+
                 if(!isInRange && isOpen)
                 {
                     isOpen = false;
                     itemsParent.gameObject.SetActive(false);
+                    character.CloseItemContainer(this);
                 }
+
+                if (isInRange)
+                    character = gameObject.GetComponent<Character>();
+                else
+                    character = null;
             }
         }
     }

@@ -28,6 +28,7 @@ namespace EKS.Crafting
 		{
 			foreach (ItemAmount itemAmount in Materials)
 			{
+				//Make sure that the inventory of character panel is assigned on crafting window item container
 				if (itemContainer.ItemCount(itemAmount.Item.ID) < itemAmount.Amount)
 				{
 					Debug.LogWarning("You don't have the required materials.");
